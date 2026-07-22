@@ -28,7 +28,7 @@ class PublicSiteTest extends TestCase
         $this->withoutVite();
     }
 
-    public function test_home_page_renders_the_starter_pitch(): void
+    public function test_home_page_renders_the_law_firm_pitch(): void
     {
         SiteSetting::current();
 
@@ -44,7 +44,7 @@ class PublicSiteTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('Un site clair')
-            ->assertSee('Essence');
+            ->assertSee('Urgências penais');
     }
 
     public function test_services_page_uses_dedicated_demo_template(): void
