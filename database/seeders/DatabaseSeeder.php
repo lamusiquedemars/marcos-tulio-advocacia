@@ -1,0 +1,147 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use App\Modules\ContentSlots\Models\ContentSlot;
+use App\Modules\Pages\Models\Page;
+use App\Modules\SiteSettings\Models\SiteSetting;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
+class DatabaseSeeder extends Seeder
+{
+    public function run(): void
+    {
+        User::query()->updateOrCreate([
+            'email' => 'admin@avocat.test',
+        ], [
+            'name' => 'Administração Demonstração',
+            'password' => Hash::make('password'),
+            'is_admin' => true,
+        ]);
+
+        SiteSetting::query()->updateOrCreate(['id' => 1], [
+            'site_name' => 'Marcos Túlio Advocacia',
+            'baseline' => 'Defesa penal em Cuiabá e em todo o Brasil',
+            'default_seo_title' => 'Marcos Túlio Advocacia — Site de demonstração',
+            'default_seo_description' => 'Demonstração fictícia de um site para advocacia criminal, realizada pela Maracuja Digital.',
+            'contact_email' => 'contato-avocat@example.test',
+            'phone' => '+55 (65) 0000-0000',
+            'address' => 'Endereço fictício — Cuiabá, MT',
+            'social_links' => [],
+            'contact_form_send_admin_email' => false,
+            'contact_form_send_confirmation_email' => false,
+        ]);
+
+        collect([
+            [
+                'key' => 'home.hero.cta_label',
+                'label' => 'Ação principal da página inicial',
+                'group' => 'Início',
+                'type' => 'text',
+                'value' => 'Falar sobre uma urgência',
+                'help_text' => 'Conteúdo fictício a validar antes da produção.',
+            ],
+            [
+                'key' => 'home.hero.secondary_cta_label',
+                'label' => 'Ação secundária da página inicial',
+                'group' => 'Início',
+                'type' => 'text',
+                'value' => 'Apresentar meu caso',
+                'help_text' => 'Conteúdo fictício a validar antes da produção.',
+            ],
+            [
+                'key' => 'home.intro.title',
+                'label' => 'Título de introdução',
+                'group' => 'Início',
+                'type' => 'text',
+                'value' => 'Atuação penal com preparação e presença',
+                'help_text' => 'Conteúdo de demonstração.',
+            ],
+            [
+                'key' => 'home.intro.text',
+                'label' => 'Texto de introdução',
+                'group' => 'Início',
+                'type' => 'textarea',
+                'value' => 'Uma base inicial para apresentar a atuação, as sustentações e os caminhos de atendimento.',
+                'help_text' => 'Conteúdo de demonstração.',
+            ],
+        ])->each(fn (array $slot) => ContentSlot::query()->updateOrCreate(
+            ['key' => $slot['key']],
+            $slot + ['is_locked' => true],
+        ));
+
+        $pages = [
+            [
+                'slug' => 'accueil',
+                'title' => 'Início',
+                'template' => 'landing',
+                'type' => Page::TYPE_SYSTEM,
+                'excerpt' => 'Site fictício de demonstração realizado pela Maracuja Digital.',
+                'hero_title' => 'Defesa penal em Cuiabá e em todo o Brasil',
+                'hero_subtitle' => 'Atendimento presencial e remoto. Informações e contatos desta demonstração são fictícios.',
+                'content' => null,
+            ],
+            [
+                'slug' => 'services',
+                'title' => 'Atuação Penal',
+                'template' => 'default',
+                'type' => Page::TYPE_SYSTEM,
+                'excerpt' => 'Situações em que o escritório pode atuar.',
+                'hero_title' => 'Atuação Penal',
+                'hero_subtitle' => 'Prisão, investigação, processo penal, recursos e consultoria preventiva.',
+                'content' => '<p>Conteúdo inicial de demonstração, a ser desenvolvido e validado.</p>',
+            ],
+            [
+                'slug' => 'sustentacoes-e-defesas',
+                'title' => 'Sustentações e Defesas',
+                'template' => 'default',
+                'type' => Page::TYPE_TEXT,
+                'excerpt' => 'Seleção profissional de sustentações e intervenções.',
+                'hero_title' => 'Sustentações e Defesas',
+                'hero_subtitle' => 'Estrutura provisória, sem casos reais nem promessas de resultado.',
+                'content' => '<p>As mídias e defesas autorizadas serão adicionadas em um próximo lote.</p>',
+            ],
+            [
+                'slug' => 'marcos-tulio',
+                'title' => 'Marcos Túlio',
+                'template' => 'default',
+                'type' => Page::TYPE_TEXT,
+                'excerpt' => 'Apresentação profissional a completar com informações verificadas.',
+                'hero_title' => 'Marcos Túlio',
+                'hero_subtitle' => 'Advogado penalista, professor de direito penal há dez anos e autor.',
+                'content' => '<p>Biografia provisória. Nenhuma informação profissional não confirmada foi adicionada.</p>',
+            ],
+            [
+                'slug' => 'contact',
+                'title' => 'Atendimento e Contato',
+                'template' => 'contact',
+                'type' => Page::TYPE_SYSTEM,
+                'excerpt' => 'Contato de demonstração, sem envio de email real.',
+                'hero_title' => 'Atendimento e Contato',
+                'hero_subtitle' => 'Em uma urgência, o contato humano deve permanecer direto.',
+                'content' => null,
+            ],
+            [
+                'slug' => 'mentions-legales',
+                'title' => 'Aviso legal e demonstração',
+                'template' => 'default',
+                'type' => Page::TYPE_TEXT,
+                'excerpt' => 'Informações sobre esta demonstração.',
+                'hero_title' => 'Site de demonstração',
+                'hero_subtitle' => 'Projeto fictício realizado pela Maracuja Digital.',
+                'content' => '<p>Este site é uma demonstração comercial realizada pela Maracuja Digital. A identidade, os contatos, o endereço e os conteúdos apresentados são fictícios ou provisórios. Este site não presta aconselhamento jurídico e não recebe casos reais.</p>',
+            ],
+        ];
+
+        foreach ($pages as $page) {
+            Page::query()->updateOrCreate(['slug' => $page['slug']], $page + [
+                'seo_title' => $page['title'].' — Demonstração',
+                'seo_description' => $page['excerpt'],
+                'is_published' => true,
+                'published_at' => now(),
+            ]);
+        }
+    }
+}
