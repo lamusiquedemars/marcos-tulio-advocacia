@@ -25,13 +25,15 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::query()->updateOrCreate([
-            'email' => 'admin@avocat.test',
-        ], [
-            'name' => 'Administração Demonstração',
-            'password' => Hash::make('password'),
-            'is_admin' => true,
-        ]);
+        if (! app()->isProduction()) {
+            User::query()->updateOrCreate([
+                'email' => 'admin@avocat.test',
+            ], [
+                'name' => 'Administração Demonstração',
+                'password' => Hash::make('password'),
+                'is_admin' => true,
+            ]);
+        }
 
         SiteSetting::query()->updateOrCreate(['id' => 1], [
             'site_name' => 'Marcos Túlio Advocacia',

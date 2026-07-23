@@ -3,7 +3,7 @@
 ## 1. Avant le déploiement
 
 1. Sauvegarder les fichiers applicatifs, `storage/app` et la base MySQL partagée.
-2. Vérifier que PHP 8.3+ et les extensions requises par Laravel sont actives.
+2. Vérifier que PHP 8.3.31+ et les extensions requises par Laravel sont actives.
 3. Installer les dépendances sans développement et construire les assets :
 
 ```bash
@@ -71,13 +71,18 @@ php artisan maracuja:doctor
 
 ## 5. Stockage et permissions
 
-Créer le lien public :
+Maracuja stocke directement les médias publics dans `public/storage`. Aucun
+lien symbolique ne doit être créé. Préparer le dossier :
 
 ```bash
-php artisan storage:link
+mkdir -p public/storage
+chmod 775 public/storage
 ```
 
-Le processus PHP doit pouvoir écrire dans `storage` et `bootstrap/cache`, et lire le reste du projet. Utiliser les permissions les plus restrictives compatibles avec l'utilisateur PHP de LWS ; éviter `777`. Vérifier l'upload et l'affichage d'un média factice depuis Filament.
+Le processus PHP doit pouvoir écrire dans `public/storage`, `storage` et
+`bootstrap/cache`, et lire le reste du projet. Utiliser les permissions les
+plus restrictives compatibles avec l'utilisateur PHP de LWS ; éviter `777`.
+Vérifier l'upload et l'affichage d'un média factice depuis Filament.
 
 ## 6. Sauvegarde et retour arrière
 

@@ -6,7 +6,7 @@ Toutes les identités, coordonnées et données de contact présentes dans l'ins
 
 ## Installation locale
 
-Prérequis : PHP 8.3+, Composer, Node.js/npm, MySQL 8 ou MariaDB et l'extension PHP PDO MySQL.
+Prérequis : PHP 8.3.31+, Composer, Node.js/npm, MySQL 8 ou MariaDB et l'extension PHP PDO MySQL.
 
 ```bash
 cp .env.example .env
@@ -15,7 +15,7 @@ php artisan key:generate
 php artisan migrate --seed
 npm install
 npm run build
-php artisan storage:link
+mkdir -p public/storage
 php artisan serve
 ```
 
