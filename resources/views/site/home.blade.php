@@ -21,6 +21,14 @@
         secondary-cta-label="Apresentar meu caso"
     />
 
+    <div class="home-facts" aria-label="Informações de atendimento">
+        <div class="container home-facts__inner">
+            <p><span>Base</span><strong>Cuiabá, Mato Grosso</strong></p>
+            <p><span>Alcance</span><strong>Atendimento em todo o Brasil</strong></p>
+            <p><span>Formato</span><strong>Presencial e remoto</strong></p>
+        </div>
+    </div>
+
     @if ($homeNotice)
         <div class="container notice-wrap">
             <x-site.notice :notice="$homeNotice" />

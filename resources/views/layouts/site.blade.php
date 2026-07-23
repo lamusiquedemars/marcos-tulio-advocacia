@@ -53,7 +53,7 @@
 
     <header class="site-header container" data-nav>
         <a class="site-brand" href="{{ route('home') }}">
-            <span class="site-brand__mark">M</span>
+            <span class="site-brand__mark" aria-hidden="true">MT</span>
             <span>
                 <strong>{{ $settings->site_name }}</strong>
                 @if ($settings->baseline)
@@ -62,7 +62,7 @@
             </span>
         </a>
 
-        <button class="btn btn--secondary nav-toggle" data-nav-toggle type="button">
+        <button class="btn btn--secondary nav-toggle" data-nav-toggle type="button" aria-label="Abrir menu de navegação">
             Menu
         </button>
 
@@ -98,16 +98,36 @@
         @yield('content')
     </main>
 
-    <footer class="site-footer container">
-        <p>&copy; {{ now()->year }} {{ $settings->site_name }}</p>
-        <p><strong>Site de demonstração:</strong> identidade, dados e conteúdos fictícios, realizado por Maracuja Digital.</p>
-        @if ($settings->contact_email)
-            <a href="mailto:{{ $settings->contact_email }}">{{ $settings->contact_email }}</a>
-        @endif
-        @if (\App\Support\Modules::enabled('pages'))
-            <a href="{{ route('pages.show', 'mentions-legales') }}">Aviso legal</a>
-        @endif
-        <a href="/admin" rel="nofollow">Administração</a>
+    <footer class="site-footer">
+        <div class="site-footer__inner container">
+            <div class="site-footer__identity">
+                <a class="site-brand" href="{{ route('home') }}">
+                    <span class="site-brand__mark" aria-hidden="true">MT</span>
+                    <span>
+                        <strong>{{ $settings->site_name }}</strong>
+                        <small>Advocacia criminal</small>
+                    </span>
+                </a>
+                <p>Atendimento presencial em Cuiabá e remoto em todo o Brasil.</p>
+            </div>
+            <div class="site-footer__notice">
+                <p><strong>Site de demonstração</strong></p>
+                <p>Identidade, contatos e conteúdos fictícios. Projeto realizado pela Maracuja Digital.</p>
+            </div>
+            <nav class="site-footer__links" aria-label="Links institucionais">
+                @if ($settings->contact_email)
+                    <a href="mailto:{{ $settings->contact_email }}">{{ $settings->contact_email }}</a>
+                @endif
+                @if (\App\Support\Modules::enabled('pages'))
+                    <a href="{{ route('pages.show', 'mentions-legales') }}">Aviso legal</a>
+                @endif
+                <a href="/admin" rel="nofollow">Administração</a>
+            </nav>
+        </div>
+        <div class="site-footer__bottom container">
+            <p>&copy; {{ now()->year }} {{ $settings->site_name }}</p>
+            <p>Conteúdo informativo. Nenhum resultado é garantido.</p>
+        </div>
     </footer>
 
     <button class="btn btn--primary back-to-top" type="button" data-back-to-top hidden aria-label="Voltar ao topo">

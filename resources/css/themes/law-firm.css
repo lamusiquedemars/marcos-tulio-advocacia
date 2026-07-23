@@ -1,28 +1,35 @@
 .theme-law-firm {
-    --color-bg: #faf8f3;
-    --color-brand: #9a5a32;
-    --color-brand-strong: #704022;
-    --color-brand-soft: #f0dfd1;
-    --color-accent: #294861;
-    --color-text: #172231;
-    --color-muted: #586472;
+    --font-heading: Georgia, 'Times New Roman', serif;
+    --color-bg: #f8f5ee;
+    --color-brand: #9b5b36;
+    --color-brand-strong: #713b20;
+    --color-brand-soft: #efe0d4;
+    --color-accent: #294b5c;
+    --color-text: #15242d;
+    --color-muted: #5b6870;
     --color-surface: #fffdf8;
-    --color-surface-muted: #f2eee6;
-    --color-line: #d9d2c6;
-    background: #faf8f3;
+    --color-surface-muted: #eeeae1;
+    --color-line: #d7d0c4;
+    --radius-lg: 8px;
+    background: var(--color-bg);
 }
 
 .theme-law-firm .site-brand__mark {
     background: var(--color-text);
     color: #fff;
+    border-radius: 0;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
 }
 
 .theme-law-firm .site-header {
-    background: rgb(250 248 243 / 95%);
+    background: rgb(248 245 238 / 96%);
 }
 
 .theme-law-firm .hero {
     background:
-        radial-gradient(circle at 85% 15%, rgb(154 90 50 / 18%), transparent 30%),
-        linear-gradient(135deg, #f7f2e9, #fffdf8);
+        linear-gradient(90deg, transparent 0 72%, rgb(41 75 92 / 7%) 72% 72.15%, transparent 72.15%),
+        radial-gradient(circle at 84% 18%, rgb(155 91 54 / 16%), transparent 26%),
+        linear-gradient(135deg, #f3ede3, #fffdf8);
 }
