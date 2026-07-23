@@ -56,9 +56,6 @@
             <span class="site-brand__mark" aria-hidden="true">MT</span>
             <span>
                 <strong>{{ $settings->site_name }}</strong>
-                @if ($settings->baseline)
-                    <small>{{ $settings->baseline }}</small>
-                @endif
             </span>
         </a>
 
@@ -67,7 +64,6 @@
         </button>
 
         <nav class="site-nav" data-nav-menu aria-label="Navegação principal">
-            <a href="{{ route('home') }}">Início</a>
             @if (\App\Support\Modules::enabled('news'))
                 <a href="{{ route('news.index') }}">Atualizações</a>
             @endif
@@ -85,12 +81,6 @@
             @if (\App\Support\Modules::enabled('contact_form'))
                 <a href="{{ route('contact') }}">Atendimento</a>
             @endif
-            <div class="site-quick-actions">
-                @if (\App\Support\Modules::enabled('contact_form'))
-                    <a class="btn btn--secondary" href="{{ route('contact', ['tipo' => 'analise']) }}">Apresentar o caso</a>
-                @endif
-                <a class="btn btn--primary" href="{{ config('maracuja.law_firm.whatsapp_url') }}" rel="nofollow">Urgência</a>
-            </div>
         </nav>
     </header>
 
