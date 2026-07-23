@@ -11,6 +11,7 @@ use App\Filament\Resources\OralDefenses\OralDefenseResource;
 use App\Filament\Resources\Pages\PageResource;
 use App\Filament\Resources\SiteNotices\SiteNoticeResource;
 use App\Filament\Resources\SiteSettings\SiteSettingResource;
+use App\Modules\Appointments\Filament\Resources\AppointmentSettings\AppointmentSettingResource;
 use App\Modules\Inquiries\Filament\Resources\Inquiries\InquiryResource;
 use App\Modules\SiteSettings\Models\SiteSetting;
 use App\Support\Modules;
@@ -46,6 +47,7 @@ class AdminWelcome extends Widget
             $this->moduleAction('pages', PageResource::class, 'Atualizar uma página', 'Títulos, textos principais e SEO.'),
             $this->moduleAction('content_slots', ContentSlotResource::class, 'Modificar um texto curto', 'Chamadas, frases de seção e microconteúdos.'),
             $this->moduleAction('inquiries', InquiryResource::class, 'Tratar solicitações', 'Mensagens recebidas, respostas e acompanhamento.', 'inquiries'),
+            $this->moduleAction('appointments', AppointmentSettingResource::class, 'Configurar agendamento', 'Página Brevo Meetings, modo de reserva e fuso horário.', 'appointment_settings'),
             $this->moduleAction('site_settings', SiteSettingResource::class, 'Configurar o site', 'Nome, contato, redes, SEO e imagens padrão.'),
         ]));
     }

@@ -2,6 +2,8 @@
 
 namespace App\Modules\Inquiries\Filament\Resources\Inquiries;
 
+use App\Modules\Appointments\Enums\AppointmentStatus;
+use App\Modules\Appointments\Models\AppointmentSetting;
 use App\Modules\Audience\Actions\CreateContactFromInquiry;
 use App\Modules\Inquiries\Enums\InquiryModality;
 use App\Modules\Inquiries\Enums\InquiryPhase;
@@ -115,6 +117,28 @@ class InquiryResource extends Resource
                         DateTimePicker::make('archived_at')->label('Encerrada em')->disabled(),
                     ])
                     ->columns(2),
+                Section::make('Agendamento')
+                    ->description('O link do Brevo Meetings não recebe o resumo nem dados do caso.')
+                    ->schema([
+                        Select::make('appointment_status')
+                            ->label('Estado do agendamento')
+                            ->options(self::appointmentStatusOptions())
+                            ->required(),
+                        DateTimePicker::make('scheduled_start_at')
+                            ->label('Início agendado')
+                            ->timezone(fn (): string => AppointmentSetting::current()->timezone),
+                        DateTimePicker::make('scheduled_end_at')
+                            ->label('Fim agendado')
+                            ->timezone(fn (): string => AppointmentSetting::current()->timezone),
+                        TextInput::make('appointment_timezone')
+                            ->label('Fuso do agendamento')
+                            ->default('America/Cuiaba'),
+                        TextInput::make('appointment_external_reference')
+                            ->label('Referência externa')
+                            ->helperText('Opcional. Não inserir link de videoconferência.')
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2),
             ]);
     }
 
@@ -214,6 +238,20 @@ class InquiryResource extends Resource
                             ->success()
                             ->send();
                     }),
+                Action::make('openBooking')
+                    ->label('Abrir agendamento')
+                    ->icon(Heroicon::OutlinedCalendarDays)
+                    ->visible(fn (): bool => self::appointmentBookingAvailable())
+                    ->action(function (Inquiry $record) {
+                        $setting = AppointmentSetting::current();
+                        $record->update([
+                            'appointment_status' => AppointmentStatus::BookingOpened,
+                            'booking_opened_at' => now(),
+                            'appointment_timezone' => $setting->timezone,
+                        ]);
+
+                        return redirect()->away($setting->booking_url);
+                    }),
                 ActionGroup::make([
                     Action::make('markRead')
                         ->label('Marcar como consultada')
@@ -292,6 +330,20 @@ class InquiryResource extends Resource
     private static function urgencyFrom(InquiryUrgency|string|null $urgency): ?InquiryUrgency
     {
         return $urgency instanceof InquiryUrgency ? $urgency : InquiryUrgency::tryFrom((string) $urgency);
+    }
+
+    private static function appointmentStatusOptions(): array
+    {
+        return collect(AppointmentStatus::cases())
+            ->mapWithKeys(fn (AppointmentStatus $status): array => [$status->value => $status->label()])
+            ->all();
+    }
+
+    private static function appointmentBookingAvailable(): bool
+    {
+        $setting = AppointmentSetting::current();
+
+        return $setting->is_enabled && filled($setting->booking_url);
     }
 
     private static function mailtoUrl(Inquiry $record): string

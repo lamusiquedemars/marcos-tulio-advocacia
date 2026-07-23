@@ -71,6 +71,13 @@ class AdminPanelProvider extends PanelProvider
             );
         }
 
+        if (Modules::enabled('appointments') && is_dir(app_path('Modules/Appointments/Filament/Resources'))) {
+            $panel->discoverResources(
+                in: app_path('Modules/Appointments/Filament/Resources'),
+                for: 'App\Modules\Appointments\Filament\Resources',
+            );
+        }
+
         if (Modules::enabled('audience') && is_dir(app_path('Modules/Audience/Filament/Resources'))) {
             $panel->discoverResources(
                 in: app_path('Modules/Audience/Filament/Resources'),

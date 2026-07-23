@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Modules\Appointments\Enums\AppointmentMode;
+use App\Modules\Appointments\Enums\AppointmentProvider;
+use App\Modules\Appointments\Models\AppointmentSetting;
 use App\Modules\ContentSlots\Models\ContentSlot;
 use App\Modules\Inquiries\Enums\InquiryModality;
 use App\Modules\Inquiries\Enums\InquiryPhase;
@@ -41,6 +44,14 @@ class DatabaseSeeder extends Seeder
             'social_links' => [],
             'contact_form_send_admin_email' => false,
             'contact_form_send_confirmation_email' => false,
+        ]);
+
+        AppointmentSetting::query()->updateOrCreate(['id' => 1], [
+            'is_enabled' => true,
+            'provider' => AppointmentProvider::Fake,
+            'mode' => AppointmentMode::AfterReview,
+            'booking_url' => 'https://example.test/agendamento-demo',
+            'timezone' => 'America/Cuiaba',
         ]);
 
         collect([

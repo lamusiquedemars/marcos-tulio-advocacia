@@ -72,6 +72,7 @@ return [
         'campaigns' => env('MARACUJA_MODULE_CAMPAIGNS', false),
         'oral_defenses' => env('MARACUJA_MODULE_ORAL_DEFENSES', true),
         'assistant' => env('MARACUJA_MODULE_ASSISTANT', true),
+        'appointments' => env('MARACUJA_MODULE_APPOINTMENTS', true),
     ],
 
     'developer_tools' => [

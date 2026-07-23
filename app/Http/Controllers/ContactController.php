@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Modules\Appointments\Models\AppointmentSetting;
 use App\Modules\ContactForm\Data\ContactMessage;
 use App\Modules\ContactForm\Mail\ContactMessageConfirmation;
 use App\Modules\ContactForm\Mail\ContactMessageReceived;
@@ -25,6 +26,7 @@ class ContactController extends Controller
             'page' => Modules::enabled('pages')
                 ? Page::query()->where('slug', 'contact')->where('is_published', true)->first()
                 : null,
+            'appointmentSettings' => Modules::enabled('appointments') ? AppointmentSetting::current() : null,
         ]);
     }
 

@@ -46,6 +46,21 @@
         intro="Campos reduzidos para organizar a solicitação sem recolher o conteúdo completo de um caso."
         heading-variant="underline"
     >
+        @if (($appointmentSettings ?? null)?->canBookDirectly())
+            <div class="confidentiality-note">
+                <strong>Agendamento direto disponível.</strong>
+                A reserva será concluída na página Brevo Meetings, sem envio do resumo desta solicitação.
+                <a class="btn btn--secondary" href="{{ $appointmentSettings->booking_url }}" target="_blank" rel="noopener noreferrer nofollow">
+                    Ver horários disponíveis
+                </a>
+            </div>
+        @elseif (($appointmentSettings ?? null)?->is_enabled)
+            <div class="confidentiality-note">
+                <strong>Agendamento após análise.</strong>
+                Depois de examinar a solicitação inicial, o escritório poderá encaminhar o acesso à página de reserva.
+            </div>
+        @endif
+
         @if (session('status'))
             <p class="notice" role="status">{{ session('status') }}</p>
         @endif
