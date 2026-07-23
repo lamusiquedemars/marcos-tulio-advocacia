@@ -99,8 +99,8 @@ class DatabaseSeeder extends Seeder
                 'template' => 'landing',
                 'type' => Page::TYPE_SYSTEM,
                 'excerpt' => 'Site fictício de demonstração realizado pela Maracuja Digital.',
-                'hero_title' => 'Defesa penal em Cuiabá e em todo o Brasil',
-                'hero_subtitle' => 'Atendimento presencial e remoto. Informações e contatos desta demonstração são fictícios.',
+                'hero_title' => 'Marcos Túlio de Melo, advogado criminalista',
+                'hero_subtitle' => 'Defesa penal com atuação estratégica, sigilo profissional e atendimento presencial ou remoto.',
                 'content' => null,
             ],
             [

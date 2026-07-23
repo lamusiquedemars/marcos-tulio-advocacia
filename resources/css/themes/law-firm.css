@@ -33,3 +33,41 @@
         radial-gradient(circle at 84% 18%, rgb(155 91 54 / 16%), transparent 26%),
         linear-gradient(135deg, #f3ede3, #fffdf8);
 }
+
+.theme-law-firm .hero--home.hero--image {
+    min-height: min(74vh, 50rem);
+    background-position: center;
+}
+
+.theme-law-firm .hero--home.hero--image::before {
+    background: linear-gradient(90deg, rgb(7 22 34 / 72%) 0%, rgb(7 22 34 / 26%) 56%, transparent 78%);
+}
+
+.theme-law-firm .hero--home.hero--image .hero__inner {
+    min-height: min(74vh, 50rem);
+    align-content: center;
+}
+
+.theme-law-firm .hero--home.hero--image .hero__content {
+    max-width: 49rem;
+}
+
+.theme-law-firm .hero--home.hero--image :where(h1, .hero__subtitle) {
+    color: #ffffff;
+    text-shadow: 0 2px 22px rgb(0 0 0 / 28%);
+}
+
+.theme-law-firm .hero--home.hero--image .eyebrow {
+    color: #efb58d;
+}
+
+@media (max-width: 760px) {
+    .theme-law-firm .hero--home.hero--image {
+        min-height: 40rem;
+        background-position: 64% center;
+    }
+
+    .theme-law-firm .hero--home.hero--image::before {
+        background: linear-gradient(90deg, rgb(7 22 34 / 88%), rgb(7 22 34 / 55%) 72%, rgb(7 22 34 / 28%));
+    }
+}

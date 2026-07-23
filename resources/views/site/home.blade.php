@@ -11,23 +11,15 @@
 @section('content')
     <x-site.hero
         variant="home"
-        eyebrow="Advocacia criminal · Cuiabá e todo o Brasil"
-        :title="$homePage?->hero_title ?? $settings->site_name"
-        :subtitle="$homePage?->hero_subtitle ?? $settings->baseline"
-        :image="$homePage?->heroImageUrl()"
-        :cta-url="config('maracuja.law_firm.whatsapp_url')"
-        cta-label="Falar sobre uma urgência"
-        :secondary-cta-url="$analysisUrl"
-        secondary-cta-label="Apresentar meu caso"
+        eyebrow="Em Cuiabá · atuação em todo o Brasil"
+        :title="$homePage?->hero_title ?? 'Marcos Túlio de Melo, advogado criminalista'"
+        :subtitle="$homePage?->hero_subtitle ?? 'Defesa penal com atuação estratégica, sigilo profissional e atendimento presencial ou remoto.'"
+        :image="$homePage?->heroImageUrl() ?? asset('images/marcos-tulio-home.jpg')"
+        cta-url="#atendimento"
+        cta-label="Escolher forma de atendimento"
     />
 
-    <div class="home-facts" aria-label="Informações de atendimento">
-        <div class="container home-facts__inner">
-            <p><span>Base</span><strong>Cuiabá, Mato Grosso</strong></p>
-            <p><span>Alcance</span><strong>Atendimento em todo o Brasil</strong></p>
-            <p><span>Formato</span><strong>Presencial e remoto</strong></p>
-        </div>
-    </div>
+    <div class="home-divider" aria-hidden="true"></div>
 
     @if ($homeNotice)
         <div class="container notice-wrap">
@@ -36,31 +28,61 @@
     @endif
 
     <x-site.section
+        variant="muted"
+        title="Advocacia, docência e produção jurídica"
+        intro="Marcos Túlio de Melo reúne atuação na advocacia criminal, experiência docente e produção jurídica. A preparação e a apresentação oral da defesa ocupam lugar central em seu trabalho."
+        heading-variant="underline"
+    >
+        <div class="authority-grid">
+            <article class="authority-card">
+                <span class="practice-card__label">Advocacia</span>
+                <h3>Defesa penal</h3>
+                <p>Atuação desde [ANO] em [PRINCIPAIS ÁREAS DA ADVOCACIA CRIMINAL].</p>
+            </article>
+            <article class="authority-card">
+                <span class="practice-card__label">Docência</span>
+                <h3>Direito penal</h3>
+                <p>Professor desde [ANO], com experiência em [INSTITUIÇÃO E DISCIPLINAS A CONFIRMAR].</p>
+            </article>
+            <article class="authority-card">
+                <span class="practice-card__label">Autoria</span>
+                <h3>Produção jurídica</h3>
+                <p>Autor de <em>O Pacote Anticrime Comentado</em>. [EDITORA, EDIÇÃO E ANO A CONFIRMAR].</p>
+            </article>
+        </div>
+
+        <div class="cluster section-action">
+            <x-site.button :href="route('pages.show', 'marcos-tulio')" variant="secondary">Conhecer Marcos Túlio</x-site.button>
+        </div>
+    </x-site.section>
+
+    <x-site.section
+        id="atendimento"
         title="Como podemos orientar o primeiro contato"
-        intro="Escolha o caminho mais adequado ao momento. Uma urgência nunca depende do preenchimento de um formulário."
+        intro="Escolha entre contato imediato, apresentação inicial da situação ou solicitação de consulta."
         heading-variant="accent"
     >
         <div class="pathway-grid">
             <article class="pathway-card pathway-card--urgent">
-                <span class="pathway-card__label">Resposta direta</span>
-                <h2>Estou em uma situação urgente</h2>
-                <p>Prisão, busca e apreensão, intimação próxima ou outra situação que exige contato humano imediato.</p>
+                <span class="pathway-card__label">01 · Urgência</span>
+                <h2>Preciso de contato imediato</h2>
+                <p>Para prisão, busca e apreensão, intimação próxima ou outra situação que não pode esperar.</p>
                 <x-site.button :href="config('maracuja.law_firm.whatsapp_url')">Abrir WhatsApp</x-site.button>
             </article>
 
             <article class="pathway-card pathway-card--analysis">
-                <span class="pathway-card__label">Apresentação guiada</span>
-                <h2>Preciso explicar meu caso</h2>
-                <p>Envie somente um resumo inicial para que a solicitação possa ser organizada e avaliada.</p>
+                <span class="pathway-card__label">02 · Análise inicial</span>
+                <h2>Quero apresentar uma situação</h2>
+                <p>Envie um resumo inicial pelo formulário para organizar o primeiro contato.</p>
                 @if ($analysisUrl)
-                    <x-site.button :href="$analysisUrl" variant="secondary">Apresentar o caso</x-site.button>
+                    <x-site.button :href="$analysisUrl" variant="secondary">Preencher o formulário</x-site.button>
                 @endif
             </article>
 
             <article class="pathway-card">
-                <span class="pathway-card__label">Consulta</span>
-                <h2>Quero solicitar uma consulta</h2>
-                <p>Atendimento presencial em Cuiabá ou remoto, conforme a disponibilidade a ser confirmada.</p>
+                <span class="pathway-card__label">03 · Consulta</span>
+                <h2>Quero solicitar atendimento</h2>
+                <p>Solicite uma consulta presencial ou remota, sujeita à análise e confirmação.</p>
                 @if ($consultationUrl)
                     <x-site.button :href="$consultationUrl" variant="secondary">Solicitar consulta</x-site.button>
                 @endif
@@ -71,7 +93,7 @@
     <x-site.section
         variant="muted"
         title="Atuação penal"
-        intro="Uma apresentação inicial das situações atendidas, sem promessas de resultado e sem substituir uma análise jurídica."
+        intro="Conheça as áreas em que concentro minha atuação na defesa penal."
         heading-variant="underline"
     >
         <div class="practice-grid">
@@ -92,14 +114,14 @@
             </article>
         </div>
 
-        <div class="cluster">
+        <div class="cluster section-action">
             <x-site.button :href="route('pages.show', 'services')" variant="secondary">Conhecer a atuação penal</x-site.button>
         </div>
     </x-site.section>
 
     <x-site.section
         title="Sustentação oral: preparação e presença"
-        intro="Uma seleção profissional mostrará, com autorização, como a defesa é apresentada perante os tribunais."
+        intro="Veja como preparo e apresento os fundamentos da defesa perante os tribunais."
         heading-variant="accent"
     >
         <div class="split">
@@ -110,40 +132,10 @@
                 </div>
             </div>
             <div class="stack stack--md">
-                <span class="section-kicker">Sustentações e defesas</span>
                 <h2>Uma defesa compreensível, fundamentada e preparada para o julgamento</h2>
-                <p>Nenhum caso, resultado ou dado de cliente será publicado sem autorização e anonimização adequadas.</p>
-                <x-site.button :href="route('pages.show', 'sustentacoes-e-defesas')" variant="secondary">Ver a seleção profissional</x-site.button>
+                <p>Os materiais publicados preservam a confidencialidade e não representam promessa de resultado.</p>
+                <x-site.button :href="route('pages.show', 'sustentacoes-e-defesas')" variant="secondary">Conhecer exemplos de sustentações</x-site.button>
             </div>
-        </div>
-    </x-site.section>
-
-    <x-site.section
-        variant="muted"
-        title="Experiência que sustenta a defesa"
-        intro="Informações profissionais conhecidas nesta fase, ainda sujeitas à validação dos detalhes editoriais e biográficos."
-        heading-variant="underline"
-    >
-        <div class="authority-grid">
-            <article class="authority-card">
-                <span class="practice-card__label">Advocacia</span>
-                <h3>Atuação penal</h3>
-                <p>Defesa em Cuiabá e atendimento remoto em todo o Brasil.</p>
-            </article>
-            <article class="authority-card">
-                <span class="practice-card__label">Ensino</span>
-                <h3>Professor há dez anos</h3>
-                <p>Experiência no ensino do direito penal, sem instituições inventadas nesta demonstração.</p>
-            </article>
-            <article class="authority-card">
-                <span class="practice-card__label">Publicação</span>
-                <h3><em>O Pacote Anticrime Comentado</em></h3>
-                <p>Referências editoriais e imagem da obra serão adicionadas após confirmação.</p>
-            </article>
-        </div>
-
-        <div class="cluster">
-            <x-site.button :href="route('pages.show', 'marcos-tulio')" variant="secondary">Conhecer Marcos Túlio</x-site.button>
         </div>
     </x-site.section>
 
@@ -165,7 +157,7 @@
         <x-site.section
             variant="surface"
             title="Atualizações"
-            intro="Conteúdos publicados pela administração."
+            intro="Conteúdos e informações publicados pelo escritório."
             heading-variant="accent"
         >
             <x-site.grid columns="3">
@@ -180,36 +172,25 @@
 
     <x-site.section
         title="Como funciona o atendimento"
-        intro="Um processo inicial simples, inclusive para quem está fora de Cuiabá."
+        intro="Cada situação exige uma análise própria. O percurso abaixo será detalhado com o escritório."
         heading-variant="accent"
     >
         <div class="process-grid">
             <article class="process-step">
                 <span class="process-step__number">01</span>
-                <h3>Primeiro contato</h3>
-                <p>Urgência pelo WhatsApp ou apresentação resumida da situação.</p>
+                <h3>Contato inicial</h3>
+                <p>[DESCREVER OS CANAIS E A FORMA DE RECEPÇÃO DO PRIMEIRO CONTATO.]</p>
             </article>
             <article class="process-step">
                 <span class="process-step__number">02</span>
-                <h3>Análise inicial</h3>
-                <p>Confirmação do conflito de interesses e das informações necessárias.</p>
+                <h3>Análise da situação</h3>
+                <p>[DESCREVER COMO A SOLICITAÇÃO É ANALISADA E QUAIS INFORMAÇÕES SÃO NECESSÁRIAS.]</p>
             </article>
             <article class="process-step">
                 <span class="process-step__number">03</span>
-                <h3>Próximo passo</h3>
-                <p>Orientação sobre consulta presencial ou remota, quando aplicável.</p>
+                <h3>Definição do atendimento</h3>
+                <p>[DESCREVER COMO SÃO DEFINIDOS A CONSULTA E OS PRÓXIMOS PASSOS.]</p>
             </article>
         </div>
-    </x-site.section>
-
-    <x-site.section>
-        <x-site.cta
-            title="Precisa falar sobre uma situação penal?"
-            text="Em uma urgência, use o contato direto. Para uma análise inicial, apresente apenas as informações essenciais."
-            :href="$contactUrl"
-            label="Ver formas de atendimento"
-            variant="brand"
-            inline
-        />
     </x-site.section>
 @endsection

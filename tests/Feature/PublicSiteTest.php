@@ -44,7 +44,7 @@ class PublicSiteTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('Un site clair')
-            ->assertSee('Estou em uma situação urgente');
+            ->assertSee('Preciso de contato imediato');
     }
 
     public function test_services_page_uses_dedicated_demo_template(): void
