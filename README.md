@@ -6,11 +6,10 @@ Toutes les identités, coordonnées et données de contact présentes dans l'ins
 
 ## Installation locale
 
-Prérequis : PHP 8.3+, Composer, Node.js/npm et l'extension PHP SQLite.
+Prérequis : PHP 8.3+, Composer, Node.js/npm, MySQL 8 ou MariaDB et l'extension PHP PDO MySQL.
 
 ```bash
 cp .env.example .env
-touch database/database.sqlite
 composer install
 php artisan key:generate
 php artisan migrate --seed
@@ -20,7 +19,7 @@ php artisan storage:link
 php artisan serve
 ```
 
-Ne copie jamais une `APP_KEY` depuis un autre site. `php artisan key:generate` crée celle de cette installation.
+Créer auparavant les bases MySQL locales `avocat_cms` et `avocat_cms_testing`. Ne copie jamais une `APP_KEY` depuis un autre site : `php artisan key:generate` crée celle de cette installation.
 
 Administration : `http://127.0.0.1:8000/admin`. Compte de démonstration local : `admin@avocat.test` / `password`. Change ou supprime ce mot de passe avant toute exposition publique.
 

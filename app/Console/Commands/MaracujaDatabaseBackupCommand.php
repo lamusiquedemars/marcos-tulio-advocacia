@@ -40,9 +40,6 @@ class MaracujaDatabaseBackupCommand extends Command
                 'select table_name from information_schema.tables where table_schema = database() and table_type = ?',
                 ['BASE TABLE'],
             ))->map(fn (object $row): string => (string) ($row->TABLE_NAME ?? $row->table_name)),
-            'sqlite' => collect(DB::select(
-                "select name as table_name from sqlite_master where type = 'table' and name not like 'sqlite_%'",
-            ))->map(fn (object $row): string => (string) $row->table_name),
             default => throw new RuntimeException("Le pilote {$driver} n'est pas pris en charge par cette sauvegarde."),
         };
 
