@@ -4,6 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Modules\ContentSlots\Models\ContentSlot;
+use App\Modules\Inquiries\Enums\InquiryModality;
+use App\Modules\Inquiries\Enums\InquiryPhase;
+use App\Modules\Inquiries\Enums\InquiryRequestType;
+use App\Modules\Inquiries\Enums\InquiryStatus;
+use App\Modules\Inquiries\Enums\InquiryUrgency;
+use App\Modules\Inquiries\Models\Inquiry;
 use App\Modules\OralDefenses\Enums\OralDefenseStatus;
 use App\Modules\OralDefenses\Enums\OralDefenseType;
 use App\Modules\OralDefenses\Models\OralDefense;
@@ -171,6 +177,25 @@ class DatabaseSeeder extends Seeder
             'is_featured' => false,
             'position' => 20,
             'published_at' => now(),
+        ]);
+
+        Inquiry::query()->updateOrCreate([
+            'email' => 'solicitante-ficticio@example.test',
+            'source' => 'demo_seeder',
+        ], [
+            'name' => 'Solicitante Fictício',
+            'phone' => '+55 (65) 00000-0000',
+            'subject' => 'Apresentação de situação',
+            'request_type' => InquiryRequestType::Analysis,
+            'urgency' => InquiryUrgency::UpcomingDeadline,
+            'phase' => InquiryPhase::Investigation,
+            'deadline' => now()->addDays(10)->toDateString(),
+            'location' => 'Cuiabá, MT — dado fictício',
+            'modality' => InquiryModality::Remote,
+            'message' => 'Resumo inteiramente fictício para demonstrar o acompanhamento administrativo.',
+            'consent_at' => now(),
+            'status' => InquiryStatus::New,
+            'internal_notes' => 'Demonstração: não entrar em contato.',
         ]);
     }
 }

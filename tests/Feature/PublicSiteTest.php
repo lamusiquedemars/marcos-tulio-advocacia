@@ -385,6 +385,11 @@ class PublicSiteTest extends TestCase
             'name' => 'Ivo',
             'email' => 'ivo@example.test',
             'request_type' => 'analise',
+            'urgency' => 'prazo_proximo',
+            'phase' => 'investigacao',
+            'deadline' => '2026-08-01',
+            'location' => 'Cuiabá, MT',
+            'modality' => 'remoto',
             'message' => 'Bonjour depuis le formulaire.',
             'consent' => '1',
         ])->assertRedirect('/contact');
@@ -392,7 +397,18 @@ class PublicSiteTest extends TestCase
         $this->assertDatabaseHas(Inquiry::class, [
             'email' => 'ivo@example.test',
             'subject' => 'Apresentação de situação',
+            'request_type' => 'analise',
+            'urgency' => 'prazo_proximo',
+            'phase' => 'investigacao',
+            'deadline' => '2026-08-01',
+            'location' => 'Cuiabá, MT',
+            'modality' => 'remoto',
+            'message' => 'Bonjour depuis le formulaire.',
+            'status' => 'nova',
+            'source' => 'contact_form',
         ]);
+
+        $this->assertNotNull(Inquiry::query()->where('email', 'ivo@example.test')->value('consent_at'));
 
         Mail::assertSent(ContactMessageReceived::class);
     }

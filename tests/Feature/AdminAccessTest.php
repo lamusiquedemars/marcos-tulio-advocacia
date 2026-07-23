@@ -32,4 +32,14 @@ class AdminAccessTest extends TestCase
             ->get('/admin')
             ->assertForbidden();
     }
+
+    public function test_admin_user_can_open_portuguese_inquiries_resource(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+
+        $this->actingAs($admin)
+            ->get('/admin/inquiries')
+            ->assertOk()
+            ->assertSee('Solicitações recebidas');
+    }
 }

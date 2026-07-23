@@ -8,21 +8,15 @@ class InquiryReplyLink
 {
     public static function make(Inquiry $inquiry): string
     {
-        $subject = 'Re: '.($inquiry->subject ?: 'Votre demande');
+        $subject = 'Retorno sobre sua solicitação';
 
         $bodyLines = [
-            'Bonjour '.($inquiry->name ?: ''),
+            'Olá '.($inquiry->name ?: ''),
             '',
-            'Merci pour votre message.',
+            'Recebemos sua solicitação de contato.',
             '',
-            'Bien cordialement,',
+            'Atenciosamente,',
         ];
-
-        if ($inquiry->message) {
-            $bodyLines[] = '';
-            $bodyLines[] = '--- Message initial ---';
-            $bodyLines[] = $inquiry->message;
-        }
 
         $body = implode("\n", $bodyLines);
 

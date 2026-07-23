@@ -20,9 +20,9 @@ class InquiryReplyLinkTest extends TestCase
         $url = InquiryReplyLink::make($inquiry);
 
         $this->assertStringStartsWith('mailto:claire@example.test?', $url);
-        $this->assertStringContainsString(rawurlencode('Re: Location violon'), $url);
-        $this->assertStringContainsString(rawurlencode('Bonjour Claire'), $url);
-        $this->assertStringContainsString(rawurlencode('--- Message initial ---'), $url);
+        $this->assertStringContainsString(rawurlencode('Retorno sobre sua solicitação'), $url);
+        $this->assertStringContainsString(rawurlencode('Olá Claire'), $url);
+        $this->assertStringNotContainsString(rawurlencode($inquiry->message), $url);
     }
 
     public function test_it_uses_default_subject_when_empty(): void
@@ -35,6 +35,6 @@ class InquiryReplyLinkTest extends TestCase
 
         $url = InquiryReplyLink::make($inquiry);
 
-        $this->assertStringContainsString(rawurlencode('Re: Votre demande'), $url);
+        $this->assertStringContainsString(rawurlencode('Retorno sobre sua solicitação'), $url);
     }
 }

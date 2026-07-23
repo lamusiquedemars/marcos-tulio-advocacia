@@ -41,6 +41,7 @@ class ContactController extends Controller
             'phone' => ['nullable', 'string', 'max:60'],
             'request_type' => ['required', 'in:analise,consulta,outro'],
             'urgency' => ['nullable', 'in:sem_urgencia,prazo_proximo,urgente'],
+            'phase' => ['nullable', 'in:nao_informada,investigacao,intimacao_depoimento,prisao,processo_penal,recurso,preventiva'],
             'deadline' => ['nullable', 'date'],
             'location' => ['nullable', 'string', 'max:120'],
             'modality' => ['nullable', 'in:presencial,remoto,indiferente'],
@@ -61,6 +62,7 @@ class ContactController extends Controller
             'request_type.required' => 'Selecione o tipo de solicitação.',
             'request_type.in' => 'Selecione um tipo de solicitação válido.',
             'urgency.in' => 'Selecione um grau de urgência válido.',
+            'phase.in' => 'Selecione uma fase válida.',
             'deadline.date' => 'Informe uma data válida.',
             'modality.in' => 'Selecione uma modalidade válida.',
             'message.required' => 'Escreva um resumo inicial.',
@@ -78,30 +80,9 @@ class ContactController extends Controller
             'consulta' => 'Solicitação de consulta',
             'outro' => 'Outro contato',
         ];
-        $urgencyLabels = [
-            'sem_urgencia' => 'Sem urgência imediata',
-            'prazo_proximo' => 'Existe prazo próximo',
-            'urgente' => 'Urgente',
-        ];
-        $modalityLabels = [
-            'presencial' => 'Presencial',
-            'remoto' => 'Remoto',
-            'indiferente' => 'A definir',
-        ];
-
         $data['subject'] = $requestLabels[$data['request_type']];
-        $data['message'] = implode("\n", array_filter([
-            'Tipo: '.$requestLabels[$data['request_type']],
-            isset($data['urgency']) ? 'Urgência: '.$urgencyLabels[$data['urgency']] : null,
-            filled($data['deadline'] ?? null) ? 'Data importante: '.$data['deadline'] : null,
-            filled($data['location'] ?? null) ? 'Localização: '.$data['location'] : null,
-            isset($data['modality']) ? 'Modalidade: '.$modalityLabels[$data['modality']] : null,
-            '',
-            'Resumo informado:',
-            $data['message'],
-            '',
-            'Consentimento registrado em: '.now()->toIso8601String(),
-        ]));
+        $data['consent_at'] = now()->toIso8601String();
+        $data['source'] = 'contact_form';
 
         $message = ContactMessage::fromArray($data);
 

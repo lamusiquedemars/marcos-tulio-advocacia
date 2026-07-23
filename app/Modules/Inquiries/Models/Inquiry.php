@@ -2,7 +2,11 @@
 
 namespace App\Modules\Inquiries\Models;
 
+use App\Modules\Inquiries\Enums\InquiryModality;
+use App\Modules\Inquiries\Enums\InquiryPhase;
+use App\Modules\Inquiries\Enums\InquiryRequestType;
 use App\Modules\Inquiries\Enums\InquiryStatus;
+use App\Modules\Inquiries\Enums\InquiryUrgency;
 use Illuminate\Database\Eloquent\Model;
 
 class Inquiry extends Model
@@ -12,7 +16,15 @@ class Inquiry extends Model
         'email',
         'phone',
         'subject',
+        'request_type',
+        'urgency',
+        'phase',
+        'deadline',
+        'location',
+        'modality',
         'message',
+        'consent_at',
+        'source',
         'status',
         'internal_notes',
         'read_at',
@@ -24,6 +36,12 @@ class Inquiry extends Model
     {
         return [
             'status' => InquiryStatus::class,
+            'request_type' => InquiryRequestType::class,
+            'urgency' => InquiryUrgency::class,
+            'phase' => InquiryPhase::class,
+            'deadline' => 'date',
+            'modality' => InquiryModality::class,
+            'consent_at' => 'datetime',
             'read_at' => 'datetime',
             'handled_at' => 'datetime',
             'archived_at' => 'datetime',

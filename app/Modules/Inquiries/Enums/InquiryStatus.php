@@ -4,20 +4,20 @@ namespace App\Modules\Inquiries\Enums;
 
 enum InquiryStatus: string
 {
-    case New = 'new';
-    case ToHandle = 'to_handle';
-    case WaitingCustomer = 'waiting_customer';
-    case Handled = 'handled';
-    case Archived = 'archived';
+    case New = 'nova';
+    case ToHandle = 'em_contato';
+    case WaitingCustomer = 'consulta_solicitada';
+    case Handled = 'agendada';
+    case Archived = 'encerrada';
 
     public function label(): string
     {
         return match ($this) {
-            self::New => 'Nouveau',
-            self::ToHandle => 'À traiter',
-            self::WaitingCustomer => 'En attente client',
-            self::Handled => 'Traité',
-            self::Archived => 'Archivé',
+            self::New => 'Nova',
+            self::ToHandle => 'Em contato',
+            self::WaitingCustomer => 'Consulta solicitada',
+            self::Handled => 'Agendada',
+            self::Archived => 'Encerrada',
         };
     }
 

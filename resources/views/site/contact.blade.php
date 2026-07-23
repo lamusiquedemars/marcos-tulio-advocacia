@@ -74,6 +74,20 @@
                 </select>
             </label>
 
+            <label>
+                Fase geral da situação
+                <select name="phase">
+                    <option value="nao_informada" @selected(old('phase') === 'nao_informada')>Prefiro não informar</option>
+                    <option value="investigacao" @selected(old('phase') === 'investigacao')>Investigação</option>
+                    <option value="intimacao_depoimento" @selected(old('phase') === 'intimacao_depoimento')>Intimação ou depoimento</option>
+                    <option value="prisao" @selected(old('phase') === 'prisao')>Prisão</option>
+                    <option value="processo_penal" @selected(old('phase') === 'processo_penal')>Processo penal</option>
+                    <option value="recurso" @selected(old('phase') === 'recurso')>Recurso ou habeas corpus</option>
+                    <option value="preventiva" @selected(old('phase') === 'preventiva')>Orientação preventiva</option>
+                </select>
+                @error('phase') <small class="field__error">{{ $message }}</small> @enderror
+            </label>
+
             @if ($settings->contact_form_show_name)
                 <label>
                     Nome
