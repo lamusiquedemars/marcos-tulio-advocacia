@@ -12,6 +12,7 @@
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $seo['title'] }}</title>
     <meta name="description" content="{{ $seo['description'] }}">
     <meta name="robots" content="{{ $seo['robots'] }}">
@@ -112,5 +113,9 @@
     <button class="btn btn--primary back-to-top" type="button" data-back-to-top hidden aria-label="Voltar ao topo">
         <span class="back-to-top__icon" aria-hidden="true">↑</span>
     </button>
+
+    @if (\App\Support\Modules::enabled('assistant') && \App\Support\Modules::enabled('inquiries'))
+        @include('site.partials.assistant')
+    @endif
 </body>
 </html>

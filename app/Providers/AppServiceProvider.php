@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Modules\Assistant\Contracts\AssistantProvider;
+use App\Modules\Assistant\Providers\FakeAssistantProvider;
 use App\Modules\Media\Models\MediaAsset;
 use App\Modules\Media\Policies\MediaAssetPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -14,7 +16,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(AssistantProvider::class, function (): AssistantProvider {
+            return match (config('maracuja.assistant.provider')) {
+                'fake' => new FakeAssistantProvider,
+                default => throw new \InvalidArgumentException('O provedor configurado para o assistente não está disponível.'),
+            };
+        });
     }
 
     /**

@@ -16,6 +16,11 @@ return [
         'demo' => env('MARACUJA_DEMO_MODE', true),
     ],
 
+    'assistant' => [
+        'provider' => env('MARACUJA_ASSISTANT_PROVIDER', 'fake'),
+        'inquiry_retention_days' => env('MARACUJA_INQUIRY_RETENTION_DAYS', 90),
+    ],
+
     'gallery' => [
         'slug' => env('MARACUJA_GALLERY_SLUG', 'home'),
         'layout' => env('MARACUJA_GALLERY_LAYOUT', 'grid'),
@@ -66,6 +71,7 @@ return [
         'audience' => env('MARACUJA_MODULE_AUDIENCE', false),
         'campaigns' => env('MARACUJA_MODULE_CAMPAIGNS', false),
         'oral_defenses' => env('MARACUJA_MODULE_ORAL_DEFENSES', true),
+        'assistant' => env('MARACUJA_MODULE_ASSISTANT', true),
     ],
 
     'developer_tools' => [
