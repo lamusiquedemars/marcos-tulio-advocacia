@@ -18,8 +18,8 @@ class ArticleController extends Controller
 
         return view('site.articles.index', [
             'settings' => SiteSetting::current(),
-            'label' => ContentSlots::value('articles.public_label', 'Articles'),
-            'subtitle' => ContentSlots::value('articles.index.subtitle', 'Articles éditoriaux publiés sur le site.'),
+            'label' => ContentSlots::value('articles.public_label', 'Artigos'),
+            'subtitle' => ContentSlots::value('articles.index.subtitle', 'Artigos publicados no site.'),
             'posts' => Article::query()->forListing()->paginate(9),
         ]);
     }
@@ -35,7 +35,7 @@ class ArticleController extends Controller
 
         return view('site.articles.show', [
             'settings' => SiteSetting::current(),
-            'label' => ContentSlots::value('articles.public_label', 'Articles'),
+            'label' => ContentSlots::value('articles.public_label', 'Artigos'),
             'post' => $post,
         ]);
     }

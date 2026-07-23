@@ -39,10 +39,15 @@ class AppointmentsTest extends TestCase
         $response = $this->get('/contact')
             ->assertOk()
             ->assertSee('Ver horários disponíveis')
-            ->assertSee('https://example.test/agendamento-demo', false);
+            ->assertSee('http://avocat-cms.test/agendamento', false);
 
         $this->assertStringNotContainsString('summary=', $response->getContent());
         $this->assertStringNotContainsString('message=', $response->getContent());
+
+        $this->get('/agendamento')
+            ->assertOk()
+            ->assertSee('Nenhum agendamento real será realizado.')
+            ->assertSee('sem login Brevo e sem mudança de aba');
     }
 
     public function test_enabled_booking_requires_a_booking_page_url(): void

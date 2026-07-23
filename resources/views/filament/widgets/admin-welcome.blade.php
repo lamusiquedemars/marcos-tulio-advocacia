@@ -224,7 +224,7 @@
                     rel="noreferrer"
                     class="maracuja-admin-site-link"
                 >
-                    Voir le site
+                    Ver o site
                 </a>
             </div>
 

@@ -3,10 +3,10 @@
 ])
 
 @if (count($items) > 0)
-    <nav {{ $attributes->class(['breadcrumb container'])->merge(['aria-label' => 'Fil d Ariane']) }}>
+    <nav {{ $attributes->class(['breadcrumb container'])->merge(['aria-label' => 'Navegação estrutural']) }}>
         <ol class="breadcrumb__list">
             <li class="breadcrumb__item">
-                <a href="{{ route('home') }}">Accueil</a>
+                <a href="{{ route('home') }}">Início</a>
             </li>
 
             @foreach ($items as $item)

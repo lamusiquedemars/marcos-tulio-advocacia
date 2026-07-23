@@ -11,6 +11,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PublicStorageController;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
+use App\Modules\Appointments\Http\Controllers\AppointmentController;
 use App\Modules\Assistant\Http\Controllers\AssistantInquiryController;
 use App\Support\Modules;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,10 @@ if (Modules::enabled('assistant')) {
     Route::post('/assistant/solicitacao', AssistantInquiryController::class)
         ->middleware('throttle:10,1')
         ->name('assistant.inquiry');
+}
+
+if (Modules::enabled('appointments')) {
+    Route::get('/agendamento', AppointmentController::class)->name('appointments.booking');
 }
 
 Route::get('/{slug}', [PageController::class, 'show'])->name('pages.show');

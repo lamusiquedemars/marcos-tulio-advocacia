@@ -16,7 +16,7 @@ class MediaPickerTest extends TestCase
         $this->assertSame(MediaType::Image, $picker->acceptedMediaType());
         $this->assertSame(['type' => 'image'], $picker->tableArgumentsForMedia());
         $this->assertSame(MediaPickerTable::class, $picker->getTableConfiguration());
-        $this->assertSame('Choisir une image', $picker->selectionModalHeading());
+        $this->assertSame('Escolher uma imagem', $picker->selectionModalHeading());
     }
 
     public function test_it_can_be_restricted_to_documents(): void
@@ -25,7 +25,7 @@ class MediaPickerTest extends TestCase
 
         $this->assertSame(MediaType::Document, $picker->acceptedMediaType());
         $this->assertSame(['type' => 'document'], $picker->tableArgumentsForMedia());
-        $this->assertSame('Choisir un document', $picker->selectionModalHeading());
+        $this->assertSame('Escolher um documento', $picker->selectionModalHeading());
     }
 
     public function test_it_can_offer_all_media_types(): void
@@ -34,6 +34,6 @@ class MediaPickerTest extends TestCase
 
         $this->assertNull($picker->acceptedMediaType());
         $this->assertSame(['type' => null], $picker->tableArgumentsForMedia());
-        $this->assertSame('Choisir un média', $picker->selectionModalHeading());
+        $this->assertSame('Escolher uma mídia', $picker->selectionModalHeading());
     }
 }

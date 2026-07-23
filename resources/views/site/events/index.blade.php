@@ -16,7 +16,7 @@
     <x-site.section>
         @if ($events->isEmpty())
             <div class="prose">
-                <p>Aucun événement annoncé pour le moment.</p>
+                <p>Nenhum evento anunciado no momento.</p>
             </div>
         @else
             <div class="event-list">

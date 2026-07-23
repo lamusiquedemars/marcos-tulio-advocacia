@@ -342,7 +342,7 @@ class PublicSiteTest extends TestCase
 
         $this->get('/mentions-legales')
             ->assertOk()
-            ->assertSee('Fil d Ariane')
+            ->assertSee('Navegação estrutural')
             ->assertSee('Mentions légales')
             ->assertSee('Éditeur du site: Maracuja CMS')
             ->assertSee('Voltar ao início');
@@ -645,9 +645,9 @@ class PublicSiteTest extends TestCase
 
         $this->get('/actualites/actualite-active')
             ->assertOk()
-            ->assertSee('Fil d Ariane')
-            ->assertSee('Actualités')
-            ->assertSee('Retour aux actualités');
+            ->assertSee('Navegação estrutural')
+            ->assertSee('Atualizações')
+            ->assertSee('Voltar às atualizações');
     }
 
     public function test_articles_render_structured_blocks(): void
@@ -693,7 +693,7 @@ class PublicSiteTest extends TestCase
             ->assertSee('Le bois répond au geste.')
             ->assertSee('Le geste confirme.')
             ->assertSee('Cumaru')
-            ->assertSee('Retour à articles');
+            ->assertSee('Voltar para artigos');
 
         $this->get('/article.php?slug=bois-et-geste')
             ->assertRedirect('/articles/bois-et-geste');

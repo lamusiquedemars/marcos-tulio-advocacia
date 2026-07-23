@@ -16,7 +16,7 @@
     <x-site.section>
         @if ($posts->isEmpty())
             <div class="prose">
-                <p>Aucun article publié pour le moment.</p>
+                <p>Nenhum artigo publicado no momento.</p>
             </div>
         @else
             <x-site.grid columns="3">

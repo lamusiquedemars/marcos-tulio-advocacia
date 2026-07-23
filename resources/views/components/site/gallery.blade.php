@@ -89,8 +89,8 @@
 
         @if ($isCarousel && $items->count() > 1)
             <div class="carousel__controls">
-                <button class="btn btn--secondary btn--small" data-carousel-prev type="button">Précédent</button>
-                <button class="btn btn--secondary btn--small" data-carousel-next type="button">Suivant</button>
+                <button class="btn btn--secondary btn--small" data-carousel-prev type="button">Anterior</button>
+                <button class="btn btn--secondary btn--small" data-carousel-next type="button">Próximo</button>
             </div>
         @endif
     </div>

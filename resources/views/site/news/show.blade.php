@@ -9,13 +9,13 @@
     <x-site.hero :title="$post->title" :subtitle="$post->excerpt" />
 
     <x-site.breadcrumb :items="[
-        ['label' => 'Actualités', 'url' => route('news.index')],
+        ['label' => 'Atualizações', 'url' => route('news.index')],
         ['label' => $post->title],
     ]" />
 
     <x-site.section container="narrow" inner-class="prose">
         {!! $post->content !!}
 
-        <x-site.back-link :href="route('news.index')" label="Retour aux actualités" />
+        <x-site.back-link :href="route('news.index')" label="Voltar às atualizações" />
     </x-site.section>
 @endsection

@@ -16,8 +16,8 @@ class EventController extends Controller
 
         return view('site.events.index', [
             'settings' => SiteSetting::current(),
-            'label' => ContentSlots::value('events.public_label', 'Événements'),
-            'subtitle' => ContentSlots::value('events.index.subtitle', 'Dates à venir et rendez-vous publics.'),
+            'label' => ContentSlots::value('events.public_label', 'Eventos'),
+            'subtitle' => ContentSlots::value('events.index.subtitle', 'Próximas datas e eventos públicos.'),
             'events' => Event::query()
                 ->with('venue')
                 ->upcoming()
@@ -37,7 +37,7 @@ class EventController extends Controller
 
         return view('site.events.show', [
             'settings' => SiteSetting::current(),
-            'label' => ContentSlots::value('events.public_label', 'Événements'),
+            'label' => ContentSlots::value('events.public_label', 'Eventos'),
             'event' => $event,
         ]);
     }

@@ -3,7 +3,7 @@
 <p><strong>Nom :</strong> {{ $messageData->name }}</p>
 <p><strong>Email :</strong> {{ $messageData->email }}</p>
 @if ($messageData->phone)
-    <p><strong>Téléphone :</strong> {{ $messageData->phone }}</p>
+    <p><strong>Telefone:</strong> {{ $messageData->phone }}</p>
 @endif
 @if ($messageData->subject)
     <p><strong>Sujet :</strong> {{ $messageData->subject }}</p>

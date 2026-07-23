@@ -29,13 +29,13 @@ class MediaUploadAction
         });
 
         return Action::make('uploadMedia')
-            ->label('Importer depuis l’ordinateur')
+            ->label('Importar do computador')
             ->icon(Heroicon::OutlinedArrowUpTray)
-            ->modalHeading('Importer depuis l’ordinateur')
+            ->modalHeading('Importar do computador')
             ->modalDescription(self::description($type))
             ->form([
                 FileUpload::make('files')
-                    ->label('Fichiers')
+                    ->label('Arquivos')
                     ->multiple()
                     ->storeFiles(false)
                     ->acceptedFileTypes($acceptedFileTypes)
@@ -52,7 +52,7 @@ class MediaUploadAction
                 $files->each(fn (TemporaryUploadedFile $file) => $storage->store($file, uploader: $uploader));
 
                 Notification::make()
-                    ->title($files->count().' média'.($files->count() > 1 ? 's ajoutés' : ' ajouté'))
+                    ->title($files->count().' mídia'.($files->count() > 1 ? 's adicionadas' : ' adicionada'))
                     ->success()
                     ->send();
             });
@@ -61,10 +61,10 @@ class MediaUploadAction
     private static function description(?MediaType $type): string
     {
         return match ($type) {
-            MediaType::Image => 'Images JPEG, PNG ou WebP, 5 Mo maximum.',
-            MediaType::Document => 'Documents PDF, 15 Mo maximum.',
+            MediaType::Image => 'Imagens JPEG, PNG ou WebP, 5 MB no máximo.',
+            MediaType::Document => 'Documentos PDF, 15 MB no máximo.',
             MediaType::Video => 'Vídeos MP4 ou WebM, 100 MB no máximo.',
-            null => 'Images JPEG, PNG ou WebP, documents PDF et vidéos MP4 ou WebM.',
+            null => 'Imagens JPEG, PNG ou WebP, documentos PDF e vídeos MP4 ou WebM.',
         };
     }
 }

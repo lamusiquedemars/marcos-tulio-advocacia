@@ -18,19 +18,19 @@ class MediaPicker extends ModalTableSelect
         parent::setUp();
 
         $this
-            ->label('Média')
+            ->label('Mídia')
             ->tableConfiguration(MediaPickerTable::class)
             ->tableArguments(fn (): array => $this->tableArgumentsForMedia())
             ->getOptionLabelFromRecordUsing(fn (MediaAsset $record): string => $record->display_name)
             ->selectAction(fn (Action $action): Action => $action
                 ->label(fn (): string => match ($this->acceptedMediaType) {
-                    MediaType::Image => 'Choisir ou importer une image',
-                    MediaType::Document => 'Choisir ou importer un document',
+                    MediaType::Image => 'Escolher ou importar uma imagem',
+                    MediaType::Document => 'Escolher ou importar um documento',
                     MediaType::Video => 'Escolher ou importar um vídeo',
-                    null => 'Choisir ou importer un média',
+                    null => 'Escolher ou importar uma mídia',
                 })
                 ->modalHeading($this->selectionModalHeading())
-                ->modalSubmitActionLabel('Utiliser ce média')
+                ->modalSubmitActionLabel('Usar esta mídia')
                 ->modalWidth(Width::SevenExtraLarge));
     }
 
@@ -69,10 +69,10 @@ class MediaPicker extends ModalTableSelect
     public function selectionModalHeading(): string
     {
         return match ($this->acceptedMediaType) {
-            MediaType::Image => 'Choisir une image',
-            MediaType::Document => 'Choisir un document',
+            MediaType::Image => 'Escolher uma imagem',
+            MediaType::Document => 'Escolher um documento',
             MediaType::Video => 'Escolher um vídeo',
-            null => 'Choisir un média',
+            null => 'Escolher uma mídia',
         };
     }
 }

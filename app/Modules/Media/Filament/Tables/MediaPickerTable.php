@@ -25,16 +25,16 @@ class MediaPickerTable
                 ->when($type, fn (Builder $query, MediaType $type): Builder => $query->where('type', $type)))
             ->columns([
                 ViewColumn::make('preview')
-                    ->label('Aperçu')
+                    ->label('Visualização')
                     ->view('filament.media.columns.preview'),
                 Stack::make([
                     TextColumn::make('display_name')
-                        ->label('Nom')
+                        ->label('Nome')
                         ->weight('semibold')
                         ->searchable(['display_name', 'original_name', 'alt_text', 'caption', 'credit'])
                         ->wrap(),
                     TextColumn::make('original_name')
-                        ->label('Fichier')
+                        ->label('Arquivo')
                         ->color('gray')
                         ->size('sm')
                         ->limit(40),
@@ -54,7 +54,7 @@ class MediaPickerTable
             ->defaultSort('created_at', 'desc')
             ->filters($type ? [] : [
                 SelectFilter::make('type')
-                    ->label('Type')
+                    ->label('Tipo')
                     ->options([
                         MediaType::Image->value => 'Images',
                         MediaType::Document->value => 'Documents',
@@ -64,7 +64,7 @@ class MediaPickerTable
             ->headerActions([
                 MediaUploadAction::make($type),
             ])
-            ->emptyStateHeading('Aucun média disponible')
-            ->emptyStateDescription('Ajoutez un média ou modifiez vos filtres.');
+            ->emptyStateHeading('Nenhuma mídia disponível')
+            ->emptyStateDescription('Adicione uma mídia ou altere os filtros.');
     }
 }

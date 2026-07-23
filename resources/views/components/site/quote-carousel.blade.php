@@ -69,13 +69,13 @@
         @if ($hasMultipleSlides && ($showControls || $showDots))
             <div class="quote-carousel__controls carousel__controls">
                 @if ($showControls)
-                    <button class="btn btn--secondary btn--small" data-carousel-prev type="button">Précédent</button>
+                    <button class="btn btn--secondary btn--small" data-carousel-prev type="button">Anterior</button>
                 @endif
                 @if ($showDots)
                     <div class="carousel__dots" data-carousel-dots></div>
                 @endif
                 @if ($showControls)
-                    <button class="btn btn--secondary btn--small" data-carousel-next type="button">Suivant</button>
+                    <button class="btn btn--secondary btn--small" data-carousel-next type="button">Próximo</button>
                 @endif
             </div>
         @endif

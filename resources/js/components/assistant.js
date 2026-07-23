@@ -14,6 +14,7 @@ export function initAssistant(root = document) {
     const status = assistant.querySelector('[data-assistant-status]');
     const urgent = assistant.querySelector('[data-assistant-urgent]');
     let currentStep = 0;
+    let completed = false;
 
     if (!dialog || !form || !steps.length || !back || !next || !submit || !status) {
         return;
@@ -43,6 +44,15 @@ export function initAssistant(root = document) {
     };
 
     assistant.querySelector('[data-assistant-open]')?.addEventListener('click', () => {
+        if (completed) {
+            form.reset();
+            completed = false;
+            submit.disabled = false;
+            submit.removeAttribute('aria-busy');
+            urgent.hidden = true;
+            showStep(0);
+        }
+
         dialog.showModal();
         showStep(currentStep);
     });
@@ -89,6 +99,7 @@ export function initAssistant(root = document) {
             }
 
             form.reset();
+            completed = true;
             steps.forEach((step) => step.hidden = true);
             status.textContent = payload.message;
             back.hidden = true;

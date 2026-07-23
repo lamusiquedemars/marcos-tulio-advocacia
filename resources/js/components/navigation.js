@@ -19,6 +19,29 @@ export function initNavigation(root = document) {
             menu.hidden = !isOpen;
         });
 
-        menu.hidden = window.matchMedia('(max-width: 760px)').matches;
+        const mediaQuery = window.matchMedia('(max-width: 760px)');
+        const syncMenu = () => {
+            const isMobile = mediaQuery.matches;
+            const isOpen = nav.classList.contains('is-open');
+
+            menu.hidden = isMobile && !isOpen;
+        };
+
+        mediaQuery.addEventListener('change', () => {
+            nav.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded', 'false');
+            syncMenu();
+        });
+
+        nav.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+                nav.classList.remove('is-open');
+                toggle.setAttribute('aria-expanded', 'false');
+                syncMenu();
+                toggle.focus();
+            }
+        });
+
+        syncMenu();
     });
 }

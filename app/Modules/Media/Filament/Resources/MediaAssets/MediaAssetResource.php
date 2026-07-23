@@ -55,42 +55,42 @@ class MediaAssetResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Informations éditoriales')
+            Section::make('Informações editoriais')
                 ->schema([
                     TextInput::make('display_name')
-                        ->label('Nom')
+                        ->label('Nome')
                         ->columnSpanFull()
                         ->required()
                         ->maxLength(255),
                     Textarea::make('alt_text')
-                        ->label('Texte alternatif')
+                        ->label('Texto alternativo')
                         ->rows(2)
                         ->visible(fn (?MediaAsset $record): bool => $record?->isImage() ?? true)
-                        ->helperText('Décrire l’information apportée par l’image. Laisser vide pour une image décorative.'),
+                        ->helperText('Descreva a informação transmitida pela imagem. Deixe vazio para uma imagem decorativa.'),
                     Textarea::make('caption')
-                        ->label('Légende')
+                        ->label('Legenda')
                         ->rows(2),
                     TextInput::make('credit')
-                        ->label('Crédit')
+                        ->label('Crédito')
                         ->maxLength(255),
                 ])
                 ->columns(2),
-            Section::make('Fichier')
+            Section::make('Arquivo')
                 ->schema([
                     TextInput::make('original_name')
-                        ->label('Nom original')
+                        ->label('Nome original')
                         ->disabled()
                         ->dehydrated(false),
                     TextInput::make('path')
-                        ->label('Chemin')
+                        ->label('Caminho')
                         ->disabled()
                         ->dehydrated(false),
                     TextInput::make('mime_type')
-                        ->label('Type MIME')
+                        ->label('Tipo MIME')
                         ->disabled()
                         ->dehydrated(false),
                     TextInput::make('technical_details')
-                        ->label('Dimensions et poids')
+                        ->label('Dimensões e tamanho')
                         ->formatStateUsing(fn (?MediaAsset $record): string => collect([
                             $record?->dimensionsLabel(),
                             $record?->formattedSize(),
@@ -109,16 +109,16 @@ class MediaAssetResource extends Resource
             ->modifyQueryUsing(fn (Builder $query): Builder => $query->withCount('usages'))
             ->columns([
                 ViewColumn::make('preview')
-                    ->label('Aperçu')
+                    ->label('Visualização')
                     ->view('filament.media.columns.preview'),
                 Stack::make([
                     TextColumn::make('display_name')
-                        ->label('Nom')
+                        ->label('Nome')
                         ->weight('semibold')
                         ->searchable(['display_name', 'original_name', 'path', 'alt_text', 'caption', 'credit'])
                         ->wrap(),
                     TextColumn::make('original_name')
-                        ->label('Fichier')
+                        ->label('Arquivo')
                         ->color('gray')
                         ->size('sm')
                         ->limit(40),
@@ -138,8 +138,8 @@ class MediaAssetResource extends Resource
                         ->color('gray')
                         ->size('sm'),
                     TextColumn::make('usages_count')
-                        ->label('Utilisations')
-                        ->formatStateUsing(fn (int $state): string => $state === 0 ? 'Non utilisé' : $state.' utilisation'.($state > 1 ? 's' : ''))
+                        ->label('Usos')
+                        ->formatStateUsing(fn (int $state): string => $state === 0 ? 'Não utilizada' : $state.' uso'.($state > 1 ? 's' : ''))
                         ->color(fn (int $state): string => $state === 0 ? 'gray' : 'success')
                         ->size('sm'),
                 ])->space(2),
@@ -152,17 +152,17 @@ class MediaAssetResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('type')
-                    ->label('Type')
+                    ->label('Tipo')
                     ->options([
                         MediaType::Image->value => 'Images',
                         MediaType::Document->value => 'Documents',
                         MediaType::Video->value => 'Vídeos',
                     ]),
                 TernaryFilter::make('used')
-                    ->label('Utilisation')
-                    ->placeholder('Tous les médias')
-                    ->trueLabel('Utilisés')
-                    ->falseLabel('Non utilisés')
+                    ->label('Uso')
+                    ->placeholder('Todas as mídias')
+                    ->trueLabel('Utilizadas')
+                    ->falseLabel('Não utilizadas')
                     ->queries(
                         true: fn (Builder $query): Builder => $query->has('usages'),
                         false: fn (Builder $query): Builder => $query->doesntHave('usages'),
@@ -172,24 +172,24 @@ class MediaAssetResource extends Resource
             ->recordAction('edit')
             ->recordActions([
                 Action::make('preview')
-                    ->label('Aperçu')
+                    ->label('Visualizar')
                     ->icon(Heroicon::OutlinedEye)
                     ->modalHeading(fn (MediaAsset $record): string => $record->display_name)
                     ->modalWidth(Width::FourExtraLarge)
                     ->modalSubmitAction(false)
-                    ->modalCancelActionLabel('Fermer')
+                    ->modalCancelActionLabel('Fechar')
                     ->modalContent(fn (MediaAsset $record) => view('filament.media.preview', ['media' => $record])),
                 EditAction::make()
-                    ->label('Modifier'),
+                    ->label('Editar'),
                 DeleteAction::make()
-                    ->label('Supprimer')
+                    ->label('Excluir')
                     ->disabled(fn (MediaAsset $record): bool => ! $record->canBeDeleted())
                     ->tooltip(fn (MediaAsset $record): ?string => $record->canBeDeleted()
                         ? null
-                        : 'Ce média est encore utilisé et ne peut pas être supprimé.'),
+                        : 'Esta mídia ainda está em uso e não pode ser excluída.'),
             ])
             ->toolbarActions([])
-            ->emptyStateHeading('Aucun média')
+            ->emptyStateHeading('Nenhuma mídia')
             ->emptyStateDescription('Adicione uma imagem, um documento ou um vídeo à biblioteca de mídia.');
     }
 

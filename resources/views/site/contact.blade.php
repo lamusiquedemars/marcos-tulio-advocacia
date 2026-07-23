@@ -50,7 +50,7 @@
             <div class="confidentiality-note">
                 <strong>Agendamento direto disponível.</strong>
                 A reserva será concluída na página Brevo Meetings, sem envio do resumo desta solicitação.
-                <a class="btn btn--secondary" href="{{ $appointmentSettings->booking_url }}" target="_blank" rel="noopener noreferrer nofollow">
+                <a class="btn btn--secondary" href="{{ route('appointments.booking') }}">
                     Ver horários disponíveis
                 </a>
             </div>

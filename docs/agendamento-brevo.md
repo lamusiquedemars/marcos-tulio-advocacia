@@ -11,8 +11,12 @@ por link ou incorporada ao site:
 - https://help.brevo.com/hc/pt/articles/7333628001938
 - https://help.brevo.com/hc/en-us/articles/7073284620306
 
-A V1 utiliza um link externo configurável. Não tenta criar um horário pela API,
-pois essa operação não foi identificada na documentação pública oficial.
+A configuração conserva o link da página Brevo, mas o percurso público usa a
+rota interna `/agendamento`. A futura página Brevo deverá ser incorporada nessa
+rota: nenhum novo separador, redirecionamento ou login Brevo será aceito.
+
+O módulo não tenta criar um horário pela API, pois essa operação não foi
+identificada na documentação pública oficial.
 
 ## Modos
 
@@ -27,6 +31,15 @@ caso, email ou telefone como parâmetro.
 
 Em demonstração, o provedor obrigatório é `fake` e o endereço usa
 `example.test`. O modelo bloqueia a ativação acidental do provedor Brevo.
+
+A ativação pública do Brevo depende de um teste com a conta real confirmando:
+
+- incorporação dentro do site;
+- percurso completo em português brasileiro;
+- ausência de login Brevo para o visitante;
+- confirmação e lembretes em idioma aceitável.
+
+Se um desses pontos falhar, a integração pública não será ativada.
 
 Para ativar em produção:
 

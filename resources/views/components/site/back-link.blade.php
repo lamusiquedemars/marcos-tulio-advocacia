@@ -1,6 +1,6 @@
 @props([
     'href',
-    'label' => 'Retour',
+    'label' => 'Voltar',
 ])
 
 <a {{ $attributes->class(['back-link'])->merge(['href' => $href]) }}>

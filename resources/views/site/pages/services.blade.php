@@ -61,7 +61,7 @@
         />
 
         <div class="stack stack--md">
-            <x-site.back-link :href="route('home')" label="Retour à l'accueil" />
+            <x-site.back-link :href="route('home')" label="Voltar ao início" />
         </div>
     </x-site.section>
 @endsection

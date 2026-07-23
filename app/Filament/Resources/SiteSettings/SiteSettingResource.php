@@ -32,9 +32,9 @@ class SiteSettingResource extends Resource
 
     protected static UnitEnum|string|null $navigationGroup = 'Configurações';
 
-    protected static ?string $modelLabel = 'paramètres';
+    protected static ?string $modelLabel = 'configuração';
 
-    protected static ?string $pluralModelLabel = 'paramètres';
+    protected static ?string $pluralModelLabel = 'configurações';
 
     protected static ?int $navigationSort = 90;
 
@@ -53,39 +53,39 @@ class SiteSettingResource extends Resource
         return $schema
             ->components([
                 TextInput::make('site_name')
-                    ->label('Nom du site')
+                    ->label('Nome do site')
                     ->required()
                     ->default('Maracuja CMS'),
                 TextInput::make('baseline')
-                    ->label('Baseline'),
+                    ->label('Descrição curta'),
                 TextInput::make('default_seo_title')
-                    ->label('Titre SEO par défaut'),
+                    ->label('Título SEO padrão'),
                 Textarea::make('default_seo_description')
-                    ->label('Description SEO par défaut')
+                    ->label('Descrição SEO padrão')
                     ->columnSpanFull(),
                 TextInput::make('contact_email')
-                    ->label('Email de contact')
+                    ->label('Email de contato')
                     ->email(),
                 Toggle::make('contact_form_send_admin_email')
-                    ->label('Envoyer une notification à l’admin')
+                    ->label('Enviar uma notificação ao administrador')
                     ->default(true),
                 Toggle::make('contact_form_send_confirmation_email')
-                    ->label('Envoyer une confirmation au visiteur')
+                    ->label('Enviar uma confirmação ao visitante')
                     ->default(false),
                 Toggle::make('contact_form_show_name')
-                    ->label('Afficher le champ Nom')
+                    ->label('Exibir o campo Nome')
                     ->default(true),
                 Toggle::make('contact_form_show_phone')
-                    ->label('Afficher le champ Téléphone')
+                    ->label('Exibir o campo Telefone')
                     ->default(true),
                 Toggle::make('contact_form_show_subject')
-                    ->label('Afficher le champ Sujet')
+                    ->label('Exibir o campo Assunto')
                     ->default(true),
                 TextInput::make('phone')
-                    ->label('Téléphone')
+                    ->label('Telefone')
                     ->tel(),
                 Textarea::make('address')
-                    ->label('Adresse')
+                    ->label('Endereço')
                     ->columnSpanFull(),
                 MediaPicker::make('logo_media_id')
                     ->label('Logo')
@@ -96,13 +96,13 @@ class SiteSettingResource extends Resource
                     ->relationship('faviconMedia', 'display_name')
                     ->imagesOnly(),
                 MediaPicker::make('default_og_media_id')
-                    ->label('Image sociale par défaut')
-                    ->helperText('Image utilisée par Open Graph si une page ou actualité n’en fournit pas.')
+                    ->label('Imagem social padrão')
+                    ->helperText('Imagem usada pelo Open Graph quando o conteúdo não fornece outra.')
                     ->relationship('defaultOgMedia', 'display_name')
                     ->imagesOnly(),
                 KeyValue::make('social_links')
-                    ->label('Liens sociaux')
-                    ->keyLabel('Libellé')
+                    ->label('Links sociais')
+                    ->keyLabel('Nome')
                     ->valueLabel('URL')
                     ->columnSpanFull(),
             ]);
@@ -113,7 +113,7 @@ class SiteSettingResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('site_name')
-                    ->label('Nom')
+                    ->label('Nome')
                     ->searchable(),
                 TextColumn::make('baseline')
                     ->searchable(),
@@ -129,7 +129,7 @@ class SiteSettingResource extends Resource
                 TextColumn::make('favicon_path')
                     ->searchable(),
                 TextColumn::make('default_og_image_path')
-                    ->label('Image sociale')
+                    ->label('Imagem social')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')

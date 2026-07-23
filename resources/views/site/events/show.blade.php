@@ -73,11 +73,11 @@
                 @endif
 
                 @if ($event->venue?->maps_url)
-                    <x-site.button :href="$event->venue->maps_url" variant="secondary">Voir la carte</x-site.button>
+                    <x-site.button :href="$event->venue->maps_url" variant="secondary">Ver o mapa</x-site.button>
                 @endif
             </div>
 
-            <x-site.back-link :href="route('events.index')" :label="'Retour à ' . strtolower($label)" />
+            <x-site.back-link :href="route('events.index')" :label="'Voltar para ' . strtolower($label)" />
         </article>
     </x-site.section>
 @endsection

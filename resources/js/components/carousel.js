@@ -35,7 +35,7 @@ export function initCarousel(root = document) {
                 const button = document.createElement('button');
                 button.className = 'carousel__dot';
                 button.type = 'button';
-                button.setAttribute('aria-label', `Aller au slide ${index + 1}`);
+                button.setAttribute('aria-label', `Ir para o slide ${index + 1}`);
                 button.addEventListener('click', () => embla.scrollTo(index));
                 dots.appendChild(button);
 
