@@ -9,7 +9,6 @@ use App\Modules\Inquiries\Models\Inquiry;
 use App\Modules\Inquiries\Support\InquiryReplyLink;
 use App\Support\Modules;
 use BackedEnum;
-use UnitEnum;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -29,6 +28,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Schema as SchemaFacade;
+use UnitEnum;
 
 class InquiryResource extends Resource
 {
@@ -36,9 +36,9 @@ class InquiryResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedInbox;
 
-    protected static ?string $navigationLabel = 'Demandes reçues';
+    protected static ?string $navigationLabel = 'Solicitações recebidas';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Relation client';
+    protected static UnitEnum|string|null $navigationGroup = 'Atendimento';
 
     protected static ?string $modelLabel = 'demande';
 

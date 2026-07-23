@@ -6,7 +6,6 @@ use App\Filament\Resources\ContentSlots\Pages\ManageContentSlots;
 use App\Modules\ContentSlots\Models\ContentSlot;
 use App\Support\Modules;
 use BackedEnum;
-use UnitEnum;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
@@ -21,6 +20,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class ContentSlotResource extends Resource
 {
@@ -28,9 +28,9 @@ class ContentSlotResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPencilSquare;
 
-    protected static ?string $navigationLabel = 'Contenus courts';
+    protected static ?string $navigationLabel = 'Textos curtos';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Contenus';
+    protected static UnitEnum|string|null $navigationGroup = 'Conteúdos';
 
     protected static ?string $modelLabel = 'contenu court';
 

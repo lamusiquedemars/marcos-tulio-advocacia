@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Modules\OralDefenses\Enums\OralDefenseType;
+use App\Modules\OralDefenses\Models\OralDefense;
 use App\Modules\Pages\Models\Page;
 use App\Modules\SiteSettings\Models\SiteSetting;
 use App\Support\Modules;
@@ -28,10 +30,28 @@ class PageController extends Controller
                 : 'site.page';
         }
 
-        return view($view, [
+        $data = [
             'settings' => SiteSetting::current(),
             'page' => $page,
             'contactUrl' => Modules::enabled('contact_form') ? route('contact') : null,
-        ]);
+        ];
+
+        if ($page->template === 'oral-arguments' && Modules::enabled('oral_defenses')) {
+            $published = OralDefense::query()
+                ->published()
+                ->ordered()
+                ->with(['videoMedia', 'thumbnailMedia'])
+                ->get();
+
+            $data['featuredVideo'] = $published
+                ->first(fn (OralDefense $item): bool => $item->type === OralDefenseType::Video && $item->is_featured);
+            $data['secondaryVideos'] = $published
+                ->filter(fn (OralDefense $item): bool => $item->type === OralDefenseType::Video && ! $item->is_featured)
+                ->take(OralDefense::MAX_PUBLISHED_SECONDARY_VIDEOS);
+            $data['defenseExamples'] = $published
+                ->filter(fn (OralDefense $item): bool => $item->type === OralDefenseType::Defense);
+        }
+
+        return view($view, $data);
     }
 }

@@ -109,7 +109,7 @@ class PublicSiteTest extends TestCase
                 'slug' => 'sustentacoes-e-defesas',
                 'title' => 'Sustentações e Defesas',
                 'template' => 'oral-arguments',
-                'expected' => 'Seleção profissional em preparação',
+                'expected' => 'Seleção profissional',
             ],
             [
                 'slug' => 'marcos-tulio',

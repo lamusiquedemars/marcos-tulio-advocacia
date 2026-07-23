@@ -6,7 +6,6 @@ use App\Filament\Resources\SiteNotices\Pages\ManageSiteNotices;
 use App\Modules\Notices\Models\SiteNotice;
 use App\Support\Modules;
 use BackedEnum;
-use UnitEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -22,6 +21,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SiteNoticeResource extends Resource
 {
@@ -29,9 +29,9 @@ class SiteNoticeResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMegaphone;
 
-    protected static ?string $navigationLabel = 'Annonce courte';
+    protected static ?string $navigationLabel = 'Aviso curto';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Contenus';
+    protected static UnitEnum|string|null $navigationGroup = 'Conteúdos';
 
     protected static ?string $modelLabel = 'annonce courte';
 

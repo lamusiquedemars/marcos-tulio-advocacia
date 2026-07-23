@@ -2,8 +2,8 @@
 
 namespace App\Modules\Media\Concerns;
 
-use App\Modules\Media\Models\MediaUsage;
 use App\Modules\Media\Models\MediaAsset;
+use App\Modules\Media\Models\MediaUsage;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait TracksMediaUsages
@@ -64,7 +64,7 @@ trait TracksMediaUsages
 
         preg_match_all('/\bid=["\']media-(\d+)["\']/i', $html, $matches);
 
-        preg_match_all('/\b(?:href|src)=["\'][^"\']*\/storage\/(media\/(?:images|documents)\/[^"\'?#]+)[^"\']*["\']/i', $html, $pathMatches);
+        preg_match_all('/\b(?:href|src)=["\'][^"\']*\/storage\/(media\/(?:images|documents|videos)\/[^"\'?#]+)[^"\']*["\']/i', $html, $pathMatches);
 
         $pathIds = MediaAsset::query()
             ->whereIn('path', array_map('rawurldecode', $pathMatches[1] ?? []))

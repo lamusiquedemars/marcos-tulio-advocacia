@@ -80,9 +80,11 @@ class MediaStorageService
 
     private function validateSize(UploadedFile $file, MediaType $type): void
     {
-        $maximumKilobytes = (int) config(
-            $type === MediaType::Image ? 'maracuja.media.image_max_size_kb' : 'maracuja.media.document_max_size_kb'
-        );
+        $maximumKilobytes = (int) config(match ($type) {
+            MediaType::Image => 'maracuja.media.image_max_size_kb',
+            MediaType::Document => 'maracuja.media.document_max_size_kb',
+            MediaType::Video => 'maracuja.media.video_max_size_kb',
+        });
 
         if ($file->getSize() <= $maximumKilobytes * 1024) {
             return;
@@ -95,9 +97,15 @@ class MediaStorageService
 
     private function directoryFor(MediaType $type): string
     {
-        $root = (string) config(
-            $type === MediaType::Image ? 'maracuja.media.images_directory' : 'maracuja.media.documents_directory'
-        );
+        $root = (string) config(match ($type) {
+            MediaType::Image => 'maracuja.media.images_directory',
+            MediaType::Document => 'maracuja.media.documents_directory',
+            MediaType::Video => 'maracuja.media.videos_directory',
+        }, match ($type) {
+            MediaType::Image => 'media/images',
+            MediaType::Document => 'media/documents',
+            MediaType::Video => 'media/videos',
+        });
 
         return trim($root, '/').'/'.now()->format('Y/m');
     }

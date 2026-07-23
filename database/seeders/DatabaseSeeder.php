@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Modules\ContentSlots\Models\ContentSlot;
+use App\Modules\OralDefenses\Enums\OralDefenseStatus;
+use App\Modules\OralDefenses\Enums\OralDefenseType;
+use App\Modules\OralDefenses\Models\OralDefense;
 use App\Modules\Pages\Models\Page;
 use App\Modules\SiteSettings\Models\SiteSetting;
 use Illuminate\Database\Seeder;
@@ -143,5 +146,31 @@ class DatabaseSeeder extends Seeder
                 'published_at' => now(),
             ]);
         }
+
+        OralDefense::query()->updateOrCreate([
+            'title' => 'Preparação de sustentação — conteúdo demonstrativo',
+        ], [
+            'type' => OralDefenseType::Video,
+            'context' => 'Registro fictício aguardando um vídeo expressamente autorizado para publicação.',
+            'status' => OralDefenseStatus::Draft,
+            'is_featured' => true,
+            'position' => 10,
+        ]);
+
+        OralDefense::query()->updateOrCreate([
+            'title' => 'Definição da questão central da defesa',
+        ], [
+            'type' => OralDefenseType::Defense,
+            'context' => 'Exemplo inteiramente fictício criado apenas para demonstrar a estrutura editorial.',
+            'initial_situation' => 'Situação hipotética, sem pessoa, processo ou resultado real.',
+            'legal_question' => 'Identificação do ponto jurídico que precisava ser apresentado com clareza.',
+            'strategy' => 'Organização dos argumentos e seleção dos elementos estritamente necessários à exposição.',
+            'intervention' => 'Preparação de uma apresentação objetiva, respeitando os limites éticos e a confidencialidade.',
+            'is_anonymized' => true,
+            'status' => OralDefenseStatus::Published,
+            'is_featured' => false,
+            'position' => 20,
+            'published_at' => now(),
+        ]);
     }
 }

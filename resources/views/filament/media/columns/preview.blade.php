@@ -8,6 +8,8 @@
             class="h-full w-full object-cover"
             loading="lazy"
         >
+    @elseif ($media->isVideo())
+        <video src="{{ $media->url() }}" class="h-full w-full object-cover" muted preload="metadata"></video>
     @else
         <div class="flex h-full items-center justify-center text-gray-400">
             <x-filament::icon icon="heroicon-o-document-text" class="h-14 w-14" />

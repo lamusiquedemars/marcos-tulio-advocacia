@@ -21,23 +21,23 @@ class AdminOverview extends StatsOverviewWidget
 
     protected static ?int $sort = 20;
 
-    protected ?string $heading = 'Vue rapide';
+    protected ?string $heading = 'Visão geral';
 
-    protected ?string $description = 'Les points utiles pour piloter le site au quotidien.';
+    protected ?string $description = 'Os pontos úteis para administrar o site no dia a dia.';
 
     protected function getStats(): array
     {
         return [
-            Stat::make('Pages publiées', Modules::enabled('pages') ? $this->count(Page::class, 'pages', fn ($query) => $query->where('is_published', true)) : 0)
-                ->description('Pages visibles sur le site')
+            Stat::make('Páginas publicadas', Modules::enabled('pages') ? $this->count(Page::class, 'pages', fn ($query) => $query->where('is_published', true)) : 0)
+                ->description('Páginas visíveis no site')
                 ->icon(Heroicon::OutlinedRectangleStack)
                 ->color('success'),
-            Stat::make('Contenus à relire', $this->contentToReviewCount())
-                ->description('Brouillons, contenus courts ou demandes en attente')
+            Stat::make('Conteúdos para revisar', $this->contentToReviewCount())
+                ->description('Rascunhos, textos curtos ou solicitações pendentes')
                 ->icon(Heroicon::OutlinedPencilSquare)
                 ->color('warning'),
-            Stat::make('Demandes à traiter', $this->inquiriesToHandleCount())
-                ->description('Nouvelles demandes et suivis prioritaires')
+            Stat::make('Solicitações pendentes', $this->inquiriesToHandleCount())
+                ->description('Novas solicitações e acompanhamentos prioritários')
                 ->icon(Heroicon::OutlinedInbox)
                 ->color($this->inquiriesToHandleCount() > 0 ? 'danger' : 'gray'),
         ];

@@ -9,7 +9,6 @@ use App\Filament\Resources\Galleries\RelationManagers\ImagesRelationManager;
 use App\Modules\Gallery\Models\Gallery;
 use App\Support\Modules;
 use BackedEnum;
-use UnitEnum;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Textarea;
@@ -21,6 +20,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class GalleryResource extends Resource
 {
@@ -30,7 +30,7 @@ class GalleryResource extends Resource
 
     protected static ?string $navigationLabel = 'Galeries';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Médias';
+    protected static UnitEnum|string|null $navigationGroup = 'Mídia';
 
     protected static ?string $modelLabel = 'galerie';
 

@@ -74,6 +74,11 @@ class MediaAsset extends Model
         return $query->where('type', MediaType::Document);
     }
 
+    public function scopeVideos(Builder $query): Builder
+    {
+        return $query->where('type', MediaType::Video);
+    }
+
     public function isImage(): bool
     {
         return $this->type === MediaType::Image;
@@ -82,6 +87,11 @@ class MediaAsset extends Model
     public function isDocument(): bool
     {
         return $this->type === MediaType::Document;
+    }
+
+    public function isVideo(): bool
+    {
+        return $this->type === MediaType::Video;
     }
 
     public function canBeDeleted(): bool

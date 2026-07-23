@@ -58,6 +58,7 @@ class MediaPickerTable
                     ->options([
                         MediaType::Image->value => 'Images',
                         MediaType::Document->value => 'Documents',
+                        MediaType::Video->value => 'Vídeos',
                     ]),
             ])
             ->headerActions([

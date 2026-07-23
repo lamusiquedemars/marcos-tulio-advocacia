@@ -7,7 +7,6 @@ use App\Modules\Media\Filament\Forms\Components\MediaPicker;
 use App\Modules\SiteSettings\Models\SiteSetting;
 use App\Support\Modules;
 use BackedEnum;
-use UnitEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -21,6 +20,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SiteSettingResource extends Resource
 {
@@ -28,9 +28,9 @@ class SiteSettingResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $navigationLabel = 'Paramètres';
+    protected static ?string $navigationLabel = 'Configurações';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Réglages';
+    protected static UnitEnum|string|null $navigationGroup = 'Configurações';
 
     protected static ?string $modelLabel = 'paramètres';
 

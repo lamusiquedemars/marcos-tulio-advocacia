@@ -3,13 +3,12 @@
 namespace App\Filament\Resources\Articles;
 
 use App\Filament\Resources\Articles\Pages\ManageArticles;
-use App\Modules\Media\Filament\Forms\Components\MediaPicker;
+use App\Modules\Articles\Models\Article;
 use App\Modules\Media\Filament\Forms\Components\MaracujaRichEditor;
 use App\Modules\Media\Filament\Forms\Components\MediaIdSelect;
-use App\Modules\Articles\Models\Article;
+use App\Modules\Media\Filament\Forms\Components\MediaPicker;
 use App\Support\Modules;
 use BackedEnum;
-use UnitEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -27,6 +26,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class ArticleResource extends Resource
 {
@@ -36,7 +36,7 @@ class ArticleResource extends Resource
 
     protected static ?string $navigationLabel = 'Articles';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Contenus';
+    protected static UnitEnum|string|null $navigationGroup = 'Conteúdos';
 
     protected static ?string $modelLabel = 'article';
 

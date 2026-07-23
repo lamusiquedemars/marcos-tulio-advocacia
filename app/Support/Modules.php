@@ -34,6 +34,7 @@ class Modules
             'inquiries' => app_path('Modules/Inquiries'),
             'audience' => app_path('Modules/Audience'),
             'campaigns' => app_path('Modules/Campaigns'),
+            'oral_defenses' => app_path('Modules/OralDefenses'),
         ];
 
         return is_dir($paths[$module] ?? app_path('Modules/'.str($module)->studly()));

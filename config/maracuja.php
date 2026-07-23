@@ -40,11 +40,14 @@ return [
         'documents_directory' => 'media/documents',
         'image_max_size_kb' => 5 * 1024,
         'document_max_size_kb' => 15 * 1024,
+        'video_max_size_kb' => 100 * 1024,
         'mime_types' => [
             'image/jpeg' => ['type' => 'image', 'extension' => 'jpg'],
             'image/png' => ['type' => 'image', 'extension' => 'png'],
             'image/webp' => ['type' => 'image', 'extension' => 'webp'],
             'application/pdf' => ['type' => 'document', 'extension' => 'pdf'],
+            'video/mp4' => ['type' => 'video', 'extension' => 'mp4'],
+            'video/webm' => ['type' => 'video', 'extension' => 'webm'],
         ],
     ],
 
@@ -62,6 +65,7 @@ return [
         'inquiries' => env('MARACUJA_MODULE_INQUIRIES', true),
         'audience' => env('MARACUJA_MODULE_AUDIENCE', false),
         'campaigns' => env('MARACUJA_MODULE_CAMPAIGNS', false),
+        'oral_defenses' => env('MARACUJA_MODULE_ORAL_DEFENSES', true),
     ],
 
     'developer_tools' => [

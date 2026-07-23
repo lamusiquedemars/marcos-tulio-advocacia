@@ -3,18 +3,16 @@
 namespace App\Filament\Resources\NewsPosts;
 
 use App\Filament\Resources\NewsPosts\Pages\ManageNewsPosts;
-use App\Modules\Media\Filament\Forms\Components\MediaPicker;
 use App\Modules\Media\Filament\Forms\Components\MaracujaRichEditor;
+use App\Modules\Media\Filament\Forms\Components\MediaPicker;
 use App\Modules\News\Models\NewsPost;
 use App\Support\Modules;
 use BackedEnum;
-use UnitEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -25,6 +23,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class NewsPostResource extends Resource
 {
@@ -32,9 +31,9 @@ class NewsPostResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $navigationLabel = 'Actualités';
+    protected static ?string $navigationLabel = 'Notícias';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Contenus';
+    protected static UnitEnum|string|null $navigationGroup = 'Conteúdos';
 
     protected static ?string $modelLabel = 'actualité';
 
