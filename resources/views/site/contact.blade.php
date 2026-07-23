@@ -49,7 +49,7 @@
         @if (($appointmentSettings ?? null)?->canBookDirectly())
             <div class="confidentiality-note">
                 <strong>Agendamento direto disponível.</strong>
-                A reserva será concluída na página Brevo Meetings, sem envio do resumo desta solicitação.
+                A reserva será concluída no módulo de agenda incorporado a este site, sem envio do resumo desta solicitação.
                 <a class="btn btn--secondary" href="{{ route('appointments.booking') }}">
                     Ver horários disponíveis
                 </a>
@@ -65,9 +65,15 @@
             <p class="notice" role="status">{{ session('status') }}</p>
         @endif
 
-        <form method="post" action="{{ route('contact.store') }}" class="contact-form" data-form>
+        <form method="post" action="{{ route('contact.store') }}" class="contact-form contact-form--legal" data-form>
             @csrf
             <input type="text" name="website" value="" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;">
+
+            <div class="contact-form__heading full">
+                <span class="section-kicker">Etapa 1</span>
+                <h3>Contexto da solicitação</h3>
+                <p>Indique apenas o necessário para encaminhar o primeiro contato.</p>
+            </div>
 
             <label>
                 Tipo de solicitação
@@ -103,6 +109,17 @@
                 @error('phase') <small class="field__error">{{ $message }}</small> @enderror
             </label>
 
+            <label>
+                Data importante, se houver
+                <input name="deadline" type="date" value="{{ old('deadline') }}">
+            </label>
+
+            <div class="contact-form__heading full">
+                <span class="section-kicker">Etapa 2</span>
+                <h3>Contato e preferência</h3>
+                <p>Estes dados permanecem apenas neste ambiente local de demonstração.</p>
+            </div>
+
             @if ($settings->contact_form_show_name)
                 <label>
                     Nome
@@ -130,11 +147,6 @@
             </label>
 
             <label>
-                Data importante, se houver
-                <input name="deadline" type="date" value="{{ old('deadline') }}">
-            </label>
-
-            <label>
                 Preferência de atendimento
                 <select name="modality">
                     <option value="indiferente" @selected(old('modality') === 'indiferente')>A definir</option>
@@ -142,6 +154,12 @@
                     <option value="remoto" @selected(old('modality') === 'remoto')>Atendimento remoto</option>
                 </select>
             </label>
+
+            <div class="contact-form__heading full">
+                <span class="section-kicker">Etapa 3</span>
+                <h3>Resumo inicial</h3>
+                <p>Não é necessário apresentar o relato completo nem anexar documentos.</p>
+            </div>
 
             <label class="full">
                 Resumo inicial

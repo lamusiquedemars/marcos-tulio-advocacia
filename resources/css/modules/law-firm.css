@@ -190,6 +190,59 @@
     padding-bottom: 0;
 }
 
+.practice-list--detailed {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    counter-reset: practice;
+}
+
+.practice-list--detailed li {
+    position: relative;
+    min-height: 15rem;
+    padding: var(--space-xl);
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    counter-increment: practice;
+}
+
+.practice-list--detailed li::after {
+    position: absolute;
+    right: var(--space-lg);
+    bottom: var(--space-md);
+    color: color-mix(in srgb, var(--color-line), transparent 20%);
+    content: "0" counter(practice);
+    font-family: var(--font-heading);
+    font-size: 2rem;
+}
+
+.practice-list--detailed li:first-child {
+    grid-column: 1 / -1;
+    min-height: auto;
+    border-left: 4px solid var(--color-brand);
+    background: linear-gradient(100deg, var(--color-brand-soft), var(--color-surface) 55%);
+}
+
+.practice-list--detailed li:last-child {
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--color-line);
+}
+
+.profile-portrait {
+    display: grid;
+    min-height: 34rem;
+    place-items: end start;
+    overflow: hidden;
+    padding: var(--space-xl);
+    border: 1px solid var(--color-line);
+    background:
+        linear-gradient(180deg, transparent, rgb(21 36 45 / 72%)),
+        linear-gradient(135deg, var(--color-surface-muted), #aab4b7);
+    color: #ffffff;
+}
+
+.profile-portrait p {
+    margin-bottom: 0;
+}
+
 .confidentiality-note {
     background: var(--color-muted);
     border-left: 4px solid var(--color-brand);
@@ -247,6 +300,18 @@
     .authority-grid,
     .contact-intro {
         grid-template-columns: 1fr;
+    }
+
+    .practice-list--detailed {
+        grid-template-columns: 1fr;
+    }
+
+    .practice-list--detailed li:first-child {
+        grid-column: auto;
+    }
+
+    .profile-portrait {
+        min-height: 26rem;
     }
 
     .home-facts__inner {

@@ -24,7 +24,7 @@
         intro="Cada situação exige análise própria. Os exemplos abaixo organizam o primeiro contato e não constituem aconselhamento jurídico."
         heading-variant="accent"
     >
-        <ul class="practice-list">
+        <ul class="practice-list practice-list--detailed">
             <li>
                 <span class="practice-card__label">Urgência</span>
                 <h2>Prisão, busca e apreensão</h2>

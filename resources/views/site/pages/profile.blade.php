@@ -23,10 +23,10 @@
         heading-variant="accent"
     >
         <div class="split">
-            <div class="video-placeholder">
+            <div class="profile-portrait">
                 <div>
                     <span class="demo-tag">Retrato pendente</span>
-                    <p>Imagem profissional a ser fornecida e autorizada.</p>
+                    <p>Imagem profissional a ser fornecida, recortada e autorizada.</p>
                 </div>
             </div>
             <div class="stack stack--md prose">
