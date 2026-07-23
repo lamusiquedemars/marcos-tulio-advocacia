@@ -39,7 +39,12 @@ class ContactController extends Controller
             'email' => ['required', 'string', 'max:160', 'email:rfc', 'regex:/^[^@\s]+@[^@\s]+\.[^@\s]+$/'],
             'message' => ['required', 'string', 'max:5000'],
             'phone' => ['nullable', 'string', 'max:60'],
-            'subject' => ['nullable', 'string', 'max:160'],
+            'request_type' => ['required', 'in:analise,consulta,outro'],
+            'urgency' => ['nullable', 'in:sem_urgencia,prazo_proximo,urgente'],
+            'deadline' => ['nullable', 'date'],
+            'location' => ['nullable', 'string', 'max:120'],
+            'modality' => ['nullable', 'in:presencial,remoto,indiferente'],
+            'consent' => ['required', 'accepted'],
         ];
 
         if ($settings->contact_form_show_name) {
@@ -48,11 +53,55 @@ class ContactController extends Controller
             $rules['name'] = ['sometimes', 'nullable', 'string', 'max:120'];
         }
 
-        $data = $request->validate($rules);
+        $data = $request->validate($rules, [
+            'name.required' => 'Informe um nome.',
+            'email.required' => 'Informe um email.',
+            'email.email' => 'Informe um email válido.',
+            'email.regex' => 'Informe um email válido.',
+            'request_type.required' => 'Selecione o tipo de solicitação.',
+            'request_type.in' => 'Selecione um tipo de solicitação válido.',
+            'urgency.in' => 'Selecione um grau de urgência válido.',
+            'deadline.date' => 'Informe uma data válida.',
+            'modality.in' => 'Selecione uma modalidade válida.',
+            'message.required' => 'Escreva um resumo inicial.',
+            'message.max' => 'O resumo deve ter no máximo 5.000 caracteres.',
+            'consent.required' => 'Confirme o consentimento para registrar a solicitação.',
+            'consent.accepted' => 'Confirme o consentimento para registrar a solicitação.',
+        ]);
 
         if (! $settings->contact_form_show_name) {
             $data['name'] = $data['email'];
         }
+
+        $requestLabels = [
+            'analise' => 'Apresentação de situação',
+            'consulta' => 'Solicitação de consulta',
+            'outro' => 'Outro contato',
+        ];
+        $urgencyLabels = [
+            'sem_urgencia' => 'Sem urgência imediata',
+            'prazo_proximo' => 'Existe prazo próximo',
+            'urgente' => 'Urgente',
+        ];
+        $modalityLabels = [
+            'presencial' => 'Presencial',
+            'remoto' => 'Remoto',
+            'indiferente' => 'A definir',
+        ];
+
+        $data['subject'] = $requestLabels[$data['request_type']];
+        $data['message'] = implode("\n", array_filter([
+            'Tipo: '.$requestLabels[$data['request_type']],
+            isset($data['urgency']) ? 'Urgência: '.$urgencyLabels[$data['urgency']] : null,
+            filled($data['deadline'] ?? null) ? 'Data importante: '.$data['deadline'] : null,
+            filled($data['location'] ?? null) ? 'Localização: '.$data['location'] : null,
+            isset($data['modality']) ? 'Modalidade: '.$modalityLabels[$data['modality']] : null,
+            '',
+            'Resumo informado:',
+            $data['message'],
+            '',
+            'Consentimento registrado em: '.now()->toIso8601String(),
+        ]));
 
         $message = ContactMessage::fromArray($data);
 
@@ -71,7 +120,7 @@ class ContactController extends Controller
         return redirect()
             ->route('contact')
             ->with('status', Modules::enabled('inquiries')
-                ? 'Votre message a bien été enregistré. Nous répondrons dans les meilleurs délais.'
-                : 'Votre message a bien été envoyé.');
+                ? 'Sua solicitação foi registrada. Este ambiente de demonstração não envia mensagens reais.'
+                : 'Sua solicitação foi recebida neste ambiente de demonstração.');
     }
 }

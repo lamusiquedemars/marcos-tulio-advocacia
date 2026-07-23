@@ -86,7 +86,7 @@ class DatabaseSeeder extends Seeder
             [
                 'slug' => 'services',
                 'title' => 'Atuação Penal',
-                'template' => 'default',
+                'template' => 'criminal-practice',
                 'type' => Page::TYPE_SYSTEM,
                 'excerpt' => 'Situações em que o escritório pode atuar.',
                 'hero_title' => 'Atuação Penal',
@@ -96,8 +96,8 @@ class DatabaseSeeder extends Seeder
             [
                 'slug' => 'sustentacoes-e-defesas',
                 'title' => 'Sustentações e Defesas',
-                'template' => 'default',
-                'type' => Page::TYPE_TEXT,
+                'template' => 'oral-arguments',
+                'type' => Page::TYPE_SYSTEM,
                 'excerpt' => 'Seleção profissional de sustentações e intervenções.',
                 'hero_title' => 'Sustentações e Defesas',
                 'hero_subtitle' => 'Estrutura provisória, sem casos reais nem promessas de resultado.',
@@ -106,8 +106,8 @@ class DatabaseSeeder extends Seeder
             [
                 'slug' => 'marcos-tulio',
                 'title' => 'Marcos Túlio',
-                'template' => 'default',
-                'type' => Page::TYPE_TEXT,
+                'template' => 'profile',
+                'type' => Page::TYPE_SYSTEM,
                 'excerpt' => 'Apresentação profissional a completar com informações verificadas.',
                 'hero_title' => 'Marcos Túlio',
                 'hero_subtitle' => 'Advogado penalista, professor de direito penal há dez anos e autor.',

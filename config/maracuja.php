@@ -11,6 +11,11 @@ return [
         'indexable' => env('MARACUJA_INDEXABLE', false),
     ],
 
+    'law_firm' => [
+        'whatsapp_url' => env('MARACUJA_WHATSAPP_URL', 'https://example.test/whatsapp-demo'),
+        'demo' => env('MARACUJA_DEMO_MODE', true),
+    ],
+
     'gallery' => [
         'slug' => env('MARACUJA_GALLERY_SLUG', 'home'),
         'layout' => env('MARACUJA_GALLERY_LAYOUT', 'grid'),

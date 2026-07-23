@@ -24,6 +24,6 @@
             {!! strip_tags($page->content, '<p><br><strong><b><em><i><u><ul><ol><li><a><sup><sub>') !!}
         @endif
 
-        <x-site.back-link :href="route('home')" label="Retour à l'accueil" />
+        <x-site.back-link :href="route('home')" label="Voltar ao início" />
     </x-site.section>
 @endsection

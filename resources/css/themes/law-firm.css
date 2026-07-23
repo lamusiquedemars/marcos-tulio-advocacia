@@ -1,0 +1,28 @@
+.theme-law-firm {
+    --color-bg: #faf8f3;
+    --color-brand: #9a5a32;
+    --color-brand-strong: #704022;
+    --color-brand-soft: #f0dfd1;
+    --color-accent: #294861;
+    --color-text: #172231;
+    --color-muted: #586472;
+    --color-surface: #fffdf8;
+    --color-surface-muted: #f2eee6;
+    --color-line: #d9d2c6;
+    background: #faf8f3;
+}
+
+.theme-law-firm .site-brand__mark {
+    background: var(--color-text);
+    color: #fff;
+}
+
+.theme-law-firm .site-header {
+    background: rgb(250 248 243 / 95%);
+}
+
+.theme-law-firm .hero {
+    background:
+        radial-gradient(circle at 85% 15%, rgb(154 90 50 / 18%), transparent 30%),
+        linear-gradient(135deg, #f7f2e9, #fffdf8);
+}

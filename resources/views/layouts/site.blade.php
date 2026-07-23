@@ -41,6 +41,15 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="site-shell theme-{{ config('maracuja.theme', 'default') }}">
+    @if (config('maracuja.law_firm.demo'))
+        <div class="demo-banner">
+            <p class="container">
+                Site de demonstração da <a href="https://maracujadigital.fr">Maracuja Digital</a>.
+                Identidade, contatos e conteúdos fictícios.
+            </p>
+        </div>
+    @endif
+
     <header class="site-header container" data-nav>
         <a class="site-brand" href="{{ route('home') }}">
             <span class="site-brand__mark">M</span>
@@ -59,13 +68,13 @@
         <nav class="site-nav" data-nav-menu aria-label="Navegação principal">
             <a href="{{ route('home') }}">Início</a>
             @if (\App\Support\Modules::enabled('news'))
-                <a href="{{ route('news.index') }}">Actualités</a>
+                <a href="{{ route('news.index') }}">Atualizações</a>
             @endif
             @if (\App\Support\Modules::enabled('articles'))
-                <a href="{{ route('articles.index') }}">{{ \App\Support\ContentSlots::value('articles.public_label', 'Articles') }}</a>
+                <a href="{{ route('articles.index') }}">{{ \App\Support\ContentSlots::value('articles.public_label', 'Artigos') }}</a>
             @endif
             @if (\App\Support\Modules::enabled('events'))
-                <a href="{{ route('events.index') }}">{{ \App\Support\ContentSlots::value('events.public_label', 'Événements') }}</a>
+                <a href="{{ route('events.index') }}">{{ \App\Support\ContentSlots::value('events.public_label', 'Eventos') }}</a>
             @endif
             @if (\App\Support\Modules::enabled('pages'))
                 <a href="{{ route('pages.show', 'services') }}">Atuação Penal</a>
@@ -75,7 +84,12 @@
             @if (\App\Support\Modules::enabled('contact_form'))
                 <a href="{{ route('contact') }}">Atendimento</a>
             @endif
-            <a href="/admin">Admin</a>
+            <div class="site-quick-actions">
+                @if (\App\Support\Modules::enabled('contact_form'))
+                    <a class="btn btn--secondary" href="{{ route('contact', ['tipo' => 'analise']) }}">Apresentar o caso</a>
+                @endif
+                <a class="btn btn--primary" href="{{ config('maracuja.law_firm.whatsapp_url') }}" rel="nofollow">Urgência</a>
+            </div>
         </nav>
     </header>
 
@@ -92,6 +106,7 @@
         @if (\App\Support\Modules::enabled('pages'))
             <a href="{{ route('pages.show', 'mentions-legales') }}">Aviso legal</a>
         @endif
+        <a href="/admin" rel="nofollow">Administração</a>
     </footer>
 
     <button class="btn btn--primary back-to-top" type="button" data-back-to-top hidden aria-label="Voltar ao topo">

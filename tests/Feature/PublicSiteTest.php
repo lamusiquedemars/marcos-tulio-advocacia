@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Modules\Articles\Models\Article;
 use App\Modules\ContactForm\Mail\ContactMessageConfirmation;
 use App\Modules\ContactForm\Mail\ContactMessageReceived;
-use App\Modules\Articles\Models\Article;
-use App\Modules\Inquiries\Models\Inquiry;
 use App\Modules\ContentSlots\Models\ContentSlot;
 use App\Modules\Gallery\Models\Gallery;
 use App\Modules\Gallery\Models\GalleryImage;
+use App\Modules\Inquiries\Models\Inquiry;
 use App\Modules\News\Models\NewsPost;
 use App\Modules\Notices\Models\SiteNotice;
 use App\Modules\Pages\Models\Page;
@@ -44,7 +44,7 @@ class PublicSiteTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('Un site clair')
-            ->assertSee('Urgências penais');
+            ->assertSee('Estou em uma situação urgente');
     }
 
     public function test_services_page_uses_dedicated_demo_template(): void
@@ -92,6 +92,45 @@ class PublicSiteTest extends TestCase
             ->assertOk()
             ->assertSee('À partir de 1800')
             ->assertDontSee('À partir de 1500');
+    }
+
+    public function test_law_firm_pages_use_their_dedicated_portuguese_templates(): void
+    {
+        SiteSetting::current();
+
+        collect([
+            [
+                'slug' => 'services',
+                'title' => 'Atuação Penal',
+                'template' => 'criminal-practice',
+                'expected' => 'Situações em que a defesa pode começar',
+            ],
+            [
+                'slug' => 'sustentacoes-e-defesas',
+                'title' => 'Sustentações e Defesas',
+                'template' => 'oral-arguments',
+                'expected' => 'Seleção profissional em preparação',
+            ],
+            [
+                'slug' => 'marcos-tulio',
+                'title' => 'Marcos Túlio',
+                'template' => 'profile',
+                'expected' => 'Uma apresentação profissional em construção',
+            ],
+        ])->each(function (array $page): void {
+            Page::query()->create([
+                'title' => $page['title'],
+                'slug' => $page['slug'],
+                'template' => $page['template'],
+                'type' => Page::TYPE_SYSTEM,
+                'is_published' => true,
+                'published_at' => now(),
+            ]);
+
+            $this->get('/'.$page['slug'])
+                ->assertOk()
+                ->assertSee($page['expected']);
+        });
     }
 
     public function test_home_hides_contact_and_services_ctas_when_targets_are_unavailable(): void
@@ -306,7 +345,7 @@ class PublicSiteTest extends TestCase
             ->assertSee('Fil d Ariane')
             ->assertSee('Mentions légales')
             ->assertSee('Éditeur du site: Maracuja CMS')
-            ->assertSee('Retour à l&#039;accueil', false);
+            ->assertSee('Voltar ao início');
     }
 
     public function test_contact_page_uses_page_registry_metadata(): void
@@ -345,15 +384,34 @@ class PublicSiteTest extends TestCase
         $this->post('/contact', [
             'name' => 'Ivo',
             'email' => 'ivo@example.test',
-            'subject' => 'Projet',
+            'request_type' => 'analise',
             'message' => 'Bonjour depuis le formulaire.',
+            'consent' => '1',
         ])->assertRedirect('/contact');
 
         $this->assertDatabaseHas(Inquiry::class, [
             'email' => 'ivo@example.test',
+            'subject' => 'Apresentação de situação',
         ]);
 
         Mail::assertSent(ContactMessageReceived::class);
+    }
+
+    public function test_contact_form_requires_explicit_demo_consent(): void
+    {
+        SiteSetting::query()->create([
+            'site_name' => 'Maracuja CMS',
+            'contact_email' => null,
+        ]);
+
+        $this->post('/contact', [
+            'name' => 'Ivo',
+            'email' => 'ivo@example.test',
+            'request_type' => 'analise',
+            'message' => 'Resumo fictício para o teste.',
+        ])->assertSessionHasErrors('consent');
+
+        $this->assertDatabaseCount(Inquiry::class, 0);
     }
 
     public function test_contact_form_sends_mail_without_storing_inquiry_when_inquiries_module_is_not_enabled(): void
@@ -370,8 +428,9 @@ class PublicSiteTest extends TestCase
         $this->post('/contact', [
             'name' => 'Ivo',
             'email' => 'ivo@example.test',
-            'subject' => 'Projet',
+            'request_type' => 'analise',
             'message' => 'Bonjour depuis le formulaire.',
+            'consent' => '1',
         ])->assertRedirect('/contact');
 
         $this->assertDatabaseCount(Inquiry::class, 0);
@@ -389,8 +448,9 @@ class PublicSiteTest extends TestCase
         $this->post('/contact', [
             'name' => 'Ivo',
             'email' => 'ivo@mail',
-            'subject' => 'Projet',
+            'request_type' => 'analise',
             'message' => 'Bonjour depuis le formulaire.',
+            'consent' => '1',
         ])->assertSessionHasErrors('email');
 
         $this->assertDatabaseCount(Inquiry::class, 0);
@@ -408,8 +468,9 @@ class PublicSiteTest extends TestCase
         $this->post('/contact', [
             'name' => 'Ivo',
             'email' => 'ivo@example.test',
-            'subject' => 'Projet',
+            'request_type' => 'analise',
             'message' => 'Bonjour depuis le formulaire.',
+            'consent' => '1',
         ])->assertRedirect('/contact');
 
         $this->assertDatabaseHas(Inquiry::class, [
@@ -432,8 +493,9 @@ class PublicSiteTest extends TestCase
         $this->post('/contact', [
             'name' => 'Ivo',
             'email' => 'ivo@example.test',
-            'subject' => 'Projet',
+            'request_type' => 'analise',
             'message' => 'Bonjour depuis le formulaire.',
+            'consent' => '1',
         ])->assertRedirect('/contact');
 
         $this->assertDatabaseHas(Inquiry::class, [

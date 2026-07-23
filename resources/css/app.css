@@ -39,7 +39,9 @@
 @import './modules/contact.css';
 @import './modules/events.css';
 @import './modules/gallery.css';
+@import './modules/law-firm.css';
 
 @import './themes/default.css';
 @import './themes/maracuja.css';
 @import './themes/atelier.css';
+@import './themes/law-firm.css';
