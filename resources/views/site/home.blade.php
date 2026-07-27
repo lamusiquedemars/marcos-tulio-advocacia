@@ -14,7 +14,7 @@
         eyebrow="Em Cuiabá · atuação em todo o Brasil"
         :title="$homePage?->hero_title ?? 'Marcos Túlio de Melo, advogado criminalista'"
         :subtitle="$homePage?->hero_subtitle ?? 'Defesa penal com atuação estratégica, sigilo profissional e atendimento presencial ou remoto.'"
-        :image="$homePage?->heroImageUrl() ?? asset('images/marcos-tulio-home.jpg')"
+        :image="$homePage?->heroImageUrl() ?? asset('images/marcos-tulio-home-v2.jpg')"
         cta-url="#atendimento"
         cta-label="Escolher forma de atendimento"
     />
@@ -29,11 +29,11 @@
 
     <x-site.section
         variant="muted"
-        title="Advocacia, docência e produção jurídica"
-        intro="Marcos Túlio de Melo reúne atuação na advocacia criminal, experiência docente e produção jurídica. A preparação e a apresentação oral da defesa ocupam lugar central em seu trabalho."
+        title="Advocacia e docência"
+        intro="Marcos Túlio de Melo reúne atuação na advocacia criminal e experiência docente. A preparação e a apresentação oral da defesa ocupam lugar central em seu trabalho."
         heading-variant="underline"
     >
-        <div class="authority-grid">
+        <div class="authority-grid authority-grid--two">
             <article class="authority-card">
                 <span class="practice-card__label">Advocacia</span>
                 <h3>Defesa penal</h3>
@@ -43,11 +43,6 @@
                 <span class="practice-card__label">Docência</span>
                 <h3>Direito penal</h3>
                 <p>Professor desde [ANO], com experiência em [INSTITUIÇÃO E DISCIPLINAS A CONFIRMAR].</p>
-            </article>
-            <article class="authority-card">
-                <span class="practice-card__label">Autoria</span>
-                <h3>Produção jurídica</h3>
-                <p>Autor de <em>O Pacote Anticrime Comentado</em>. [EDITORA, EDIÇÃO E ANO A CONFIRMAR].</p>
             </article>
         </div>
 

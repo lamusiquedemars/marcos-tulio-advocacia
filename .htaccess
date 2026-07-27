@@ -5,6 +5,10 @@ RewriteBase /
 RewriteRule ^(?:app|bootstrap|config|database|docs|resources|routes|scripts|tests|vendor)(?:/|$) - [F,L,NC]
 RewriteRule ^(?:\.env|artisan|composer\.(?:json|lock)|package(?:-lock)?\.json|phpunit\.xml|vite\.config\.js)$ - [F,L,NC]
 
+# LWS impose la racine du sous-domaine. Servir uniquement les répertoires
+# publics connus sans exposer le reste de l'application Laravel.
+RewriteRule ^(build|css|fonts|images|js|storage)/(.*)$ public/$1/$2 [L,NC]
+
 # Routage Laravel deja utilise par LWS.
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
