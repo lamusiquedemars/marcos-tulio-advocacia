@@ -15,6 +15,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -62,10 +63,11 @@ class ConversationSettingResource extends Resource
                     TextInput::make('widget_title')
                         ->label('Título da janela')
                         ->required()
-                        ->maxLength(255),
+                        ->maxLength(255)
+                        ->columnSpanFull(),
                     Textarea::make('privacy_notice')
                         ->label('Aviso exibido ao visitante')
-                        ->rows(3)
+                        ->rows(2)
                         ->maxLength(1000)
                         ->columnSpanFull(),
                     Select::make('assistant_language')
@@ -84,7 +86,8 @@ class ConversationSettingResource extends Resource
                         ->label('Tom esperado')
                         ->required()
                         ->maxLength(255)
-                        ->helperText('Por exemplo: claro, acolhedor e conciso.'),
+                        ->helperText('Por exemplo: claro, acolhedor e conciso.')
+                        ->columnSpanFull(),
                     Textarea::make('organization_summary')
                         ->label('Contexto da organização')
                         ->rows(4)
@@ -104,12 +107,14 @@ class ConversationSettingResource extends Resource
                         ->columnSpanFull(),
                     Textarea::make('qualification_guidance')
                         ->label('Orientações de qualificação')
-                        ->rows(3)
-                        ->maxLength(2000),
+                        ->rows(2)
+                        ->maxLength(2000)
+                        ->columnSpanFull(),
                     Textarea::make('sensitive_data_guidance')
                         ->label('Outras informações que não devem ser solicitadas')
-                        ->rows(3)
-                        ->maxLength(2000),
+                        ->rows(2)
+                        ->maxLength(2000)
+                        ->columnSpanFull(),
                 ])
                 ->columns(2),
 
@@ -195,7 +200,9 @@ class ConversationSettingResource extends Resource
                 IconColumn::make('callback_enabled')->label('Contato posterior')->boolean(),
             ])
             ->recordActions([
-                EditAction::make()->label('Configurar'),
+                EditAction::make()
+                    ->label('Configurar')
+                    ->modalWidth(Width::FiveExtraLarge),
             ])
             ->toolbarActions([]);
     }
