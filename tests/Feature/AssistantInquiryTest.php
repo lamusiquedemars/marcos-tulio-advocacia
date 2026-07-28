@@ -11,13 +11,20 @@ class AssistantInquiryTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_assistant_is_available_on_public_pages_with_legal_guardrails(): void
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['maracuja.modules.assistant' => true]);
+    }
+
+    public function test_conversation_is_available_on_public_pages_with_legal_guardrails(): void
     {
         $this->get('/')
             ->assertOk()
-            ->assertSee('Assistente de demonstração')
-            ->assertSee('não fornece aconselhamento jurídico')
-            ->assertSee('Em uma urgência, fale diretamente pelo WhatsApp.');
+            ->assertSee('Falar com o escritório')
+            ->assertSee('não constitui orientação jurídica')
+            ->assertSee('Evite enviar documentos ou informações altamente sensíveis');
     }
 
     public function test_fake_assistant_stores_a_structured_inquiry_without_sending_email(): void

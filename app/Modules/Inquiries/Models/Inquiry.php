@@ -3,16 +3,22 @@
 namespace App\Modules\Inquiries\Models;
 
 use App\Modules\Appointments\Enums\AppointmentStatus;
+use App\Modules\Contacts\Actions\ResolveContact;
+use App\Modules\Contacts\Models\Contact;
+use App\Modules\Conversations\Models\Conversation;
 use App\Modules\Inquiries\Enums\InquiryModality;
 use App\Modules\Inquiries\Enums\InquiryPhase;
 use App\Modules\Inquiries\Enums\InquiryRequestType;
 use App\Modules\Inquiries\Enums\InquiryStatus;
 use App\Modules\Inquiries\Enums\InquiryUrgency;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Inquiry extends Model
 {
     protected $fillable = [
+        'contact_id',
+        'conversation_id',
         'name',
         'email',
         'phone',
@@ -57,6 +63,28 @@ class Inquiry extends Model
             'handled_at' => 'datetime',
             'archived_at' => 'datetime',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::saving(function (self $inquiry): void {
+            $inquiry->contact_id = ResolveContact::run([
+                'display_name' => $inquiry->name,
+                'email' => $inquiry->email,
+                'phone' => $inquiry->phone,
+                'source' => 'inquiry',
+            ])->getKey();
+        });
+    }
+
+    public function contact(): BelongsTo
+    {
+        return $this->belongsTo(Contact::class);
+    }
+
+    public function conversation(): BelongsTo
+    {
+        return $this->belongsTo(Conversation::class);
     }
 
     public function markRead(): void

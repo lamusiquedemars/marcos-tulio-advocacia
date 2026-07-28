@@ -13,6 +13,7 @@ use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
 use App\Modules\Appointments\Http\Controllers\AppointmentController;
 use App\Modules\Assistant\Http\Controllers\AssistantInquiryController;
+use App\Modules\Conversations\Http\Controllers\PublicConversationController;
 use App\Support\Modules;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,19 @@ Route::get('/storage/{path}', PublicStorageController::class)
     ->name('public-storage');
 
 Route::get('/', HomeController::class)->name('home');
+
+Route::get('/conversa/sessao', [PublicConversationController::class, 'show'])
+    ->middleware('throttle:60,1')
+    ->name('conversations.public.show');
+Route::post('/conversa/mensagens', [PublicConversationController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('conversations.public.store');
+Route::post('/conversa/atendimento-humano', [PublicConversationController::class, 'handover'])
+    ->middleware('throttle:5,1')
+    ->name('conversations.public.handover');
+Route::post('/conversa/ser-contatado', [PublicConversationController::class, 'callback'])
+    ->middleware('throttle:5,1')
+    ->name('conversations.public.callback');
 
 Route::get('/audience/desinscription/{token}', AudienceUnsubscribeController::class)->name('audience.unsubscribe');
 Route::post('/webhooks/brevo/audience/{secret}', BrevoAudienceWebhookController::class)->name('webhooks.brevo.audience');
@@ -48,11 +62,9 @@ if (Modules::enabled('contact_form')) {
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 }
 
-if (Modules::enabled('assistant')) {
-    Route::post('/assistant/solicitacao', AssistantInquiryController::class)
-        ->middleware('throttle:10,1')
-        ->name('assistant.inquiry');
-}
+Route::post('/assistant/solicitacao', AssistantInquiryController::class)
+    ->middleware('throttle:10,1')
+    ->name('assistant.inquiry');
 
 if (Modules::enabled('appointments')) {
     Route::get('/agendamento', AppointmentController::class)->name('appointments.booking');

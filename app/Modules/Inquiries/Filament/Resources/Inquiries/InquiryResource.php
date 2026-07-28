@@ -159,6 +159,11 @@ class InquiryResource extends Resource
                     ->formatStateUsing(fn (InquiryStatus|string|null $state) => self::statusFrom($state)?->label() ?? '-')
                     ->color(fn (InquiryStatus|string|null $state) => self::statusFrom($state)?->color() ?? 'gray')
                     ->sortable(),
+                TextColumn::make('conversation.public_reference')
+                    ->label('Conversa')
+                    ->placeholder('—')
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('name')
                     ->label('Nome')
                     ->searchable(),

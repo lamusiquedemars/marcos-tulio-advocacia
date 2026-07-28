@@ -6,6 +6,7 @@ import { initLightbox } from '../components/lightbox';
 import { initFormStates } from '../components/form';
 import { initBackToTop } from '../components/back-to-top';
 import { initAssistant } from '../components/assistant';
+import { initConversation } from '../components/conversation';
 
 const initializers = [
     initNavigation,
@@ -16,6 +17,7 @@ const initializers = [
     initFormStates,
     initBackToTop,
     initAssistant,
+    initConversation,
 ];
 
 export function bootMaracujaUi(root = document) {

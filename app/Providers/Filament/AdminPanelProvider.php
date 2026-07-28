@@ -78,6 +78,20 @@ class AdminPanelProvider extends PanelProvider
             );
         }
 
+        if (Modules::enabled('contacts') && is_dir(app_path('Modules/Contacts/Filament/Resources'))) {
+            $panel->discoverResources(
+                in: app_path('Modules/Contacts/Filament/Resources'),
+                for: 'App\Modules\Contacts\Filament\Resources',
+            );
+        }
+
+        if (is_dir(app_path('Modules/Conversations/Filament/Resources'))) {
+            $panel->discoverResources(
+                in: app_path('Modules/Conversations/Filament/Resources'),
+                for: 'App\Modules\Conversations\Filament\Resources',
+            );
+        }
+
         if (Modules::enabled('audience') && is_dir(app_path('Modules/Audience/Filament/Resources'))) {
             $panel->discoverResources(
                 in: app_path('Modules/Audience/Filament/Resources'),

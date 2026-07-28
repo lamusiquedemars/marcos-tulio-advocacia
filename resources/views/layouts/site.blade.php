@@ -124,8 +124,8 @@
         <span class="back-to-top__icon" aria-hidden="true">↑</span>
     </button>
 
-    @if (\App\Support\Modules::enabled('assistant') && \App\Support\Modules::enabled('inquiries'))
-        @include('site.partials.assistant')
+    @if (\App\Support\Modules::enabled('conversations'))
+        @include('site.partials.conversation-widget')
     @endif
 </body>
 </html>
