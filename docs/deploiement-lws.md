@@ -20,7 +20,7 @@ Dans le panneau LWS :
 
 1. créer le sous-domaine `avocat.maracujadigital.fr` ;
 2. activer son certificat TLS/HTTPS ;
-3. faire pointer son document root vers le dossier `public` du projet, par exemple `/.../avocat-cms/public` ;
+3. faire pointer son document root vers le dossier `public` du projet, par exemple `/.../marcos-tulio-advocacia/public` ;
 4. vérifier que la réécriture d'URL est active et que `/admin` atteint Filament.
 
 Le document root vers `public` est obligatoire : `.env`, `vendor`, `storage` et le code PHP ne doivent pas être servis comme fichiers publics. Le `index.php` de compatibilité à la racine ne remplace pas cette configuration correcte.

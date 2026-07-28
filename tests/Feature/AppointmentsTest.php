@@ -39,7 +39,7 @@ class AppointmentsTest extends TestCase
         $response = $this->get('/contact')
             ->assertOk()
             ->assertSee('Ver horários disponíveis')
-            ->assertSee('http://avocat-cms.test/agendamento', false);
+            ->assertSee('http://marcos-tulio-advocacia.test/agendamento', false);
 
         $this->assertStringNotContainsString('summary=', $response->getContent());
         $this->assertStringNotContainsString('message=', $response->getContent());

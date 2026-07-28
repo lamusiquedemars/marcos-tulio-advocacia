@@ -1,6 +1,6 @@
-# Avocat CMS
+# Marcos Túlio Advocacia
 
-Site autonome de démonstration pour Marcos Túlio, construit avec Laravel 13, Filament 4 et le frontend Blade de Maracuja CMS.
+Site de Marcos Túlio Advocacia, construit avec Laravel 13, Filament 4 et le frontend Blade de Maracuja CMS.
 
 Toutes les identités, coordonnées et données de contact présentes dans l'installation initiale sont fictives. Le projet reste non indexable et les emails utilisent le transport `log`.
 
@@ -19,7 +19,7 @@ mkdir -p public/storage
 php artisan serve
 ```
 
-Créer auparavant les bases MySQL locales `avocat_cms` et `avocat_cms_testing`. Ne copie jamais une `APP_KEY` depuis un autre site : `php artisan key:generate` crée celle de cette installation.
+Créer auparavant les bases MySQL locales `marcos_tulio_advocacia` et `marcos_tulio_advocacia_testing`. Ne copie jamais une `APP_KEY` depuis un autre site : `php artisan key:generate` crée celle de cette installation.
 
 Administration : `http://127.0.0.1:8000/admin`. Compte de démonstration local : `admin@avocat.test` / `password`. Change ou supprime ce mot de passe avant toute exposition publique.
 
