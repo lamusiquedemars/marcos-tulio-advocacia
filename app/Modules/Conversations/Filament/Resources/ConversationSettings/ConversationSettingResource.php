@@ -128,12 +128,14 @@ class ConversationSettingResource extends Resource
                         ->columnSpanFull(),
                     Textarea::make('urgency_guidance')
                         ->label('Critérios de urgência do site')
-                        ->rows(3)
-                        ->maxLength(2000),
+                        ->rows(2)
+                        ->maxLength(2000)
+                        ->columnSpanFull(),
                     TextInput::make('expected_response_time')
                         ->label('Prazo de resposta que pode ser informado')
                         ->maxLength(255)
-                        ->helperText('Por exemplo: durante o horário de atendimento ou em um dia útil.'),
+                        ->helperText('Por exemplo: durante o horário de atendimento ou em um dia útil.')
+                        ->columnSpanFull(),
                 ])
                 ->columns(2),
 
