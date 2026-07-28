@@ -103,7 +103,7 @@ export function initConversation(root = document) {
 
     callback.addEventListener('click', async () => {
         callback.disabled = true;
-        status.textContent = 'Préparation de votre demande…';
+        status.textContent = 'Preparando sua solicitação…';
 
         try {
             render(await request(widget.dataset.callbackUrl, {
@@ -113,7 +113,7 @@ export function initConversation(root = document) {
             input.focus();
         } catch {
             callback.disabled = false;
-            status.textContent = 'La demande de contact n’a pas pu être préparée.';
+            status.textContent = 'Não foi possível preparar a solicitação de contato.';
         }
     });
 

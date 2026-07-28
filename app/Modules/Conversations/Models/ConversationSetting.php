@@ -8,23 +8,23 @@ use Illuminate\Validation\ValidationException;
 class ConversationSetting extends Model
 {
     public const QUALIFICATION_FIELDS = [
-        'request_topic' => 'Objet général de la demande',
-        'location' => 'Localisation',
-        'deadline' => 'Date, échéance ou moment important',
-        'existing_contact' => 'Interlocuteur déjà impliqué',
-        'preferred_contact' => 'Canal de contact préféré',
+        'request_topic' => 'Tema geral da solicitação',
+        'location' => 'Localização',
+        'deadline' => 'Data, prazo ou momento importante',
+        'existing_contact' => 'Profissional já envolvido',
+        'preferred_contact' => 'Canal de contato preferido',
     ];
 
     public const ROUTING_TRIGGERS = [
-        'minimum_context' => 'Le contexte minimal est compris',
-        'visitor_request' => 'Le visiteur demande à parler à une personne',
-        'urgency' => 'Une urgence configurée est détectée',
-        'assistant_limit' => 'L’assistant atteint la limite de son rôle',
+        'minimum_context' => 'O contexto mínimo foi compreendido',
+        'visitor_request' => 'O visitante pede para falar com uma pessoa',
+        'urgency' => 'Uma urgência configurada foi detectada',
+        'assistant_limit' => 'O assistente atingiu o limite de seu papel',
     ];
 
     public const CALLBACK_CHANNELS = [
         'whatsapp' => 'WhatsApp',
-        'phone' => 'Téléphone',
+        'phone' => 'Telefone',
         'email' => 'E-mail',
     ];
 

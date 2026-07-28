@@ -51,7 +51,7 @@
                 Continuar pelo WhatsApp
             </a>
             <button class="btn btn--secondary" type="button" hidden data-conversation-callback>
-                Être contacté
+                Quero ser contatado
             </button>
         </div>
 

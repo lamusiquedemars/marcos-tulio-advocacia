@@ -24,7 +24,7 @@ class AssistantInquiryTest extends TestCase
             ->assertOk()
             ->assertSee('Falar com o escritório')
             ->assertSee('não constitui orientação jurídica')
-            ->assertSee('Evite enviar documentos ou informações altamente sensíveis');
+            ->assertSee('Não envie documentos ou informações altamente sensíveis');
     }
 
     public function test_fake_assistant_stores_a_structured_inquiry_without_sending_email(): void

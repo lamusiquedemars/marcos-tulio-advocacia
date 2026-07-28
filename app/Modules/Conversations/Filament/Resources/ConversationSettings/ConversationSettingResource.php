@@ -27,13 +27,13 @@ class ConversationSettingResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
 
-    protected static ?string $navigationLabel = 'Accueil conversationnel';
+    protected static ?string $navigationLabel = 'Atendimento inicial';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Accueil';
+    protected static UnitEnum|string|null $navigationGroup = 'Atendimento';
 
-    protected static ?string $modelLabel = 'réglage de l’accueil conversationnel';
+    protected static ?string $modelLabel = 'configuração do atendimento inicial';
 
-    protected static ?string $pluralModelLabel = 'accueil conversationnel';
+    protected static ?string $pluralModelLabel = 'atendimento inicial';
 
     protected static ?int $navigationSort = 10;
 
@@ -51,25 +51,25 @@ class ConversationSettingResource extends Resource
     {
         return $schema->components([
             Section::make('Assistant')
-                ->description('Définissez son rôle avec des champs cadrés. Les protections essentielles restent imposées par le starter.')
+                ->description('Defina o papel com campos orientados. As proteções essenciais permanecem obrigatórias.')
                 ->schema([
                     Toggle::make('is_enabled')
-                        ->label('Activer l’accueil conversationnel'),
+                        ->label('Ativar o atendimento inicial'),
                     TextInput::make('widget_button_label')
-                        ->label('Libellé du bouton')
+                        ->label('Texto do botão')
                         ->required()
                         ->maxLength(255),
                     TextInput::make('widget_title')
-                        ->label('Titre de la fenêtre')
+                        ->label('Título da janela')
                         ->required()
                         ->maxLength(255),
                     Textarea::make('privacy_notice')
-                        ->label('Avertissement affiché au visiteur')
+                        ->label('Aviso exibido ao visitante')
                         ->rows(3)
                         ->maxLength(1000)
                         ->columnSpanFull(),
                     Select::make('assistant_language')
-                        ->label('Langue principale')
+                        ->label('Idioma principal')
                         ->options([
                             'fr' => 'Français',
                             'en' => 'English',
@@ -81,104 +81,104 @@ class ConversationSettingResource extends Resource
                         ->searchable()
                         ->required(),
                     TextInput::make('assistant_tone')
-                        ->label('Ton attendu')
+                        ->label('Tom esperado')
                         ->required()
                         ->maxLength(255)
-                        ->helperText('Par exemple : clair, chaleureux et concis.'),
+                        ->helperText('Por exemplo: claro, acolhedor e conciso.'),
                     Textarea::make('organization_summary')
-                        ->label('Contexte de l’organisation')
+                        ->label('Contexto da organização')
                         ->rows(4)
                         ->maxLength(3000)
-                        ->helperText('Présentez l’activité, les services et les limites utiles à l’orientation.')
+                        ->helperText('Apresente a atividade, os serviços e os limites úteis para o encaminhamento.')
                         ->columnSpanFull(),
                 ])
                 ->columns(2),
 
-            Section::make('Qualification minimale')
-                ->description('L’assistant pose une question à la fois et ne recueille que ce qui est utile.')
+            Section::make('Qualificação mínima')
+                ->description('O assistente faz uma pergunta por vez e coleta somente o que é útil.')
                 ->schema([
                     CheckboxList::make('qualification_fields')
-                        ->label('Informations que l’assistant peut demander')
+                        ->label('Informações que o assistente pode solicitar')
                         ->options(ConversationSetting::QUALIFICATION_FIELDS)
                         ->columns(2)
                         ->columnSpanFull(),
                     Textarea::make('qualification_guidance')
-                        ->label('Précisions de qualification')
+                        ->label('Orientações de qualificação')
                         ->rows(3)
                         ->maxLength(2000),
                     Textarea::make('sensitive_data_guidance')
-                        ->label('Informations supplémentaires à ne pas demander')
+                        ->label('Outras informações que não devem ser solicitadas')
                         ->rows(3)
                         ->maxLength(2000),
                 ])
                 ->columns(2),
 
             Section::make('Orientation')
-                ->description('L’assistant reconnaît le bon moment pour proposer les canaux, mais le visiteur conserve le choix.')
+                ->description('O assistente reconhece o momento de propor os canais, mas a escolha permanece com o visitante.')
                 ->schema([
                     CheckboxList::make('routing_triggers')
-                        ->label('Quand proposer une orientation')
+                        ->label('Quando propor um encaminhamento')
                         ->options(ConversationSetting::ROUTING_TRIGGERS)
                         ->columns(2)
                         ->columnSpanFull(),
                     Textarea::make('urgency_guidance')
-                        ->label('Critères d’urgence propres au site')
+                        ->label('Critérios de urgência do site')
                         ->rows(3)
                         ->maxLength(2000),
                     TextInput::make('expected_response_time')
-                        ->label('Délai de réponse pouvant être annoncé')
+                        ->label('Prazo de resposta que pode ser informado')
                         ->maxLength(255)
-                        ->helperText('Par exemple : pendant les heures d’ouverture ou sous un jour ouvré.'),
+                        ->helperText('Por exemplo: durante o horário de atendimento ou em um dia útil.'),
                 ])
                 ->columns(2),
 
             Section::make('WhatsApp')
                 ->schema([
                     Toggle::make('whatsapp_enabled')
-                        ->label('Proposer WhatsApp')
+                        ->label('Oferecer WhatsApp')
                         ->live(),
                     TextInput::make('whatsapp_number')
-                        ->label('Numéro WhatsApp')
+                        ->label('Número do WhatsApp')
                         ->tel()
                         ->maxLength(40)
-                        ->helperText('Format international, sans lien ni texte.'),
+                        ->helperText('Formato internacional, sem link ou texto.'),
                     Textarea::make('whatsapp_message_template')
-                        ->label('Message de passage vers WhatsApp')
+                        ->label('Mensagem de passagem para o WhatsApp')
                         ->rows(3)
                         ->maxLength(1000)
-                        ->helperText('Utilisez {{reference}} pour inclure la référence de conversation.')
+                        ->helperText('Use {{reference}} para incluir a referência da conversa.')
                         ->columnSpanFull(),
                     Textarea::make('whatsapp_contact_message_template')
-                        ->label('Message utilisé par l’équipe pour contacter le visiteur')
+                        ->label('Mensagem usada pela equipe para contatar o visitante')
                         ->rows(3)
                         ->maxLength(1000)
-                        ->helperText('Utilisez {{reference}} pour inclure la référence de conversation.')
+                        ->helperText('Use {{reference}} para incluir a referência da conversa.')
                         ->columnSpanFull(),
                 ])
                 ->columns(2),
 
-            Section::make('Demande de contact')
+            Section::make('Solicitação de contato')
                 ->schema([
                     Toggle::make('callback_enabled')
-                        ->label('Permettre au visiteur de demander à être contacté')
+                        ->label('Permitir que o visitante solicite contato')
                         ->live(),
                     CheckboxList::make('callback_channels')
-                        ->label('Canaux proposés')
+                        ->label('Canais oferecidos')
                         ->options(ConversationSetting::CALLBACK_CHANNELS)
                         ->columns(3)
                         ->columnSpanFull(),
                     TextInput::make('notification_email')
-                        ->label('E-mail recevant les nouvelles demandes')
+                        ->label('E-mail que recebe as novas solicitações')
                         ->email()
                         ->maxLength(255)
-                        ->helperText('À défaut, l’adresse de contact générale du site sera utilisée.'),
+                        ->helperText('Se vazio, será usado o e-mail geral de contato do site.'),
                 ]),
 
-            Section::make('Instructions particulières')
-                ->description('Complément facultatif. Il ne peut pas désactiver les protections universelles.')
+            Section::make('Instruções específicas')
+                ->description('Complemento opcional. Não pode desativar as proteções universais.')
                 ->schema([
                     Textarea::make('additional_instructions')
-                        ->label('Consignes propres à ce site')
+                        ->label('Instruções próprias deste site')
                         ->rows(5)
                         ->maxLength(4000),
                 ]),
@@ -189,13 +189,13 @@ class ConversationSettingResource extends Resource
     {
         return $table
             ->columns([
-                IconColumn::make('is_enabled')->label('Actif')->boolean(),
-                TextColumn::make('assistant_language')->label('Langue'),
+                IconColumn::make('is_enabled')->label('Ativo')->boolean(),
+                TextColumn::make('assistant_language')->label('Idioma'),
                 IconColumn::make('whatsapp_enabled')->label('WhatsApp')->boolean(),
-                IconColumn::make('callback_enabled')->label('Contact différé')->boolean(),
+                IconColumn::make('callback_enabled')->label('Contato posterior')->boolean(),
             ])
             ->recordActions([
-                EditAction::make()->label('Configurer'),
+                EditAction::make()->label('Configurar'),
             ])
             ->toolbarActions([]);
     }
