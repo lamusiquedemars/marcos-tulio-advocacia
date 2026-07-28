@@ -151,6 +151,15 @@ class PublicConversationTest extends TestCase
             ->assertOk()
             ->assertJsonPath('conversation.collecting_contact', true);
 
+        $invalidName = $this->postJson('/conversa/mensagens', ['content' => 'por telefone'])
+            ->assertCreated()
+            ->assertJsonPath('conversation.collecting_contact', true);
+
+        $this->assertSame(
+            config('maracuja.conversations.callback.invalid_name'),
+            collect($invalidName->json('messages'))->last()['content'],
+        );
+
         foreach (['Pessoa de teste', 'WhatsApp', '+55 65 99999-0000'] as $answer) {
             $this->postJson('/conversa/mensagens', ['content' => $answer])->assertCreated();
         }
