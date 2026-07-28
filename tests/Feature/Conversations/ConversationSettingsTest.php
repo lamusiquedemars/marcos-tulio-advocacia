@@ -20,8 +20,12 @@ class ConversationSettingsTest extends TestCase
         $this->assertTrue($settings->is_enabled);
         $this->assertSame('pt-BR', $settings->assistant_language);
         $this->assertContains('deadline', $settings->qualification_fields);
-        $this->assertFalse($settings->whatsapp_enabled);
+        $this->assertTrue($settings->whatsapp_enabled);
+        $this->assertSame('+5565992830446', $settings->whatsapp_number);
         $this->assertTrue($settings->callback_enabled);
+        $this->assertSame(12, $settings->max_visitor_messages);
+        $this->assertSame(10, $settings->warning_at_message);
+        $this->assertStringContainsString('Marcos Túlio Advocacia', $settings->welcome_message);
         $this->assertStringContainsString('Marcos Túlio Advocacia', $settings->organization_summary);
         $this->assertDatabaseCount('conversation_settings', 1);
     }

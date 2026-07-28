@@ -34,7 +34,7 @@
         </section>
 
         <aside class="space-y-6">
-            <x-filament::section heading="Dados da conversa">
+            <x-filament::section heading="A tratar">
                 <dl class="space-y-3 text-sm">
                     <div>
                         <dt class="text-gray-500">Referência</dt>
@@ -49,25 +49,17 @@
                         <dd>{{ $conversation->urgency->label() }}</dd>
                     </div>
                     <div>
-                        <dt class="text-gray-500">Canal</dt>
-                        <dd>{{ $conversation->channel->value === 'website' ? 'Site' : $conversation->channel->value }}</dd>
-                    </div>
-                    <div>
-                        <dt class="text-gray-500">Responsable</dt>
+                        <dt class="text-gray-500">Responsável</dt>
                         <dd>{{ $conversation->assignedUser?->name ?? 'Não atribuído' }}</dd>
-                    </div>
-                    <div>
-                        <dt class="text-gray-500">Iniciada em</dt>
-                        <dd>{{ $conversation->created_at?->format('d/m/Y H:i') }}</dd>
                     </div>
                     <div>
                         <dt class="text-gray-500">Última interação</dt>
                         <dd>{{ $conversation->last_message_at?->format('d/m/Y H:i') }}</dd>
                     </div>
-                    @if ($conversation->human_handover_at)
+                    @if ($conversation->handover_reason)
                         <div>
-                            <dt class="text-gray-500">Atendimento humano solicitado em</dt>
-                            <dd>{{ $conversation->human_handover_at->format('d/m/Y H:i') }}</dd>
+                            <dt class="text-gray-500">Por que esta solicitação aparece aqui</dt>
+                            <dd>{{ $conversation->handover_reason->label() }}</dd>
                         </div>
                     @endif
                     @if ($conversation->inquiry)
@@ -98,6 +90,30 @@
                     <p class="text-sm text-gray-500">Visitante não identificado.</p>
                 @endif
             </x-filament::section>
+
+            <details class="rounded-xl border border-gray-200 bg-white p-4 text-sm dark:border-gray-700 dark:bg-gray-900">
+                <summary class="cursor-pointer font-medium">Informações técnicas</summary>
+                <dl class="mt-4 space-y-3">
+                    <div>
+                        <dt class="text-gray-500">Canal de origem</dt>
+                        <dd>{{ $conversation->channel->value === 'website' ? 'Site' : $conversation->channel->value }}</dd>
+                    </div>
+                    <div>
+                        <dt class="text-gray-500">Conversa criada em</dt>
+                        <dd>{{ $conversation->created_at?->format('d/m/Y H:i') }}</dd>
+                    </div>
+                    <div>
+                        <dt class="text-gray-500">IA ativa</dt>
+                        <dd>{{ $conversation->ai_enabled ? 'Sim' : 'Não' }}</dd>
+                    </div>
+                    @if ($conversation->human_handover_at)
+                        <div>
+                            <dt class="text-gray-500">Encaminhamento iniciado em</dt>
+                            <dd>{{ $conversation->human_handover_at->format('d/m/Y H:i') }}</dd>
+                        </div>
+                    @endif
+                </dl>
+            </details>
         </aside>
     </div>
 </x-filament-panels::page>
