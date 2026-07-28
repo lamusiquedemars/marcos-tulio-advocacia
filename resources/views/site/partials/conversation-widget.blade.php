@@ -69,5 +69,10 @@
             <input name="website" type="text" tabindex="-1" autocomplete="off" class="conversation-widget__honeypot">
             <button class="btn btn--primary" type="submit">Enviar</button>
         </form>
+
+        <div class="conversation-widget__completed" hidden data-conversation-completed>
+            <strong>Solicitação registrada</strong>
+            <p>O escritório entrará em contato pelo canal informado. Esta conversa foi encerrada e não recebe novas mensagens.</p>
+        </div>
     </aside>
 </div>
