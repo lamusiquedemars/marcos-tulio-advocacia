@@ -32,9 +32,10 @@
             <button type="button" aria-label="Fechar conversa" data-conversation-close>×</button>
         </header>
 
-        <div class="conversation-widget__notice">
-            {{ $conversationSettings->privacy_notice }}
-        </div>
+        <details class="conversation-widget__notice">
+            <summary>Aviso sobre este atendimento</summary>
+            <p>{{ $conversationSettings->privacy_notice }}</p>
+        </details>
 
         <div
             class="conversation-widget__messages"
@@ -61,7 +62,7 @@
                 id="conversation-message"
                 name="content"
                 maxlength="5000"
-                rows="3"
+                rows="2"
                 required
                 data-conversation-input
             ></textarea>
