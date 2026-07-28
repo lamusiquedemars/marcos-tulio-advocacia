@@ -6,6 +6,7 @@ use App\Modules\Contacts\Actions\ResolveContact;
 use App\Modules\Conversations\Enums\ConversationUrgency;
 use App\Modules\Conversations\Mail\ConversationCallbackReceived;
 use App\Modules\Conversations\Models\Conversation;
+use App\Modules\Conversations\Models\ConversationSetting;
 use App\Modules\Inquiries\Enums\InquiryPhase;
 use App\Modules\Inquiries\Enums\InquiryRequestType;
 use App\Modules\Inquiries\Enums\InquiryStatus;
@@ -76,7 +77,8 @@ class CreateInquiryFromConversation
         });
 
         if ($created && config('maracuja.conversations.notifications.enabled')) {
-            $recipient = config('maracuja.conversations.notifications.recipient')
+            $recipient = ConversationSetting::current()->notification_email
+                ?: config('maracuja.conversations.notifications.recipient')
                 ?: SiteSetting::current()->contact_email;
 
             if (filled($recipient)) {

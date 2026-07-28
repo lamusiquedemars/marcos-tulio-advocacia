@@ -24,13 +24,6 @@ return [
     'conversations' => [
         'retention_days' => env('MARACUJA_CONVERSATIONS_RETENTION_DAYS', 90),
         'public' => [
-            'button_label' => env('MARACUJA_CONVERSATIONS_BUTTON_LABEL', 'Falar com o escritório'),
-            'title' => env('MARACUJA_CONVERSATIONS_TITLE', 'Como podemos ajudar?'),
-            'notice' => env(
-                'MARACUJA_CONVERSATIONS_NOTICE',
-                'Este atendimento inicial não constitui orientação jurídica nem cria relação advogado-cliente. '
-                .'Evite enviar documentos ou informações altamente sensíveis antes do contato humano.',
-            ),
             'handover_message' => env(
                 'MARACUJA_CONVERSATIONS_HANDOVER_MESSAGE',
                 'Seu pedido de atendimento humano foi registrado. Em caso de urgência, use também o WhatsApp.',
@@ -55,22 +48,6 @@ return [
             'recipient' => env('MARACUJA_CONVERSATIONS_NOTIFICATION_EMAIL'),
             'subject' => 'Nova solicitação de contato pelo site',
         ],
-        'whatsapp' => [
-            'enabled' => env('MARACUJA_CONVERSATIONS_WHATSAPP_ENABLED', false),
-            'number' => env('MARACUJA_CONVERSATIONS_WHATSAPP_NUMBER'),
-            'direct_message' => env(
-                'MARACUJA_CONVERSATIONS_WHATSAPP_DIRECT_MESSAGE',
-                'Olá, gostaria de entrar em contato com o escritório.',
-            ),
-            'message' => env(
-                'MARACUJA_CONVERSATIONS_WHATSAPP_MESSAGE',
-                'Olá, entrei em contato pelo site. Minha referência de atendimento é {{reference}}.',
-            ),
-            'contact_message' => env(
-                'MARACUJA_CONVERSATIONS_WHATSAPP_CONTACT_MESSAGE',
-                'Olá, entro em contato sobre sua solicitação {{reference}}.',
-            ),
-        ],
         'ai' => [
             'provider' => env('MARACUJA_CONVERSATIONS_AI_PROVIDER', 'fake'),
             'model' => env('OPENAI_CONVERSATIONS_MODEL', 'gpt-5.6-luna'),
@@ -78,19 +55,6 @@ return [
             'max_output_tokens' => env('OPENAI_CONVERSATIONS_MAX_OUTPUT_TOKENS', 600),
             'history_messages' => env('MARACUJA_CONVERSATIONS_HISTORY_MESSAGES', 12),
             'timeout_seconds' => env('MARACUJA_CONVERSATIONS_AI_TIMEOUT', 20),
-            'instructions' => env(
-                'MARACUJA_CONVERSATIONS_AI_INSTRUCTIONS',
-                'Você é o assistente inicial do escritório de Marcos Túlio, advogado criminalista no Brasil. '
-                .'Fale em português brasileiro com tom profissional, calmo, claro e respeitoso. '
-                .'Você não é advogado, não oferece aconselhamento jurídico, não promete resultados e não cria '
-                .'relação advogado-cliente. Faça uma pergunta simples por vez e recolha somente o necessário: '
-                .'tema geral, cidade ou Estado, existência de advogado, prazo ou audiência próxima, situação de '
-                .'prisão e forma de contato preferida. Não peça nomes de vítimas ou testemunhas, relato excessivo, '
-                .'documentos processuais, identidade completa, senhas, dados bancários ou informações confidenciais '
-                .'desnecessárias. Solicite atendimento humano imediato em caso de prisão, pessoa detida, audiência '
-                .'ou prazo próximo, mandado, busca, convocação iminente, ameaça ou risco físico. Não invente '
-                .'procedimentos. Oriente a procurar os serviços de emergência competentes quando houver risco imediato.',
-            ),
             'fallback_message' => env(
                 'MARACUJA_CONVERSATIONS_AI_FALLBACK_MESSAGE',
                 'Não consigo responder agora. Seu atendimento será encaminhado a uma pessoa do escritório.',
