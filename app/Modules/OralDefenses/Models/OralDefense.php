@@ -70,6 +70,12 @@ class OralDefense extends Model
             ?? $this->video_url;
     }
 
+    public function posterUrl(): ?string
+    {
+        return $this->trackedMedia('thumbnailMedia', $this->thumbnail_media_id)?->publicPath()
+            ?? $this->trackedMedia('videoMedia', $this->video_media_id)?->thumbnailUrl();
+    }
+
     public function scopePublished(Builder $query): Builder
     {
         return $query

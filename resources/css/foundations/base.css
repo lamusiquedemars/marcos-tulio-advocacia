@@ -14,13 +14,3 @@ a {
 main {
     min-height: 60vh;
 }
-
-:focus-visible {
-    outline: 3px solid color-mix(in srgb, var(--color-brand), #ffffff 20%);
-    outline-offset: 3px;
-}
-
-::selection {
-    background: var(--color-brand-soft);
-    color: var(--color-text);
-}

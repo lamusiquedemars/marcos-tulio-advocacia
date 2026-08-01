@@ -101,6 +101,55 @@ class OralDefenseTest extends TestCase
             ->assertDontSee('Defesa arquivada invisível');
     }
 
+    public function test_home_uses_the_published_featured_video(): void
+    {
+        $this->seed();
+
+        $this->video([
+            'title' => 'Sustentação principal na Home',
+            'context' => 'Contexto da sustentação principal.',
+            'is_featured' => true,
+        ]);
+        $this->video(['title' => 'Sustentação apenas na seleção']);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Sustentação principal na Home')
+            ->assertSee('Contexto da sustentação principal.')
+            ->assertDontSee('Sustentação apenas na seleção');
+    }
+
+    public function test_secondary_uploaded_video_is_rendered_as_a_player(): void
+    {
+        $this->seed();
+
+        $media = \App\Modules\Media\Models\MediaAsset::query()->create([
+            'disk' => 'public',
+            'path' => 'media/videos/secondary.mp4',
+            'thumbnail_path' => 'media/video-thumbnails/secondary.jpg',
+            'original_name' => 'secondary.mp4',
+            'display_name' => 'Vídeo secundário',
+            'mime_type' => 'video/mp4',
+            'extension' => 'mp4',
+            'type' => 'video',
+            'size' => 1024,
+            'checksum' => hash('sha256', 'secondary-video'),
+        ]);
+
+        $this->video([
+            'title' => 'Vídeo secundário incorporado',
+            'video_url' => null,
+            'video_media_id' => $media->id,
+        ]);
+
+        $this->get('/sustentacoes-e-defesas')
+            ->assertOk()
+            ->assertSee('Vídeo secundário incorporado')
+            ->assertSee('<video controls preload="metadata"', false)
+            ->assertSee('poster="/storage/media/video-thumbnails/secondary.jpg"', false)
+            ->assertSee('/storage/media/videos/secondary.mp4');
+    }
+
     private function video(array $attributes = []): OralDefense
     {
         return OralDefense::query()->create(array_merge([

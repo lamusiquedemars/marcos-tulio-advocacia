@@ -121,13 +121,32 @@
     >
         <div class="split">
             <div class="video-placeholder">
-                <div>
-                    <span class="demo-tag">Vídeo de demonstração pendente</span>
-                    <p>A sustentação principal será inserida após seleção e autorização.</p>
-                </div>
+                @if ($featuredVideo ?? null)
+                    @if ($featuredVideo->video_media_id)
+                        <x-site.video
+                            :media="$featuredVideo->videoMedia"
+                            :poster="$featuredVideo->thumbnailMedia?->publicPath()"
+                        />
+                    @else
+                        <div>
+                            <span class="demo-tag">Vídeo externo</span>
+                            <a class="button button--primary" href="{{ $featuredVideo->videoSource() }}" target="_blank" rel="noopener noreferrer">
+                                Assistir ao vídeo
+                            </a>
+                        </div>
+                    @endif
+                @else
+                    <div>
+                        <span class="demo-tag">Vídeo de demonstração pendente</span>
+                        <p>A sustentação principal será inserida após seleção e autorização.</p>
+                    </div>
+                @endif
             </div>
             <div class="stack stack--md">
-                <h2>Uma defesa compreensível, fundamentada e preparada para o julgamento</h2>
+                <h2>{{ $featuredVideo?->title ?? 'Uma defesa compreensível, fundamentada e preparada para o julgamento' }}</h2>
+                @if ($featuredVideo?->context)
+                    <p>{{ $featuredVideo->context }}</p>
+                @endif
                 <p>Os materiais publicados preservam a confidencialidade e não representam promessa de resultado.</p>
                 <x-site.button :href="route('pages.show', 'sustentacoes-e-defesas')" variant="secondary">Conhecer exemplos de sustentações</x-site.button>
             </div>

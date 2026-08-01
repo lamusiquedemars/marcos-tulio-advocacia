@@ -97,22 +97,6 @@
     padding-block: var(--space-3xl);
 }
 
-.theme-law-firm .hero--page .hero__inner {
-    position: relative;
-    max-width: var(--container);
-    padding-block: clamp(3.5rem, 8vw, 6.5rem);
-}
-
-.theme-law-firm .hero--page .hero__content {
-    max-width: 52rem;
-    padding-left: clamp(1rem, 3vw, 2rem);
-    border-left: 2px solid var(--color-brand);
-}
-
-.theme-law-firm .hero--page h1 {
-    font-size: clamp(2.75rem, 6vw, 4.5rem);
-}
-
 .hero--home .hero__inner {
     padding-block: calc(var(--space-4xl) * 1.15);
 }

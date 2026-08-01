@@ -9,6 +9,8 @@
             'type' => $seoType ?? null,
             'canonical' => $canonical ?? null,
         ]);
+        $brandLogo = $settings->logoUrl();
+        $clientTheme = config('maracuja.client_theme');
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +43,11 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="site-shell theme-{{ config('maracuja.theme', 'default') }}">
+<body @class([
+    'site-shell',
+    'theme-' . config('maracuja.theme', 'default'),
+    'theme-' . $clientTheme => filled($clientTheme),
+])>
     @if (config('maracuja.law_firm.demo'))
         <div class="demo-banner">
             <p class="container">
@@ -53,7 +59,13 @@
 
     <header class="site-header container" data-nav>
         <a class="site-brand" href="{{ route('home') }}">
-            <span class="site-brand__mark" aria-hidden="true">MT</span>
+            @if ($brandLogo)
+                <span class="site-brand__mark site-brand__mark--image" aria-hidden="true">
+                    <img src="{{ $brandLogo }}" alt="">
+                </span>
+            @else
+                <span class="site-brand__mark" aria-hidden="true">MT</span>
+            @endif
             <span>
                 <strong>{{ $settings->site_name }}</strong>
             </span>
@@ -92,7 +104,13 @@
         <div class="site-footer__inner container">
             <div class="site-footer__identity">
                 <a class="site-brand" href="{{ route('home') }}">
-                    <span class="site-brand__mark" aria-hidden="true">MT</span>
+                    @if ($brandLogo)
+                        <span class="site-brand__mark site-brand__mark--image" aria-hidden="true">
+                            <img src="{{ $brandLogo }}" alt="">
+                        </span>
+                    @else
+                        <span class="site-brand__mark" aria-hidden="true">MT</span>
+                    @endif
                     <span>
                         <strong>{{ $settings->site_name }}</strong>
                         <small>Advocacia criminal</small>

@@ -96,8 +96,8 @@ class OralDefenseResource extends Resource
                         ->imagesOnly()
                         ->columnSpanFull(),
                     Toggle::make('is_featured')
-                        ->label('Vídeo principal')
-                        ->helperText('Só pode existir um vídeo principal publicado. O sistema nunca substitui outro automaticamente.'),
+                        ->label('Exibir também na página inicial')
+                        ->helperText('Marque somente a sustentação principal. Ela continuará aparecendo nesta página e será usada automaticamente na Home.'),
                 ])
                 ->columns(2),
             Section::make('Exemplo anonimizado de defesa')

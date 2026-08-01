@@ -3,6 +3,7 @@
 namespace App\Modules\Media\Filament\Forms\Components;
 
 use App\Modules\Media\Enums\MediaType;
+use App\Modules\Media\Filament\Actions\MediaUploadAction;
 use App\Modules\Media\Filament\Tables\MediaPickerTable;
 use App\Modules\Media\Models\MediaAsset;
 use Filament\Actions\Action;
@@ -31,6 +32,7 @@ class MediaPicker extends ModalTableSelect
                 })
                 ->modalHeading($this->selectionModalHeading())
                 ->modalSubmitActionLabel('Usar esta mídia')
+                ->extraModalFooterActions(fn (): array => $this->selectionModalActions())
                 ->modalWidth(Width::SevenExtraLarge));
     }
 
@@ -74,5 +76,11 @@ class MediaPicker extends ModalTableSelect
             MediaType::Video => 'Escolher um vídeo',
             null => 'Escolher uma mídia',
         };
+    }
+
+    /** @return array<Action> */
+    public function selectionModalActions(): array
+    {
+        return [MediaUploadAction::make($this->acceptedMediaType)];
     }
 }

@@ -5,6 +5,8 @@ return [
 
     'theme' => env('MARACUJA_THEME', 'default'),
 
+    'client_theme' => env('MARACUJA_CLIENT_THEME', 'marcos-tulio'),
+
     'offer' => env('MARACUJA_OFFER', 'signature'),
 
     'seo' => [

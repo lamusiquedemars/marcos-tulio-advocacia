@@ -26,10 +26,10 @@
             <article class="featured-defense split">
                 <div class="video-placeholder">
                     @if ($featuredVideo->video_media_id)
-                        <video controls preload="metadata" @if ($featuredVideo->thumbnailMedia) poster="{{ $featuredVideo->thumbnailMedia->publicPath() }}" @endif>
-                            <source src="{{ $featuredVideo->videoSource() }}" type="{{ $featuredVideo->videoMedia->mime_type }}">
-                            Seu navegador não consegue reproduzir este vídeo.
-                        </video>
+                        <x-site.video
+                            :media="$featuredVideo->videoMedia"
+                            :poster="$featuredVideo->thumbnailMedia?->publicPath()"
+                        />
                     @else
                         <div>
                             <span class="demo-tag">Vídeo externo</span>
@@ -69,11 +69,24 @@
         @if (($secondaryVideos ?? collect())->isNotEmpty())
             <div class="defense-selection">
                 @foreach ($secondaryVideos as $video)
-                    <article class="authority-card">
-                        <span class="section-kicker">Sustentação</span>
-                        <h3>{{ $video->title }}</h3>
-                        @if ($video->context)<p>{{ $video->context }}</p>@endif
-                        <a href="{{ $video->videoSource() }}" @if (! $video->video_media_id) target="_blank" rel="noopener noreferrer" @endif>Assistir ao vídeo</a>
+                    <article class="authority-card video-card">
+                        <div class="video-card__media">
+                            @if ($video->video_media_id)
+                                <x-site.video
+                                    :media="$video->videoMedia"
+                                    :poster="$video->thumbnailMedia?->publicPath()"
+                                />
+                            @else
+                                <a class="button button--secondary" href="{{ $video->videoSource() }}" target="_blank" rel="noopener noreferrer">
+                                    Assistir ao vídeo externo
+                                </a>
+                            @endif
+                        </div>
+                        <div class="video-card__content">
+                            <span class="section-kicker">Sustentação</span>
+                            <h3>{{ $video->title }}</h3>
+                            @if ($video->context)<p>{{ $video->context }}</p>@endif
+                        </div>
                     </article>
                 @endforeach
             </div>

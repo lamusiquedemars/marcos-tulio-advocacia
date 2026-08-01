@@ -2,11 +2,6 @@
     margin-block: var(--space-lg) calc(var(--space-lg) * -1);
 }
 
-.theme-law-firm .breadcrumb {
-    padding-bottom: var(--space-md);
-    border-bottom: 1px solid var(--color-line);
-}
-
 .breadcrumb__list {
     display: flex;
     flex-wrap: wrap;

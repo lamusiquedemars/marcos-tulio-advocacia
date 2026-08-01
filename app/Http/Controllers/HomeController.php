@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Modules\Gallery\Models\Gallery;
 use App\Modules\News\Models\NewsPost;
 use App\Modules\Notices\Models\SiteNotice;
+use App\Modules\OralDefenses\Enums\OralDefenseType;
+use App\Modules\OralDefenses\Models\OralDefense;
 use App\Modules\Pages\Models\Page;
 use App\Modules\SiteSettings\Models\SiteSetting;
 use App\Support\Modules;
@@ -39,6 +41,14 @@ class HomeController extends Controller
             'newsPosts' => Modules::enabled('news')
                 ? NewsPost::query()->forListing()->limit(3)->get()
                 : collect(),
+            'featuredVideo' => Modules::enabled('oral_defenses')
+                ? OralDefense::query()
+                    ->published()
+                    ->where('type', OralDefenseType::Video)
+                    ->where('is_featured', true)
+                    ->with(['videoMedia', 'thumbnailMedia'])
+                    ->first()
+                : null,
             'gallery' => $gallery,
             'galleryImages' => $gallery
                 ? $gallery->images()->where('is_published', true)->limit(6)->get()

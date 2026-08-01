@@ -12,7 +12,6 @@ button.button {
     font-weight: 800;
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
 .btn--small {
@@ -35,18 +34,12 @@ button.button {
 .btn--primary:hover,
 .button:hover {
     background: var(--color-brand-strong);
-    transform: translateY(-1px);
 }
 
 .btn--secondary {
     border-color: var(--color-line);
     background: var(--color-surface);
     color: var(--color-text);
-}
-
-.btn--secondary:hover {
-    border-color: var(--color-brand);
-    color: var(--color-brand-strong);
 }
 
 .btn--ghost {
