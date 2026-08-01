@@ -17,6 +17,7 @@ class MediaAsset extends Model
         'type',
         'disk',
         'path',
+        'thumbnail_path',
         'original_name',
         'display_name',
         'mime_type',
@@ -51,6 +52,10 @@ class MediaAsset extends Model
 
         static::deleted(function (MediaAsset $media): void {
             Storage::disk($media->disk)->delete($media->path);
+
+            if (filled($media->thumbnail_path)) {
+                Storage::disk($media->disk)->delete($media->thumbnail_path);
+            }
         });
     }
 
@@ -107,6 +112,13 @@ class MediaAsset extends Model
     public function publicPath(): string
     {
         return '/storage/'.ltrim($this->path, '/');
+    }
+
+    public function thumbnailUrl(): ?string
+    {
+        return filled($this->thumbnail_path)
+            ? Storage::disk($this->disk)->url($this->thumbnail_path)
+            : null;
     }
 
     public function formattedSize(): string

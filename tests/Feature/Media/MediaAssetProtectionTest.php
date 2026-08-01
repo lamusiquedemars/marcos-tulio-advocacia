@@ -27,11 +27,14 @@ class MediaAssetProtectionTest extends TestCase
     {
         $media = $this->media();
         Storage::disk('public')->put($media->path, 'image');
+        $media->update(['thumbnail_path' => 'media/video-thumbnails/2026/07/example.jpg']);
+        Storage::disk('public')->put($media->thumbnail_path, 'thumbnail');
 
         $this->assertTrue($media->canBeDeleted());
         $this->assertTrue($media->delete());
         $this->assertDatabaseMissing('media_assets', ['id' => $media->id]);
         Storage::disk('public')->assertMissing($media->path);
+        Storage::disk('public')->assertMissing($media->thumbnail_path);
     }
 
     public function test_a_used_media_cannot_be_deleted_directly(): void

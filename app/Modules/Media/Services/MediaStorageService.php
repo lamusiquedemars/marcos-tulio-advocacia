@@ -13,6 +13,8 @@ use Throwable;
 
 class MediaStorageService
 {
+    public function __construct(private readonly VideoThumbnailService $videoThumbnails) {}
+
     /**
      * @param  array{display_name?: string|null, alt_text?: string|null, caption?: string|null, credit?: string|null}  $metadata
      */
@@ -37,7 +39,7 @@ class MediaStorageService
             $dimensions = $type === MediaType::Image ? @getimagesize(Storage::disk($disk)->path($path)) : false;
             $originalName = $this->cleanOriginalName($file->getClientOriginalName());
 
-            return MediaAsset::query()->create([
+            $media = MediaAsset::query()->create([
                 'type' => $type,
                 'disk' => $disk,
                 'path' => $path,
@@ -56,6 +58,12 @@ class MediaStorageService
                 'checksum' => hash_file('sha256', Storage::disk($disk)->path($path)),
                 'uploaded_by' => $uploader?->getKey(),
             ]);
+
+            if ($media->isVideo()) {
+                $this->videoThumbnails->generate($media);
+            }
+
+            return $media->refresh();
         } catch (Throwable $exception) {
             Storage::disk($disk)->delete($path);
 

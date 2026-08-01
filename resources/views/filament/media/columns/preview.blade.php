@@ -1,6 +1,6 @@
 @php($media = $getRecord())
 
-<div class="overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800" style="aspect-ratio: 4 / 3">
+<div class="overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800" style="aspect-ratio: 4 / 3; height: auto; min-height: 0">
     @if ($media->isImage())
         <img
             src="{{ $media->url() }}"
@@ -9,7 +9,18 @@
             loading="lazy"
         >
     @elseif ($media->isVideo())
-        <video src="{{ $media->url() }}" class="h-full w-full object-cover" muted preload="metadata"></video>
+        @if ($media->thumbnailUrl())
+            <img
+                src="{{ $media->thumbnailUrl() }}"
+                alt=""
+                class="block h-full w-full object-cover"
+                loading="lazy"
+            >
+        @else
+            <div class="flex h-full items-center justify-center text-gray-400">
+                <x-filament::icon icon="heroicon-o-video-camera" class="h-14 w-14" />
+            </div>
+        @endif
     @else
         <div class="flex h-full items-center justify-center text-gray-400">
             <x-filament::icon icon="heroicon-o-document-text" class="h-14 w-14" />
