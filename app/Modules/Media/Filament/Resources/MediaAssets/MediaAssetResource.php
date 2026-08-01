@@ -116,11 +116,13 @@ class MediaAssetResource extends Resource
                         ->label('Nome')
                         ->weight('semibold')
                         ->searchable(['display_name', 'original_name', 'path', 'alt_text', 'caption', 'credit'])
+                        ->lineClamp(2)
                         ->wrap(),
                     TextColumn::make('original_name')
                         ->label('Arquivo')
                         ->color('gray')
                         ->size('sm')
+                        ->lineClamp(1)
                         ->limit(40),
                     TextColumn::make('type')
                         ->badge()
@@ -142,7 +144,9 @@ class MediaAssetResource extends Resource
                         ->formatStateUsing(fn (int $state): string => $state === 0 ? 'Não utilizada' : $state.' uso'.($state > 1 ? 's' : ''))
                         ->color(fn (int $state): string => $state === 0 ? 'gray' : 'success')
                         ->size('sm'),
-                ])->space(2),
+                ])
+                    ->space(2)
+                    ->extraAttributes(['style' => 'min-height: 10rem']),
             ])
             ->contentGrid([
                 'sm' => 2,
