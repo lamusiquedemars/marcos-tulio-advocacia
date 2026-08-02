@@ -24,13 +24,15 @@ class ViewConversation extends ViewRecord
     {
         return [
             Action::make('takeOver')
-                ->label('Assumir atendimento')
+                ->label(fn (): string => WhatsAppHandoverLink::makeForContact($this->record)
+                    ? 'Assumir e abrir WhatsApp'
+                    : 'Assumir atendimento')
                 ->visible(fn (): bool => ! in_array($this->record->status, [
                     ConversationStatus::HumanActive,
                     ConversationStatus::Closed,
                     ConversationStatus::Archived,
                 ], true))
-                ->action(function (): void {
+                ->action(function () {
                     $this->record->update([
                         'assigned_user_id' => auth()->id(),
                         'status' => ConversationStatus::HumanActive,
@@ -40,6 +42,18 @@ class ViewConversation extends ViewRecord
                     ]);
 
                     Notification::make()->title('Atendimento assumido')->success()->send();
+
+                    $whatsappUrl = WhatsAppHandoverLink::makeForContact($this->record->fresh('contact'));
+
+                    if ($whatsappUrl) {
+                        return redirect()->away($whatsappUrl);
+                    }
+
+                    Notification::make()
+                        ->title('Número do visitante não informado')
+                        ->body('O atendimento foi assumido, mas não há um número para abrir no WhatsApp.')
+                        ->warning()
+                        ->send();
                 }),
             Action::make('internalNote')
                 ->label('Adicionar nota interna')

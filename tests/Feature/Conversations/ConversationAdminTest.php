@@ -52,6 +52,7 @@ class ConversationAdminTest extends TestCase
         $this->actingAs($admin)
             ->get("/admin/conversations/{$conversation->id}")
             ->assertOk()
+            ->assertSee('Assumir e abrir WhatsApp')
             ->assertSee('Contatar pelo WhatsApp');
     }
 

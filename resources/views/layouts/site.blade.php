@@ -88,7 +88,7 @@
             @if (\App\Support\Modules::enabled('pages'))
                 <a href="{{ route('pages.show', 'services') }}">Atuação Penal</a>
                 <a href="{{ route('pages.show', 'sustentacoes-e-defesas') }}">Sustentações</a>
-                <a href="{{ route('pages.show', 'marcos-tulio') }}">Marcos Túlio</a>
+                <a href="{{ route('pages.show', 'marcos-tulio') }}">O Escritório</a>
             @endif
             @if (\App\Support\Modules::enabled('contact_form'))
                 <a href="{{ route('contact') }}">Atendimento</a>

@@ -5,6 +5,12 @@
 ])
 
 @section('content')
+    @php
+        $collaboratorName = \App\Support\ContentSlots::value('office.collaborator.name');
+        $collaboratorRole = \App\Support\ContentSlots::value('office.collaborator.role', 'Advogado colaborador');
+        $collaboratorBio = \App\Support\ContentSlots::value('office.collaborator.bio');
+    @endphp
+
     <x-site.hero
         variant="page"
         eyebrow="Advocacia · Ensino · Produção jurídica"
@@ -15,50 +21,32 @@
         cta-label="Formas de atendimento"
     />
 
-    <x-site.breadcrumb :items="[['label' => 'Marcos Túlio']]" />
+    <x-site.breadcrumb :items="[['label' => 'O Escritório']]" />
 
     <x-site.section
-        title="Uma apresentação profissional em construção"
-        intro="Esta versão utiliza somente as informações confirmadas no briefing. O percurso detalhado será completado após validação."
+        title="O Escritório"
+        intro="Atuação em advocacia penal com preparação técnica, comunicação clara e colaboração profissional quando o caso exige."
         heading-variant="accent"
     >
-        <div class="split">
-            <div class="profile-portrait">
-                <div>
-                    <span class="demo-tag">Retrato pendente</span>
-                    <p>Imagem profissional a ser fornecida, recortada e autorizada.</p>
-                </div>
-            </div>
-            <div class="stack stack--md prose">
-                <h2>Defesa penal com preparação para cada etapa</h2>
-                <p>Marcos Túlio atua na advocacia penal, com atendimento presencial em Cuiabá e possibilidade de acompanhamento remoto em todo o Brasil.</p>
-                <p>Sua atuação inclui atenção especial à preparação da sustentação oral e à comunicação clara dos fundamentos da defesa.</p>
-                <p>Não foram adicionados número de OAB, instituições de ensino, endereço profissional ou tempo de exercício sem confirmação.</p>
-            </div>
-        </div>
-    </x-site.section>
+        <div class="stack stack--xl">
+            <article class="stack stack--md prose">
+                <span class="practice-card__label">Advogado responsável</span>
+                <h2>Marcos Túlio de Melo</h2>
+                <p>Advogado em Mato Grosso desde 2012, é mestre em História pela Universidade Federal de Mato Grosso (UFMT) e também cursou Economia na mesma instituição. Em 2008, obteve certificações básica e avançada em investimentos.</p>
+                <p>Na docência, ministrou mais de 2.000 aulas para mais de 4.000 alunos, em mais de 100 turmas, passando pelas áreas penal, processual, civil, empresarial, administrativa e de direitos humanos.</p>
+                <p>Em 2020, lançou o livro <em>O Pacote Anticrime Comentado</em>. É também autor do curso Oratória Jurídica, com mais de 400 unidades comercializadas em todo o Brasil.</p>
+                <p>Na advocacia penal, dedica especial atenção à preparação da defesa e à exposição clara de seus fundamentos, inclusive em sustentações orais perante os tribunais. Fora da atividade profissional, cultiva interesses por cães da raça Dobermann, boxe, automóveis e whisky.</p>
+            </article>
 
-    <x-site.section
-        variant="muted"
-        title="Atuação, ensino e publicação"
-        heading-variant="underline"
-    >
-        <div class="authority-grid">
-            <article class="authority-card">
-                <span class="practice-card__label">Atuação</span>
-                <h3>Advocacia penal</h3>
-                <p>Preparação da defesa desde situações urgentes até a atuação perante os tribunais.</p>
-            </article>
-            <article class="authority-card">
-                <span class="practice-card__label">Ensino</span>
-                <h3>Dez anos como professor</h3>
-                <p>Experiência de dez anos no ensino do direito penal. Instituições e períodos aguardam confirmação.</p>
-            </article>
-            <article class="authority-card">
-                <span class="practice-card__label">Livro</span>
-                <h3><em>O Pacote Anticrime Comentado</em></h3>
-                <p>Referências editoriais, edição e imagem da obra serão incluídas após validação.</p>
-            </article>
+            @if ($collaboratorName)
+                <article class="stack stack--md prose">
+                    <span class="practice-card__label">{{ $collaboratorRole }}</span>
+                    <h2>{{ $collaboratorName }}</h2>
+                    @if ($collaboratorBio)
+                        <p>{{ $collaboratorBio }}</p>
+                    @endif
+                </article>
+            @endif
         </div>
     </x-site.section>
 
