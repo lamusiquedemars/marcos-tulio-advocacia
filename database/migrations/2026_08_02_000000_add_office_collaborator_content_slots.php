@@ -20,7 +20,7 @@ return new class extends Migration
                 'key' => 'office.collaborator.name',
                 'label' => 'Nome do advogado colaborador',
                 'type' => 'text',
-                'value' => null,
+                'value' => 'Julio Cesar',
                 'help_text' => 'Deixe vazio para ocultar a apresentação do colaborador no site.',
             ],
             [
@@ -34,7 +34,7 @@ return new class extends Migration
                 'key' => 'office.collaborator.bio',
                 'label' => 'Apresentação do advogado colaborador',
                 'type' => 'textarea',
-                'value' => null,
+                'value' => 'Júlio César nasceu em Roma, em 100 a.C., em uma família patrícia. Foi general, político, escritor e uma das figuras mais importantes da história romana. Conquistou a Gália, ampliou o território de Roma, venceu uma guerra civil e assumiu o controle do governo como ditador. Também realizou reformas políticas, sociais e econômicas, reorganizou o calendário e contribuiu decisivamente para a transformação da República Romana.',
                 'help_text' => 'Breve apresentação profissional, sem sugerir sociedade.',
             ],
         ] as $slot) {

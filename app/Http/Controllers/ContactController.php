@@ -41,7 +41,7 @@ class ContactController extends Controller
             'email' => ['required', 'string', 'max:160', 'email:rfc', 'regex:/^[^@\s]+@[^@\s]+\.[^@\s]+$/'],
             'message' => ['required', 'string', 'max:5000'],
             'phone' => ['nullable', 'string', 'max:60'],
-            'request_type' => ['required', 'in:analise,consulta,outro'],
+            'request_type' => ['nullable', 'in:analise,consulta,outro'],
             'urgency' => ['nullable', 'in:sem_urgencia,prazo_proximo,urgente'],
             'phase' => ['nullable', 'in:nao_informada,investigacao,intimacao_depoimento,prisao,processo_penal,recurso,preventiva'],
             'deadline' => ['nullable', 'date'],
@@ -61,7 +61,6 @@ class ContactController extends Controller
             'email.required' => 'Informe um email.',
             'email.email' => 'Informe um email válido.',
             'email.regex' => 'Informe um email válido.',
-            'request_type.required' => 'Selecione o tipo de solicitação.',
             'request_type.in' => 'Selecione um tipo de solicitação válido.',
             'urgency.in' => 'Selecione um grau de urgência válido.',
             'phase.in' => 'Selecione uma fase válida.',
@@ -82,6 +81,7 @@ class ContactController extends Controller
             'consulta' => 'Solicitação de consulta',
             'outro' => 'Outro contato',
         ];
+        $data['request_type'] ??= 'outro';
         $data['subject'] = $requestLabels[$data['request_type']];
         $data['consent_at'] = now()->toIso8601String();
         $data['source'] = 'contact_form';

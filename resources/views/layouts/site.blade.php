@@ -135,6 +135,7 @@
         <div class="site-footer__bottom container">
             <p>&copy; {{ now()->year }} {{ $settings->site_name }}</p>
             <p>Conteúdo informativo. Nenhum resultado é garantido.</p>
+            <x-site.social-links :settings="$settings" />
         </div>
     </footer>
 
