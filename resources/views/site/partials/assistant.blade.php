@@ -11,7 +11,7 @@
     <dialog class="assistant__dialog" data-assistant-dialog aria-labelledby="assistant-title">
         <div class="assistant__header">
             <div>
-                <span class="demo-tag">Assistente de demonstração</span>
+                <span class="media-tag">Atendimento inicial</span>
                 <h2 id="assistant-title">Como podemos orientar o primeiro contato?</h2>
             </div>
             <button class="btn btn--ghost" type="button" data-assistant-close aria-label="Fechar assistente">Fechar</button>
@@ -88,7 +88,7 @@
                 </label>
                 <label class="assistant__consent">
                     <input name="consent" type="checkbox" value="1" required>
-                    <span>Confirmo que uso apenas dados fictícios nesta demonstração e autorizo o registro desta solicitação de teste.</span>
+                    <span>Autorizo o uso destes dados para que o escritório responda à minha solicitação.</span>
                 </label>
             </fieldset>
 
@@ -97,7 +97,7 @@
             <div class="assistant__actions">
                 <button class="btn btn--secondary" type="button" data-assistant-back hidden>Voltar</button>
                 <button class="btn btn--primary" type="button" data-assistant-next>Continuar</button>
-                <button class="btn btn--primary" type="submit" data-assistant-submit hidden>Registrar solicitação fictícia</button>
+                <button class="btn btn--primary" type="submit" data-assistant-submit hidden>Registrar solicitação</button>
             </div>
         </form>
     </dialog>

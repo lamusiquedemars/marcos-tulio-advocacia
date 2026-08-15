@@ -102,8 +102,6 @@ class ContactController extends Controller
 
         return redirect()
             ->route('contact')
-            ->with('status', Modules::enabled('inquiries')
-                ? 'Sua solicitação foi registrada. Este ambiente de demonstração não envia mensagens reais.'
-                : 'Sua solicitação foi recebida neste ambiente de demonstração.');
+            ->with('status', 'Sua solicitação foi recebida. O escritório entrará em contato pelo canal informado.');
     }
 }

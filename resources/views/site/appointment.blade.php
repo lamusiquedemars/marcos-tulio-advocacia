@@ -1,6 +1,6 @@
 @extends('layouts.site', [
-    'seoTitle' => 'Agendamento de demonstração',
-    'seoDescription' => 'Demonstração fictícia do futuro percurso de agendamento.',
+    'seoTitle' => 'Agendamento',
+    'seoDescription' => 'Agendamento de atendimento com Marcos Túlio Advocacia.',
 ])
 
 @section('content')
@@ -8,19 +8,19 @@
         variant="page"
         eyebrow="Atendimento"
         title="Agendamento"
-        subtitle="Etapa de demonstração, sem conexão com uma agenda ou conta Brevo real."
+        subtitle="Consulte as informações para solicitar seu atendimento."
     />
 
     <x-site.breadcrumb :items="[['label' => 'Agendamento']]" />
 
     <x-site.section
-        title="Reserva fictícia"
-        intro="O formulário Brevo Meetings será incorporado aqui somente após a validação completa do percurso em português brasileiro."
+        title="Solicitar atendimento"
+        intro="O escritório confirmará a disponibilidade e as informações necessárias para o atendimento."
         heading-variant="accent"
     >
         <div class="confidentiality-note">
-            <strong>Nenhum agendamento real será realizado.</strong>
-            Esta página confirma que o visitante permanecerá dentro do site, sem login Brevo e sem mudança de aba.
+            <strong>O agendamento depende de confirmação.</strong>
+            O envio de uma solicitação não confirma automaticamente a data ou o horário do atendimento.
         </div>
 
         <div class="cluster">

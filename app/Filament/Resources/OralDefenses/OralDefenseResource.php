@@ -58,7 +58,7 @@ class OralDefenseResource extends Resource
     {
         return $schema->components([
             Section::make('Conteúdo')
-                ->description('Use somente material fictício ou expressamente autorizado e anonimizado.')
+                ->description('Use somente material expressamente autorizado e, quando necessário, anonimizado.')
                 ->schema([
                     Select::make('type')
                         ->label('Tipo')
@@ -186,7 +186,7 @@ class OralDefenseResource extends Resource
             ])
             ->toolbarActions([])
             ->emptyStateHeading('Nenhuma sustentação ou defesa')
-            ->emptyStateDescription('Adicione o primeiro conteúdo fictício ou autorizado.');
+            ->emptyStateDescription('Adicione o primeiro conteúdo autorizado.');
     }
 
     public static function getPages(): array

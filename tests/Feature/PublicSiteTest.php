@@ -115,7 +115,7 @@ class PublicSiteTest extends TestCase
                 'slug' => 'marcos-tulio',
                 'title' => 'Marcos Túlio',
                 'template' => 'profile',
-                'expected' => 'Uma apresentação profissional em construção',
+                'expected' => 'Marcos Túlio de Melo',
             ],
         ])->each(function (array $page): void {
             Page::query()->create([

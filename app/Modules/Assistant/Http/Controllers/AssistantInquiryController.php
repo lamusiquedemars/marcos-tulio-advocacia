@@ -35,7 +35,7 @@ class AssistantInquiryController extends Controller
         StoreInquiry::run($provider->qualify($data));
 
         return response()->json([
-            'message' => 'Solicitação fictícia registrada. Nenhuma mensagem externa foi enviada.',
+            'message' => 'Solicitação registrada. O escritório entrará em contato pelo canal informado.',
         ], 201);
     }
 }

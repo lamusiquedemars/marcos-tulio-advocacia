@@ -13,7 +13,7 @@
 
     <x-site.hero
         variant="page"
-        eyebrow="Advocacia · Ensino · Produção jurídica"
+        eyebrow="Advocacia · Trajetória acadêmica · Produção jurídica"
         :title="$page->hero_title ?? $page->title"
         :subtitle="$page->hero_subtitle ?? $page->excerpt"
         :image="$page->heroImageUrl()"
@@ -33,7 +33,7 @@
                 <span class="practice-card__label">Advogado responsável</span>
                 <h2>Marcos Túlio de Melo</h2>
                 <p>Advogado em Mato Grosso desde 2012, é mestre em História pela Universidade Federal de Mato Grosso (UFMT) e também cursou Economia na mesma instituição. Em 2008, obteve certificações básica e avançada em investimentos.</p>
-                <p>Na docência, ministrou mais de 2.000 aulas para mais de 4.000 alunos, em mais de 100 turmas, passando pelas áreas penal, processual, civil, empresarial, administrativa e de direitos humanos.</p>
+                <p>Foi docente por dez anos, com atuação em Direito Penal e Processo Penal no UNIVAG, em Várzea Grande. Ao longo de sua trajetória acadêmica, ministrou mais de 2.000 aulas para mais de 4.000 alunos, em mais de 100 turmas.</p>
                 <p>Em 2020, lançou o livro <em>O Pacote Anticrime Comentado</em>. É também autor do curso Oratória Jurídica, com mais de 400 unidades comercializadas em todo o Brasil.</p>
                 <p>Na advocacia penal, dedica especial atenção à preparação da defesa e à exposição clara de seus fundamentos, inclusive em sustentações orais perante os tribunais. Fora da atividade profissional, cultiva interesses por cães da raça Dobermann, boxe, automóveis e whisky.</p>
             </article>

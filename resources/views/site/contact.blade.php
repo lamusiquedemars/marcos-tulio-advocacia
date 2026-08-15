@@ -60,11 +60,7 @@
                     <label class="full consent-field">
                         <input name="consent" type="checkbox" value="1" @checked(old('consent')) required>
                         <span>
-                            @if (config('maracuja.law_firm.demo'))
-                                Confirmo que estou usando dados fictícios e autorizo o registro desta solicitação de teste.
-                            @else
-                                Autorizo o uso destes dados para que o escritório responda à minha solicitação.
-                            @endif
+                            Autorizo o uso destes dados para que o escritório responda à minha solicitação.
                             @error('consent') <small class="field__error">{{ $message }}</small> @enderror
                         </span>
                     </label>
@@ -91,6 +87,36 @@
 
                 <small>Em caso de prisão, audiência ou prazo imediato, informe isso logo no início da conversa.</small>
             </aside>
+        </div>
+    </x-site.section>
+
+    <x-site.section
+        variant="muted"
+        title="Onde nos encontrar"
+        intro="Entre em contato pelo canal de sua preferência. O atendimento presencial é realizado mediante agendamento."
+        heading-variant="underline"
+    >
+        <div class="contact-details-grid">
+            @if ($settings->phone)
+                <article class="contact-detail-card">
+                    <x-site.contact-icon name="phone" />
+                    <div><span>Telefone</span><a href="tel:{{ preg_replace('/[^\d+]/', '', $settings->phone) }}">{{ $settings->phone }}</a></div>
+                </article>
+            @endif
+            @if ($settings->contact_email)
+                <article class="contact-detail-card">
+                    <x-site.contact-icon name="mail" />
+                    <div><span>Email</span><a href="mailto:{{ $settings->contact_email }}">{{ $settings->contact_email }}</a></div>
+                </article>
+            @endif
+            <article class="contact-detail-card">
+                <x-site.contact-icon name="map-pin" />
+                <div><span>Endereço</span><p>{{ $settings->address ?: 'Endereço completo em Cuiabá, MT' }}</p></div>
+            </article>
+            <article class="contact-detail-card">
+                <x-site.contact-icon name="clock" />
+                <div><span>Horários de atendimento</span><p>{{ \App\Support\ContentSlots::value('contact.office_hours', 'Segunda a sexta, mediante agendamento.') }}</p></div>
+            </article>
         </div>
     </x-site.section>
 @endsection

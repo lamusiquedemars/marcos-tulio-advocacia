@@ -14,8 +14,7 @@ return [
     ],
 
     'law_firm' => [
-        'whatsapp_url' => env('MARACUJA_WHATSAPP_URL', 'https://example.test/whatsapp-demo'),
-        'demo' => env('MARACUJA_DEMO_MODE', true),
+        'whatsapp_url' => env('MARACUJA_WHATSAPP_URL', 'https://wa.me/5565992830446'),
     ],
 
     'assistant' => [

@@ -48,13 +48,18 @@
     'theme-' . config('maracuja.theme', 'default'),
     'theme-' . $clientTheme => filled($clientTheme),
 ])>
-    @if (config('maracuja.law_firm.demo'))
-        <div class="demo-banner">
-            <p class="container">
-                Site de demonstração da <a href="https://maracujadigital.fr">Maracuja Digital</a>.
-                Identidade, contatos e conteúdos fictícios.
-            </p>
-        </div>
+    @if ($settings->phone || $settings->contact_email)
+        <aside class="site-contact-bar" aria-label="Contato direto">
+            <div class="site-contact-bar__inner container">
+                <span>Contato direto</span>
+                @if ($settings->phone)
+                    <a href="tel:{{ preg_replace('/[^\d+]/', '', $settings->phone) }}"><x-site.contact-icon name="phone" />{{ $settings->phone }}</a>
+                @endif
+                @if ($settings->contact_email)
+                    <a href="mailto:{{ $settings->contact_email }}"><x-site.contact-icon name="mail" />{{ $settings->contact_email }}</a>
+                @endif
+            </div>
+        </aside>
     @endif
 
     <header class="site-header container" data-nav>
@@ -118,13 +123,12 @@
                 </a>
                 <p>Atendimento presencial em Cuiabá e remoto em todo o Brasil.</p>
             </div>
-            <div class="site-footer__notice">
-                <p><strong>Site de demonstração</strong></p>
-                <p>Identidade, contatos e conteúdos fictícios. Projeto realizado pela Maracuja Digital.</p>
-            </div>
             <nav class="site-footer__links" aria-label="Links institucionais">
+                @if ($settings->phone)
+                    <a href="tel:{{ preg_replace('/[^\d+]/', '', $settings->phone) }}"><x-site.contact-icon name="phone" />{{ $settings->phone }}</a>
+                @endif
                 @if ($settings->contact_email)
-                    <a href="mailto:{{ $settings->contact_email }}">{{ $settings->contact_email }}</a>
+                    <a href="mailto:{{ $settings->contact_email }}"><x-site.contact-icon name="mail" />{{ $settings->contact_email }}</a>
                 @endif
                 @if (\App\Support\Modules::enabled('pages'))
                     <a href="{{ route('pages.show', 'mentions-legales') }}">Aviso legal</a>

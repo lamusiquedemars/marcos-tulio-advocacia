@@ -10,7 +10,7 @@ enum AppointmentProvider: string
     public function label(): string
     {
         return match ($this) {
-            self::Fake => 'Demonstração fictícia',
+            self::Fake => 'Modo de teste',
             self::Brevo => 'Brevo Meetings',
         };
     }

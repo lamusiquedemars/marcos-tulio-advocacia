@@ -33,7 +33,7 @@ class AssistantInquiryTest extends TestCase
 
         $this->postJson('/assistant/solicitacao', $this->validPayload())
             ->assertCreated()
-            ->assertJsonPath('message', 'Solicitação fictícia registrada. Nenhuma mensagem externa foi enviada.');
+            ->assertJsonPath('message', 'Solicitação registrada. O escritório entrará em contato pelo canal informado.');
 
         $this->assertDatabaseHas(Inquiry::class, [
             'email' => 'pessoa-ficticia@example.test',

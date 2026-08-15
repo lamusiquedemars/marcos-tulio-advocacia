@@ -29,8 +29,8 @@
 
     <x-site.section
         variant="muted"
-        title="Advocacia e docência"
-        intro="Marcos Túlio de Melo reúne atuação na advocacia criminal e experiência docente. A preparação e a apresentação oral da defesa ocupam lugar central em seu trabalho."
+        title="Advocacia e trajetória acadêmica"
+        intro="Marcos Túlio de Melo reúne atuação na advocacia criminal e uma trajetória de dez anos no ensino do Direito Penal e do Processo Penal. A preparação e a apresentação oral da defesa ocupam lugar central em seu trabalho."
         heading-variant="underline"
     >
         <div class="authority-grid authority-grid--two">
@@ -40,9 +40,9 @@
                 <p>Atuação desde [ANO] em [PRINCIPAIS ÁREAS DA ADVOCACIA CRIMINAL].</p>
             </article>
             <article class="authority-card">
-                <span class="practice-card__label">Docência</span>
-                <h3>Direito penal</h3>
-                <p>Professor desde [ANO], com experiência em [INSTITUIÇÃO E DISCIPLINAS A CONFIRMAR].</p>
+                <span class="practice-card__label">Experiência acadêmica</span>
+                <h3>Dez anos de docência</h3>
+                <p>Foi docente de Direito Penal e Processo Penal no UNIVAG, em Várzea Grande.</p>
             </article>
         </div>
 
@@ -129,7 +129,7 @@
                         />
                     @else
                         <div>
-                            <span class="demo-tag">Vídeo externo</span>
+                            <span class="media-tag">Vídeo externo</span>
                             <a class="button button--primary" href="{{ $featuredVideo->videoSource() }}" target="_blank" rel="noopener noreferrer">
                                 Assistir ao vídeo
                             </a>
@@ -137,8 +137,8 @@
                     @endif
                 @else
                     <div>
-                        <span class="demo-tag">Vídeo de demonstração pendente</span>
-                        <p>A sustentação principal será inserida após seleção e autorização.</p>
+                        <span class="media-tag">Vídeo em preparação</span>
+                        <p>A sustentação principal será publicada após seleção e autorização.</p>
                     </div>
                 @endif
             </div>

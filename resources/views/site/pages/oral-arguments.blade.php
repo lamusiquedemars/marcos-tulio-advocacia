@@ -32,7 +32,7 @@
                         />
                     @else
                         <div>
-                            <span class="demo-tag">Vídeo externo</span>
+                            <span class="media-tag">Vídeo externo</span>
                             <a class="button button--primary" href="{{ $featuredVideo->videoSource() }}" target="_blank" rel="noopener noreferrer">
                                 Assistir ao vídeo
                             </a>
@@ -52,7 +52,7 @@
             <div class="split">
                 <div class="video-placeholder">
                     <div>
-                        <span class="demo-tag">Demonstração</span>
+                        <span class="media-tag">Em preparação</span>
                         <h2>Vídeo principal ainda não selecionado</h2>
                         <p>Nenhum vídeo real foi associado sem autorização.</p>
                     </div>
@@ -101,7 +101,7 @@
     >
         @forelse (($defenseExamples ?? collect()) as $defense)
             <article class="defense-case stack stack--md">
-                <span class="demo-tag">Exemplo fictício e anonimizado</span>
+                <span class="media-tag">Conteúdo anonimizado</span>
                 <h3>{{ $defense->title }}</h3>
                 @if ($defense->context)<p>{{ $defense->context }}</p>@endif
                 <dl class="defense-case__details">
@@ -122,7 +122,7 @@
 
     <x-site.section>
         <div class="confidentiality-note">
-            <strong>Importante:</strong> esta demonstração não contém casos reais. A publicação futura dependerá de autorização, anonimização e revisão.
+            <strong>Importante:</strong> os materiais publicados dependem de autorização, anonimização e revisão, em respeito ao sigilo profissional.
         </div>
     </x-site.section>
 @endsection

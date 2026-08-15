@@ -35,21 +35,16 @@ class AppointmentSetting extends Model
                 ]);
             }
 
-            if (config('maracuja.law_firm.demo') && $setting->provider === AppointmentProvider::Brevo) {
-                throw ValidationException::withMessages([
-                    'provider' => 'O provedor Brevo não pode ser ativado enquanto o site estiver em modo demonstração.',
-                ]);
-            }
         });
     }
 
     public static function current(): self
     {
         return static::query()->firstOrCreate([], [
-            'is_enabled' => true,
-            'provider' => AppointmentProvider::Fake,
+            'is_enabled' => false,
+            'provider' => AppointmentProvider::Brevo,
             'mode' => AppointmentMode::AfterReview,
-            'booking_url' => 'https://example.test/agendamento-demo',
+            'booking_url' => null,
             'timezone' => 'America/Cuiaba',
         ]);
     }

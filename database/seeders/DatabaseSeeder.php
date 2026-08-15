@@ -7,15 +7,6 @@ use App\Modules\Appointments\Enums\AppointmentMode;
 use App\Modules\Appointments\Enums\AppointmentProvider;
 use App\Modules\Appointments\Models\AppointmentSetting;
 use App\Modules\ContentSlots\Models\ContentSlot;
-use App\Modules\Inquiries\Enums\InquiryModality;
-use App\Modules\Inquiries\Enums\InquiryPhase;
-use App\Modules\Inquiries\Enums\InquiryRequestType;
-use App\Modules\Inquiries\Enums\InquiryStatus;
-use App\Modules\Inquiries\Enums\InquiryUrgency;
-use App\Modules\Inquiries\Models\Inquiry;
-use App\Modules\OralDefenses\Enums\OralDefenseStatus;
-use App\Modules\OralDefenses\Enums\OralDefenseType;
-use App\Modules\OralDefenses\Models\OralDefense;
 use App\Modules\Pages\Models\Page;
 use App\Modules\SiteSettings\Models\SiteSetting;
 use Illuminate\Database\Seeder;
@@ -29,7 +20,7 @@ class DatabaseSeeder extends Seeder
             User::query()->updateOrCreate([
                 'email' => 'admin@avocat.test',
             ], [
-                'name' => 'Administração Demonstração',
+                'name' => 'Administração',
                 'password' => Hash::make('password'),
                 'is_admin' => true,
             ]);
@@ -38,21 +29,21 @@ class DatabaseSeeder extends Seeder
         SiteSetting::query()->updateOrCreate(['id' => 1], [
             'site_name' => 'Marcos Túlio Advocacia',
             'baseline' => 'Defesa penal em Cuiabá e em todo o Brasil',
-            'default_seo_title' => 'Marcos Túlio Advocacia — Site de demonstração',
-            'default_seo_description' => 'Demonstração fictícia de um site para advocacia criminal, realizada pela Maracuja Digital.',
-            'contact_email' => 'contato-avocat@example.test',
-            'phone' => '+55 (65) 0000-0000',
-            'address' => 'Endereço fictício — Cuiabá, MT',
+            'default_seo_title' => 'Marcos Túlio Advocacia — Advocacia criminal',
+            'default_seo_description' => 'Advocacia criminal em Cuiabá, com atendimento presencial e remoto em todo o Brasil.',
+            'contact_email' => 'marcostulioadvocacia@hotmail.com',
+            'phone' => '+55 (65) 99283-0446',
+            'address' => 'Endereço completo em Cuiabá, MT',
             'social_links' => [],
             'contact_form_send_admin_email' => false,
             'contact_form_send_confirmation_email' => false,
         ]);
 
         AppointmentSetting::query()->updateOrCreate(['id' => 1], [
-            'is_enabled' => true,
-            'provider' => AppointmentProvider::Fake,
+            'is_enabled' => false,
+            'provider' => AppointmentProvider::Brevo,
             'mode' => AppointmentMode::AfterReview,
-            'booking_url' => 'https://example.test/agendamento-demo',
+            'booking_url' => null,
             'timezone' => 'America/Cuiaba',
         ]);
 
@@ -63,7 +54,7 @@ class DatabaseSeeder extends Seeder
                 'group' => 'Início',
                 'type' => 'text',
                 'value' => 'Falar sobre uma urgência',
-                'help_text' => 'Conteúdo fictício a validar antes da produção.',
+                'help_text' => 'Texto do botão principal da página inicial.',
             ],
             [
                 'key' => 'home.hero.secondary_cta_label',
@@ -71,7 +62,7 @@ class DatabaseSeeder extends Seeder
                 'group' => 'Início',
                 'type' => 'text',
                 'value' => 'Apresentar meu caso',
-                'help_text' => 'Conteúdo fictício a validar antes da produção.',
+                'help_text' => 'Texto do botão secundário da página inicial.',
             ],
             [
                 'key' => 'home.intro.title',
@@ -79,7 +70,7 @@ class DatabaseSeeder extends Seeder
                 'group' => 'Início',
                 'type' => 'text',
                 'value' => 'Atuação penal com preparação e presença',
-                'help_text' => 'Conteúdo de demonstração.',
+                'help_text' => 'Título da introdução da página inicial.',
             ],
             [
                 'key' => 'home.intro.text',
@@ -87,14 +78,14 @@ class DatabaseSeeder extends Seeder
                 'group' => 'Início',
                 'type' => 'textarea',
                 'value' => 'Uma base inicial para apresentar a atuação, as sustentações e os caminhos de atendimento.',
-                'help_text' => 'Conteúdo de demonstração.',
+                'help_text' => 'Breve apresentação da atuação do escritório.',
             ],
             [
                 'key' => 'office.collaborator.name',
                 'label' => 'Nome do advogado colaborador',
                 'group' => 'O Escritório',
                 'type' => 'text',
-                'value' => null,
+                'value' => 'Luis Eduardo Oliveira Miranda',
                 'help_text' => 'Deixe vazio para ocultar a apresentação do colaborador no site.',
             ],
             [
@@ -110,8 +101,16 @@ class DatabaseSeeder extends Seeder
                 'label' => 'Apresentação do advogado colaborador',
                 'group' => 'O Escritório',
                 'type' => 'textarea',
-                'value' => null,
+                'value' => 'Inscrito na OAB/MT sob o nº 10.394, Luis Eduardo Oliveira Miranda atua na advocacia criminal desde 2008 e mantém, há alguns anos, uma colaboração profissional com Marcos Túlio em casos da área penal.',
                 'help_text' => 'Breve apresentação profissional, sem sugerir sociedade.',
+            ],
+            [
+                'key' => 'contact.office_hours',
+                'label' => 'Horários de atendimento',
+                'group' => 'Contato',
+                'type' => 'text',
+                'value' => 'Segunda a sexta, mediante agendamento.',
+                'help_text' => 'Horários exibidos na seção “Onde nos encontrar” da página de contato.',
             ],
         ])->each(fn (array $slot) => ContentSlot::query()->updateOrCreate(
             ['key' => $slot['key']],
@@ -124,7 +123,7 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Início',
                 'template' => 'landing',
                 'type' => Page::TYPE_SYSTEM,
-                'excerpt' => 'Site fictício de demonstração realizado pela Maracuja Digital.',
+                'excerpt' => 'Advocacia criminal em Cuiabá, com atendimento presencial e remoto em todo o Brasil.',
                 'hero_title' => 'Marcos Túlio de Melo, advogado criminalista',
                 'hero_subtitle' => 'Defesa penal com atuação estratégica, sigilo profissional e atendimento presencial ou remoto.',
                 'content' => null,
@@ -137,7 +136,7 @@ class DatabaseSeeder extends Seeder
                 'excerpt' => 'Situações em que o escritório pode atuar.',
                 'hero_title' => 'Atuação Penal',
                 'hero_subtitle' => 'Prisão, investigação, processo penal, recursos e consultoria preventiva.',
-                'content' => '<p>Conteúdo inicial de demonstração, a ser desenvolvido e validado.</p>',
+                'content' => '<p>Atuação técnica e estratégica em diferentes etapas da defesa penal.</p>',
             ],
             [
                 'slug' => 'sustentacoes-e-defesas',
@@ -146,93 +145,49 @@ class DatabaseSeeder extends Seeder
                 'type' => Page::TYPE_SYSTEM,
                 'excerpt' => 'Seleção profissional de sustentações e intervenções.',
                 'hero_title' => 'Sustentações e Defesas',
-                'hero_subtitle' => 'Estrutura provisória, sem casos reais nem promessas de resultado.',
-                'content' => '<p>As mídias e defesas autorizadas serão adicionadas em um próximo lote.</p>',
+                'hero_subtitle' => 'Seleção de sustentações orais e intervenções profissionais autorizadas.',
+                'content' => '<p>Materiais profissionais publicados com autorização e respeito ao sigilo.</p>',
             ],
             [
                 'slug' => 'marcos-tulio',
                 'title' => 'O Escritório',
                 'template' => 'profile',
                 'type' => Page::TYPE_SYSTEM,
-                'excerpt' => 'Advogado em Mato Grosso desde 2012, professor, mestre em História e autor.',
+                'excerpt' => 'Advogado em Mato Grosso desde 2012, mestre em História, autor e ex-docente universitário.',
                 'hero_title' => 'O Escritório',
-                'hero_subtitle' => 'Advocacia penal, ensino e comunicação jurídica.',
-                'content' => '<p>Advogado em Mato Grosso desde 2012, mestre em História pela UFMT, professor e autor de O Pacote Anticrime Comentado.</p>',
+                'hero_subtitle' => 'Advocacia penal, trajetória acadêmica e comunicação jurídica.',
+                'content' => '<p>Advogado em Mato Grosso desde 2012, mestre em História pela UFMT, autor de O Pacote Anticrime Comentado e ex-docente de Direito Penal e Processo Penal no UNIVAG.</p>',
             ],
             [
                 'slug' => 'contact',
                 'title' => 'Atendimento e Contato',
                 'template' => 'contact',
                 'type' => Page::TYPE_SYSTEM,
-                'excerpt' => 'Contato de demonstração, sem envio de email real.',
+                'excerpt' => 'Formas de contato e atendimento do escritório.',
                 'hero_title' => 'Atendimento e Contato',
                 'hero_subtitle' => 'Em uma urgência, o contato humano deve permanecer direto.',
                 'content' => null,
             ],
             [
                 'slug' => 'mentions-legales',
-                'title' => 'Aviso legal e demonstração',
+                'title' => 'Aviso legal',
                 'template' => 'default',
                 'type' => Page::TYPE_TEXT,
-                'excerpt' => 'Informações sobre esta demonstração.',
-                'hero_title' => 'Site de demonstração',
-                'hero_subtitle' => 'Projeto fictício realizado pela Maracuja Digital.',
-                'content' => '<p>Este site é uma demonstração comercial realizada pela Maracuja Digital. A identidade, os contatos, o endereço e os conteúdos apresentados são fictícios ou provisórios. Este site não presta aconselhamento jurídico e não recebe casos reais.</p>',
+                'excerpt' => 'Informações legais e condições de uso do site.',
+                'hero_title' => 'Aviso legal',
+                'hero_subtitle' => 'Informações institucionais e condições de uso.',
+                'content' => '<p>As informações deste site têm caráter institucional e informativo. O envio de uma mensagem não cria relação advogado-cliente nem substitui uma consulta jurídica.</p><p>Os dados enviados pelos formulários são utilizados exclusivamente para analisar e responder à solicitação de contato.</p>',
             ],
         ];
 
         foreach ($pages as $page) {
             Page::query()->updateOrCreate(['slug' => $page['slug']], $page + [
-                'seo_title' => $page['title'].' — Demonstração',
+                'seo_title' => $page['title'].' — Marcos Túlio Advocacia',
                 'seo_description' => $page['excerpt'],
                 'is_published' => true,
                 'published_at' => now(),
             ]);
         }
 
-        OralDefense::query()->updateOrCreate([
-            'title' => 'Preparação de sustentação — conteúdo demonstrativo',
-        ], [
-            'type' => OralDefenseType::Video,
-            'context' => 'Registro fictício aguardando um vídeo expressamente autorizado para publicação.',
-            'status' => OralDefenseStatus::Draft,
-            'is_featured' => true,
-            'position' => 10,
-        ]);
-
-        OralDefense::query()->updateOrCreate([
-            'title' => 'Definição da questão central da defesa',
-        ], [
-            'type' => OralDefenseType::Defense,
-            'context' => 'Exemplo inteiramente fictício criado apenas para demonstrar a estrutura editorial.',
-            'initial_situation' => 'Situação hipotética, sem pessoa, processo ou resultado real.',
-            'legal_question' => 'Identificação do ponto jurídico que precisava ser apresentado com clareza.',
-            'strategy' => 'Organização dos argumentos e seleção dos elementos estritamente necessários à exposição.',
-            'intervention' => 'Preparação de uma apresentação objetiva, respeitando os limites éticos e a confidencialidade.',
-            'is_anonymized' => true,
-            'status' => OralDefenseStatus::Published,
-            'is_featured' => false,
-            'position' => 20,
-            'published_at' => now(),
-        ]);
-
-        Inquiry::query()->updateOrCreate([
-            'email' => 'solicitante-ficticio@example.test',
-            'source' => 'demo_seeder',
-        ], [
-            'name' => 'Solicitante Fictício',
-            'phone' => '+55 (65) 00000-0000',
-            'subject' => 'Apresentação de situação',
-            'request_type' => InquiryRequestType::Analysis,
-            'urgency' => InquiryUrgency::UpcomingDeadline,
-            'phase' => InquiryPhase::Investigation,
-            'deadline' => now()->addDays(10)->toDateString(),
-            'location' => 'Cuiabá, MT — dado fictício',
-            'modality' => InquiryModality::Remote,
-            'message' => 'Resumo inteiramente fictício para demonstrar o acompanhamento administrativo.',
-            'consent_at' => now(),
-            'status' => InquiryStatus::New,
-            'internal_notes' => 'Demonstração: não entrar em contato.',
-        ]);
     }
 }

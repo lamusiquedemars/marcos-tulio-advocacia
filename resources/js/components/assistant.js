@@ -79,7 +79,7 @@ export function initAssistant(root = document) {
 
         submit.disabled = true;
         submit.setAttribute('aria-busy', 'true');
-        status.textContent = 'Registrando a solicitação fictícia…';
+        status.textContent = 'Registrando a solicitação…';
 
         try {
             const response = await fetch(assistant.dataset.endpoint, {
