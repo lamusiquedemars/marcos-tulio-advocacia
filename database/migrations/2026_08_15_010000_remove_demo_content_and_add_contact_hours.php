@@ -26,7 +26,14 @@ return new class extends Migration
         DB::table('site_settings')->update([
             'default_seo_title' => 'Marcos Túlio Advocacia — Advocacia criminal',
             'default_seo_description' => 'Advocacia criminal em Cuiabá, com atendimento presencial e remoto em todo o Brasil.',
+            'contact_email' => 'marcostulioadvocacia@hotmail.com',
+            'phone' => '+55 (65) 99283-0446',
             'address' => 'Endereço completo em Cuiabá, MT',
+            'updated_at' => $now,
+        ]);
+
+        DB::table('conversation_settings')->update([
+            'notification_email' => 'marcostulioadvocacia@hotmail.com',
             'updated_at' => $now,
         ]);
 
