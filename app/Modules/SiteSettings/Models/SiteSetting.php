@@ -76,6 +76,13 @@ class SiteSetting extends Model
         return $this->trackedMedia('defaultOgMedia', $this->default_og_media_id)?->url() ?? MediaFiles::url($this->default_og_image_path);
     }
 
+    public function whatsappUrl(): ?string
+    {
+        $number = preg_replace('/\D+/', '', (string) $this->phone);
+
+        return filled($number) ? "https://wa.me/{$number}" : null;
+    }
+
     protected function mediaUsageReferences(): array
     {
         return [

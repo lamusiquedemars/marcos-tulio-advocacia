@@ -13,10 +13,6 @@ return [
         'indexable' => env('MARACUJA_INDEXABLE', false),
     ],
 
-    'law_firm' => [
-        'whatsapp_url' => 'https://wa.me/5565992830446',
-    ],
-
     'assistant' => [
         'provider' => env('MARACUJA_ASSISTANT_PROVIDER', 'fake'),
         'inquiry_retention_days' => env('MARACUJA_INQUIRY_RETENTION_DAYS', 90),

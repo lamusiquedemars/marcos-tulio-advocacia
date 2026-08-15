@@ -75,7 +75,7 @@
                 <span class="pathway-card__label">Contato direto</span>
                 <h2>Prefere conversar pelo WhatsApp?</h2>
                 <p>Para uma conversa direta com o escritório, continue pelo WhatsApp.</p>
-                <x-site.button :href="config('maracuja.law_firm.whatsapp_url')">Abrir WhatsApp</x-site.button>
+                <x-site.button :href="$settings->whatsappUrl()">Abrir WhatsApp</x-site.button>
 
                 @if (($appointmentSettings ?? null)?->canBookDirectly())
                     <div class="contact-direct__secondary">

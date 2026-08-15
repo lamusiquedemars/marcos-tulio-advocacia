@@ -2,7 +2,7 @@
     class="assistant"
     data-assistant
     data-endpoint="{{ route('assistant.inquiry') }}"
-    data-whatsapp="{{ config('maracuja.law_firm.whatsapp_url') }}"
+    data-whatsapp="{{ $settings->whatsappUrl() }}"
 >
     <button class="btn btn--secondary assistant__trigger" type="button" data-assistant-open>
         Explicar minha situação
@@ -20,7 +20,7 @@
         <div class="assistant__safety">
             <strong>Este assistente não é advogado e não fornece aconselhamento jurídico.</strong>
             Não envie documentos, senhas, nomes de terceiros ou um relato completo.
-            <a href="{{ config('maracuja.law_firm.whatsapp_url') }}" rel="nofollow">Em uma urgência, fale diretamente pelo WhatsApp.</a>
+            <a href="{{ $settings->whatsappUrl() }}" rel="nofollow">Em uma urgência, fale diretamente pelo WhatsApp.</a>
         </div>
 
         <form data-assistant-form novalidate>
@@ -44,7 +44,7 @@
                 </div>
                 <p class="assistant__urgent" data-assistant-urgent hidden>
                     Não espere pelo assistente:
-                    <a class="btn btn--primary" href="{{ config('maracuja.law_firm.whatsapp_url') }}" rel="nofollow">Abrir WhatsApp</a>
+                    <a class="btn btn--primary" href="{{ $settings->whatsappUrl() }}" rel="nofollow">Abrir WhatsApp</a>
                 </p>
             </fieldset>
 

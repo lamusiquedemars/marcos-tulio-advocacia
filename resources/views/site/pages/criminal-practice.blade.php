@@ -11,7 +11,7 @@
         :title="$page->hero_title ?? $page->title"
         :subtitle="$page->hero_subtitle ?? $page->excerpt"
         :image="$page->heroImageUrl()"
-        :cta-url="config('maracuja.law_firm.whatsapp_url')"
+        :cta-url="$settings->whatsappUrl()"
         cta-label="Falar sobre uma urgência"
         :secondary-cta-url="route('contact', ['tipo' => 'analise'])"
         secondary-cta-label="Apresentar o caso"
@@ -63,7 +63,7 @@
                 <span class="pathway-card__label">Não pode esperar</span>
                 <h3>Use o contato direto</h3>
                 <p>Em caso de prisão, diligência em andamento ou prazo imediato, não preencha o formulário antes de pedir ajuda.</p>
-                <x-site.button :href="config('maracuja.law_firm.whatsapp_url')">Abrir WhatsApp</x-site.button>
+                <x-site.button :href="$settings->whatsappUrl()">Abrir WhatsApp</x-site.button>
             </article>
             <article class="pathway-card pathway-card--analysis">
                 <span class="pathway-card__label">Pode ser resumido</span>

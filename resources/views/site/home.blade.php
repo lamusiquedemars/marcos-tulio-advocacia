@@ -62,7 +62,7 @@
                 <span class="pathway-card__label">01 · Urgência</span>
                 <h2>Preciso de contato imediato</h2>
                 <p>Para prisão, busca e apreensão, intimação próxima ou outra situação que não pode esperar.</p>
-                <x-site.button :href="config('maracuja.law_firm.whatsapp_url')">Abrir WhatsApp</x-site.button>
+                <x-site.button :href="$settings->whatsappUrl()">Abrir WhatsApp</x-site.button>
             </article>
 
             <article class="pathway-card pathway-card--analysis">

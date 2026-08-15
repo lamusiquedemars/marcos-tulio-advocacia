@@ -25,7 +25,7 @@
 
         <div class="cluster">
             <x-site.button :href="route('contact', ['tipo' => 'consulta'])">Voltar ao atendimento</x-site.button>
-            <x-site.button :href="config('maracuja.law_firm.whatsapp_url')" variant="secondary">Urgência pelo WhatsApp</x-site.button>
+            <x-site.button :href="$settings->whatsappUrl()" variant="secondary">Urgência pelo WhatsApp</x-site.button>
         </div>
     </x-site.section>
 @endsection
