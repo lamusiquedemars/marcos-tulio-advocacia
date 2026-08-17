@@ -9,6 +9,10 @@ return new class extends Migration
 
     public function up(): void
     {
+        if (app()->environment('testing')) {
+            return;
+        }
+
         $this->publishSocialLinks();
 
         foreach ($this->videos() as $position => $video) {

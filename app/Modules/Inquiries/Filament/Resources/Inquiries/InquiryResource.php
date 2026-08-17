@@ -13,6 +13,7 @@ use App\Modules\Inquiries\Enums\InquiryUrgency;
 use App\Modules\Inquiries\Filament\Resources\Inquiries\Pages\ManageInquiries;
 use App\Modules\Inquiries\Models\Inquiry;
 use App\Modules\Inquiries\Support\InquiryReplyLink;
+use App\Support\AdminAccess;
 use App\Support\Modules;
 use BackedEnum;
 use Filament\Actions\Action;
@@ -61,7 +62,10 @@ class InquiryResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('inquiries') && self::hasInquiriesTable() && parent::canAccess();
+        return AdminAccess::allowed()
+            && Modules::enabled('inquiries')
+            && self::hasInquiriesTable()
+            && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

@@ -4,6 +4,7 @@ namespace App\Modules\Conversations\Filament\Resources\ConversationSettings;
 
 use App\Modules\Conversations\Filament\Resources\ConversationSettings\Pages\ManageConversationSettings;
 use App\Modules\Conversations\Models\ConversationSetting;
+use App\Support\AdminAccess;
 use App\Support\Modules;
 use BackedEnum;
 use Filament\Actions\EditAction;
@@ -45,7 +46,7 @@ class ConversationSettingResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('conversations') && parent::canAccess();
+        return AdminAccess::allowed() && Modules::enabled('conversations') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

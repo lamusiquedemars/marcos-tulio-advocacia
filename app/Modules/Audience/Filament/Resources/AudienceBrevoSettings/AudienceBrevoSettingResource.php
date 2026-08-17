@@ -5,6 +5,7 @@ namespace App\Modules\Audience\Filament\Resources\AudienceBrevoSettings;
 use App\Modules\Audience\Filament\Resources\AudienceBrevoSettings\Pages\ManageAudienceBrevoSettings;
 use App\Modules\Audience\Models\AudienceBrevoSetting;
 use App\Modules\Audience\Services\BrevoAudienceService;
+use App\Support\AdminAccess;
 use App\Support\Modules;
 use BackedEnum;
 use Filament\Actions\Action;
@@ -45,7 +46,10 @@ class AudienceBrevoSettingResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('audience') && self::hasBrevoSettingsTable() && parent::canAccess();
+        return AdminAccess::allowed()
+            && Modules::enabled('audience')
+            && self::hasBrevoSettingsTable()
+            && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

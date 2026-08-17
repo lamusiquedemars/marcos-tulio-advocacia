@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\User;
 use App\Modules\Articles\Models\Article;
 use App\Modules\ContentSlots\Models\ContentSlot;
 use App\Modules\Inquiries\Enums\InquiryStatus;
@@ -9,6 +10,7 @@ use App\Modules\Inquiries\Models\Inquiry;
 use App\Modules\News\Models\NewsPost;
 use App\Modules\Pages\Models\Page;
 use App\Support\Modules;
+use Filament\Facades\Filament;
 use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -27,20 +29,25 @@ class AdminOverview extends StatsOverviewWidget
 
     protected function getStats(): array
     {
-        return [
+        $stats = [
             Stat::make('Páginas publicadas', Modules::enabled('pages') ? $this->count(Page::class, 'pages', fn ($query) => $query->where('is_published', true)) : 0)
                 ->description('Páginas visíveis no site')
                 ->icon(Heroicon::OutlinedRectangleStack)
                 ->color('success'),
             Stat::make('Conteúdos para revisar', $this->contentToReviewCount())
-                ->description('Rascunhos, textos curtos ou solicitações pendentes')
+                ->description('Rascunhos e textos curtos')
                 ->icon(Heroicon::OutlinedPencilSquare)
                 ->color('warning'),
-            Stat::make('Solicitações pendentes', $this->inquiriesToHandleCount())
+        ];
+
+        if ($this->isFullAdministrator()) {
+            $stats[] = Stat::make('Solicitações pendentes', $this->inquiriesToHandleCount())
                 ->description('Novas solicitações e acompanhamentos prioritários')
                 ->icon(Heroicon::OutlinedInbox)
-                ->color($this->inquiriesToHandleCount() > 0 ? 'danger' : 'gray'),
-        ];
+                ->color($this->inquiriesToHandleCount() > 0 ? 'danger' : 'gray');
+        }
+
+        return $stats;
     }
 
     private function contentToReviewCount(): int
@@ -59,7 +66,7 @@ class AdminOverview extends StatsOverviewWidget
             $count += $this->count(ContentSlot::class, 'content_slots');
         }
 
-        if (Modules::enabled('inquiries')) {
+        if ($this->isFullAdministrator() && Modules::enabled('inquiries')) {
             $count += $this->inquiriesToHandleCount();
         }
 
@@ -78,6 +85,13 @@ class AdminOverview extends StatsOverviewWidget
                 InquiryStatus::ToHandle->value,
             ])
             ->count();
+    }
+
+    private function isFullAdministrator(): bool
+    {
+        $user = Filament::auth()->user();
+
+        return $user instanceof User && $user->isFullAdministrator();
     }
 
     /**

@@ -6,9 +6,9 @@ use App\Modules\Audience\Actions\CreateSegmentFromContacts;
 use App\Modules\Audience\Filament\Resources\AudienceContacts\Pages\ManageAudienceContacts;
 use App\Modules\Audience\Models\AudienceContact;
 use App\Modules\Audience\Models\AudienceSegment;
+use App\Support\AdminAccess;
 use App\Support\Modules;
 use BackedEnum;
-use UnitEnum;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -29,6 +29,7 @@ use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Facades\Schema as SchemaFacade;
+use UnitEnum;
 
 class AudienceContactResource extends Resource
 {
@@ -53,7 +54,10 @@ class AudienceContactResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('audience') && self::hasAudienceTables() && parent::canAccess();
+        return AdminAccess::allowed()
+            && Modules::enabled('audience')
+            && self::hasAudienceTables()
+            && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

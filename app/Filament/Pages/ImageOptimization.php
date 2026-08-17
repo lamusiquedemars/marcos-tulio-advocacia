@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Support\AdminAccess;
 use App\Support\Images\SiteImageOptimizer;
 use App\Support\Modules;
 use BackedEnum;
@@ -13,9 +14,9 @@ use UnitEnum;
 
 class ImageOptimization extends Page
 {
-    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedPhoto;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Outils';
+    protected static string|UnitEnum|null $navigationGroup = 'Outils';
 
     protected static ?string $navigationLabel = 'Optimisation images';
 
@@ -64,7 +65,9 @@ class ImageOptimization extends Page
 
     public static function canAccess(): bool
     {
-        return Modules::developerToolEnabled('image_optimization') && parent::canAccess();
+        return AdminAccess::allowed()
+            && Modules::developerToolEnabled('image_optimization')
+            && parent::canAccess();
     }
 
     protected function getHeaderActions(): array
@@ -161,9 +164,9 @@ class ImageOptimization extends Page
     public function formatBytes(int $bytes): string
     {
         if ($bytes >= 1024 * 1024) {
-            return number_format($bytes / 1024 / 1024, 2, ',', ' ') . ' Mo';
+            return number_format($bytes / 1024 / 1024, 2, ',', ' ').' Mo';
         }
 
-        return number_format($bytes / 1024, 0, ',', ' ') . ' Ko';
+        return number_format($bytes / 1024, 0, ',', ' ').' Ko';
     }
 }

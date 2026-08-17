@@ -12,10 +12,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'is_admin'])]
+#[Fillable(['name', 'email', 'password', 'is_admin', 'role'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser
 {
+    public const ROLE_CONTENT_EDITOR = 'content_editor';
+
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
@@ -35,6 +37,21 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
+        return $this->isFullAdministrator() || $this->isContentEditor();
+    }
+
+    public function isFullAdministrator(): bool
+    {
         return $this->is_admin === true;
+    }
+
+    public function isContentEditor(): bool
+    {
+        return $this->role === self::ROLE_CONTENT_EDITOR;
+    }
+
+    public function canManageContent(): bool
+    {
+        return $this->isFullAdministrator() || $this->isContentEditor();
     }
 }

@@ -11,6 +11,7 @@ use App\Modules\Conversations\Enums\ConversationStatus;
 use App\Modules\Conversations\Enums\MessageAuthorType;
 use App\Modules\Conversations\Enums\MessageVisibility;
 use App\Modules\Conversations\Mail\ConversationCallbackReceived;
+use App\Modules\Conversations\Models\ConversationSetting;
 use App\Modules\Inquiries\Models\Inquiry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
@@ -109,7 +110,8 @@ class ConversationDomainTest extends TestCase
     public function test_a_consented_contact_creates_one_inquiry_from_a_conversation(): void
     {
         Mail::fake();
-        config()->set('maracuja.conversations.notifications.recipient', 'escritorio@example.test');
+        config()->set('maracuja.conversations.notifications.enabled', true);
+        ConversationSetting::current()->update(['notification_email' => 'escritorio@example.test']);
         $conversation = StartAnonymousConversation::run(locale: 'pt_BR')->conversation;
         $conversation->update(['summary' => 'Pedido inicial de atendimento.']);
 

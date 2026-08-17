@@ -6,6 +6,7 @@ use App\Modules\Appointments\Enums\AppointmentMode;
 use App\Modules\Appointments\Enums\AppointmentProvider;
 use App\Modules\Appointments\Filament\Resources\AppointmentSettings\Pages\ManageAppointmentSettings;
 use App\Modules\Appointments\Models\AppointmentSetting;
+use App\Support\AdminAccess;
 use App\Support\Modules;
 use BackedEnum;
 use Filament\Actions\EditAction;
@@ -40,6 +41,11 @@ class AppointmentSettingResource extends Resource
     public static function shouldRegisterNavigation(): bool
     {
         return Modules::enabled('appointments');
+    }
+
+    public static function canAccess(): bool
+    {
+        return AdminAccess::allowed() && Modules::enabled('appointments') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

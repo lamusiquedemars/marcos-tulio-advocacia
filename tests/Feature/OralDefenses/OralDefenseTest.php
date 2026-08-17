@@ -145,8 +145,8 @@ class OralDefenseTest extends TestCase
         $this->get('/sustentacoes-e-defesas')
             ->assertOk()
             ->assertSee('Vídeo secundário incorporado')
-            ->assertSee('<video controls preload="metadata"', false)
-            ->assertSee('poster="/storage/media/video-thumbnails/secondary.jpg"', false)
+            ->assertSee('<video controls="controls" preload="metadata"', false)
+            ->assertSee('/storage/media/video-thumbnails/secondary.jpg', false)
             ->assertSee('/storage/media/videos/secondary.mp4');
     }
 

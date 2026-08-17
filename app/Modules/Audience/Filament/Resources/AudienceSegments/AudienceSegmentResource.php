@@ -2,13 +2,13 @@
 
 namespace App\Modules\Audience\Filament\Resources\AudienceSegments;
 
-use App\Modules\Audience\Filament\Resources\AudienceSegments\Pages\ManageAudienceSegments;
 use App\Modules\Audience\Filament\Resources\AudienceContacts\AudienceContactResource;
+use App\Modules\Audience\Filament\Resources\AudienceSegments\Pages\ManageAudienceSegments;
 use App\Modules\Audience\Models\AudienceSegment;
 use App\Modules\Audience\Services\BrevoAudienceService;
+use App\Support\AdminAccess;
 use App\Support\Modules;
 use BackedEnum;
-use UnitEnum;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -23,6 +23,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Schema as SchemaFacade;
+use UnitEnum;
 
 class AudienceSegmentResource extends Resource
 {
@@ -47,7 +48,10 @@ class AudienceSegmentResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('audience') && self::hasAudienceTables() && parent::canAccess();
+        return AdminAccess::allowed()
+            && Modules::enabled('audience')
+            && self::hasAudienceTables()
+            && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema
@@ -116,7 +120,7 @@ class AudienceSegmentResource extends Resource
                     ->label('Voir les contacts')
                     ->icon(Heroicon::OutlinedUsers)
                     ->url(fn (AudienceSegment $record): string => AudienceContactResource::getUrl('index')
-                        . '?' . http_build_query([
+                        .'?'.http_build_query([
                             'tableFilters' => [
                                 'segment' => [
                                     'value' => $record->getKey(),
