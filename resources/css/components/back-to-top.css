@@ -19,3 +19,14 @@
     font-size: 1.2rem;
     line-height: 1;
 }
+
+.has-conversation-widget .back-to-top {
+    bottom: calc(max(var(--space-md), env(safe-area-inset-bottom)) + 3.75rem);
+}
+
+@media (max-width: 40rem) {
+    .has-conversation-widget .back-to-top {
+        right: max(var(--space-xs), env(safe-area-inset-right));
+        bottom: calc(max(var(--space-xs), env(safe-area-inset-bottom)) + 3.75rem);
+    }
+}

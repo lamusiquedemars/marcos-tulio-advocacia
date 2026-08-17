@@ -76,7 +76,7 @@
 
 .theme-marcos-tulio .site-brand__mark--image {
     display: block;
-    width: clamp(380px, 34vw, 480px);
+    width: clamp(250px, 27vw, 360px);
     max-width: 100%;
     height: auto;
     flex: 0 1 auto;
@@ -735,7 +735,9 @@
 
     .theme-marcos-tulio .hero--home.hero--image {
         min-height: 40rem;
-        background-position: 82% center;
+        background-position: 78% top;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
     }
 
     .theme-marcos-tulio .hero--home.hero--image::before {
@@ -747,7 +749,7 @@
     }
 
     .theme-marcos-tulio .site-header .site-brand__mark--image {
-        width: min(320px, calc(100vw - 8.5rem));
+        width: clamp(150px, 52vw, 210px);
     }
 
     .theme-marcos-tulio .site-footer__inner {

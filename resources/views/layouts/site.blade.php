@@ -11,6 +11,8 @@
         ]);
         $brandLogo = $settings->logoUrl();
         $clientTheme = config('maracuja.client_theme');
+        $conversationWidgetEnabled = \App\Support\Modules::enabled('conversations')
+            && \App\Modules\Conversations\Models\ConversationSetting::current()->is_enabled;
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,6 +49,7 @@
     'site-shell',
     'theme-' . config('maracuja.theme', 'default'),
     'theme-' . $clientTheme => filled($clientTheme),
+    'has-conversation-widget' => $conversationWidgetEnabled,
 ])>
     @if ($settings->phone || $settings->contact_email)
         <aside class="site-contact-bar" aria-label="Contato direto">
@@ -147,10 +150,7 @@
         <span class="back-to-top__icon" aria-hidden="true">↑</span>
     </button>
 
-    @if (
-        \App\Support\Modules::enabled('conversations')
-        && \App\Modules\Conversations\Models\ConversationSetting::current()->is_enabled
-    )
+    @if ($conversationWidgetEnabled)
         @include('site.partials.conversation-widget')
     @endif
 </body>
