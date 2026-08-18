@@ -1,15 +1,15 @@
-<p>Bonjour,</p>
+<p>Olá,</p>
 
-<p>Nous avons bien reçu votre message envoyé depuis le site.</p>
+<p>Recebemos sua mensagem enviada pelo site.</p>
 
-<p><strong>Votre email :</strong> {{ $messageData->email }}</p>
+<p><strong>Seu email:</strong> {{ $messageData->email }}</p>
 @if ($messageData->name)
-    <p><strong>Nom :</strong> {{ $messageData->name }}</p>
+    <p><strong>Nome:</strong> {{ $messageData->name }}</p>
 @endif
 @if ($messageData->subject)
-    <p><strong>Sujet :</strong> {{ $messageData->subject }}</p>
+    <p><strong>Assunto:</strong> {{ $messageData->subject }}</p>
 @endif
-<p><strong>Message :</strong></p>
+<p><strong>Mensagem:</strong></p>
 <p>{{ $messageData->message }}</p>
 
-<p>Nous revenons vers vous rapidement.</p>
+<p>Entraremos em contato em breve.</p>

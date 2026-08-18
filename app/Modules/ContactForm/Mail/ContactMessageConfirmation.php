@@ -18,7 +18,7 @@ class ContactMessageConfirmation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Confirmation de réception de votre message',
+            subject: 'Confirmação de recebimento da sua mensagem',
         );
     }
 
