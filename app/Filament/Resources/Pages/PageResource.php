@@ -7,6 +7,7 @@ use App\Modules\Media\Filament\Forms\Components\MaracujaRichEditor;
 use App\Modules\Media\Filament\Forms\Components\MediaPicker;
 use App\Modules\Pages\Models\Page;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DateTimePicker;
@@ -46,7 +47,8 @@ class PageResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('pages')
+        return PanelAccess::manageContent()
+            && Modules::enabled('pages')
             && parent::canAccess();
     }
 

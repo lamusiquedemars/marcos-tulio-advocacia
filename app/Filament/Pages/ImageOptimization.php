@@ -2,9 +2,9 @@
 
 namespace App\Filament\Pages;
 
-use App\Support\AdminAccess;
 use App\Support\Images\SiteImageOptimizer;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
@@ -65,7 +65,7 @@ class ImageOptimization extends Page
 
     public static function canAccess(): bool
     {
-        return AdminAccess::allowed()
+        return PanelAccess::administerSite()
             && Modules::developerToolEnabled('image_optimization')
             && parent::canAccess();
     }

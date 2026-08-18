@@ -8,6 +8,7 @@ use App\Filament\Resources\Galleries\Pages\ListGalleries;
 use App\Filament\Resources\Galleries\RelationManagers\ImagesRelationManager;
 use App\Modules\Gallery\Models\Gallery;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -45,7 +46,7 @@ class GalleryResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('gallery') && parent::canAccess();
+        return PanelAccess::manageContent() && Modules::enabled('gallery') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

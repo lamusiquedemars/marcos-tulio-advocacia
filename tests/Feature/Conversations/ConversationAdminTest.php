@@ -69,6 +69,22 @@ class ConversationAdminTest extends TestCase
             ->assertForbidden();
     }
 
+    public function test_client_manager_can_access_conversation_records(): void
+    {
+        $clientManager = User::factory()->create([
+            'is_admin' => false,
+            'role' => User::ROLE_CLIENT_MANAGER,
+        ]);
+        $conversation = StartAnonymousConversation::run()->conversation;
+
+        $this->assertTrue(Gate::forUser($clientManager)->allows('viewAny', Conversation::class));
+        $this->assertTrue(Gate::forUser($clientManager)->allows('view', $conversation));
+
+        $this->actingAs($clientManager)
+            ->get("/admin/conversations/{$conversation->id}")
+            ->assertOk();
+    }
+
     public function test_conversations_cannot_be_deleted_from_the_inbox(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);

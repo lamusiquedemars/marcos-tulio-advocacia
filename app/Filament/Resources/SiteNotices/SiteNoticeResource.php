@@ -5,6 +5,7 @@ namespace App\Filament\Resources\SiteNotices;
 use App\Filament\Resources\SiteNotices\Pages\ManageSiteNotices;
 use App\Modules\Notices\Models\SiteNotice;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -46,7 +47,7 @@ class SiteNoticeResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('notices') && parent::canAccess();
+        return PanelAccess::manageContent() && Modules::enabled('notices') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

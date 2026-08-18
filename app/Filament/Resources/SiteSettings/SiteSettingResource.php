@@ -5,8 +5,8 @@ namespace App\Filament\Resources\SiteSettings;
 use App\Filament\Resources\SiteSettings\Pages\ManageSiteSettings;
 use App\Modules\Media\Filament\Forms\Components\MediaPicker;
 use App\Modules\SiteSettings\Models\SiteSetting;
-use App\Support\AdminAccess;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -46,7 +46,7 @@ class SiteSettingResource extends Resource
 
     public static function canAccess(): bool
     {
-        return AdminAccess::allowed() && Modules::enabled('site_settings') && parent::canAccess();
+        return PanelAccess::administerSite() && Modules::enabled('site_settings') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

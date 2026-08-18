@@ -10,6 +10,7 @@ use App\Modules\OralDefenses\Enums\OralDefenseStatus;
 use App\Modules\OralDefenses\Enums\OralDefenseType;
 use App\Modules\OralDefenses\Models\OralDefense;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -51,7 +52,7 @@ class OralDefenseResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('oral_defenses') && parent::canAccess();
+        return PanelAccess::manageContent() && Modules::enabled('oral_defenses') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

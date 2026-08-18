@@ -5,6 +5,7 @@ namespace App\Filament\Resources\ContentSlots;
 use App\Filament\Resources\ContentSlots\Pages\ManageContentSlots;
 use App\Modules\ContentSlots\Models\ContentSlot;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -45,7 +46,7 @@ class ContentSlotResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('content_slots') && parent::canAccess();
+        return PanelAccess::manageContent() && Modules::enabled('content_slots') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

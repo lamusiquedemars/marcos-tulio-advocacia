@@ -6,8 +6,8 @@ use App\Modules\Audience\Filament\Resources\AudienceContacts\AudienceContactReso
 use App\Modules\Audience\Filament\Resources\AudienceSegments\Pages\ManageAudienceSegments;
 use App\Modules\Audience\Models\AudienceSegment;
 use App\Modules\Audience\Services\BrevoAudienceService;
-use App\Support\AdminAccess;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
@@ -48,7 +48,7 @@ class AudienceSegmentResource extends Resource
 
     public static function canAccess(): bool
     {
-        return AdminAccess::allowed()
+        return PanelAccess::administerSite()
             && Modules::enabled('audience')
             && self::hasAudienceTables()
             && parent::canAccess();

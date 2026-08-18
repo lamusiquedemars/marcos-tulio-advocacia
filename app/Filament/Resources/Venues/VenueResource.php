@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Venues;
 use App\Filament\Resources\Venues\Pages\ManageVenues;
 use App\Modules\Venues\Models\Venue;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -46,7 +47,7 @@ class VenueResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('venues') && parent::canAccess();
+        return PanelAccess::manageContent() && Modules::enabled('venues') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

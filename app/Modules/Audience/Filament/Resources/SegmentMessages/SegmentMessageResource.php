@@ -9,8 +9,8 @@ use App\Modules\Audience\Mail\SegmentMessageMail;
 use App\Modules\Audience\Models\AudienceContact;
 use App\Modules\Audience\Models\SegmentMessage;
 use App\Modules\Media\Filament\Forms\Components\MaracujaRichEditor;
-use App\Support\AdminAccess;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Carbon\CarbonImmutable;
 use Filament\Actions\Action;
@@ -55,7 +55,7 @@ class SegmentMessageResource extends Resource
 
     public static function canAccess(): bool
     {
-        return AdminAccess::allowed()
+        return PanelAccess::administerSite()
             && Modules::enabled('audience')
             && self::hasAudienceTables()
             && parent::canAccess();

@@ -4,8 +4,8 @@ namespace App\Modules\Contacts\Filament\Resources\Contacts;
 
 use App\Modules\Contacts\Filament\Resources\Contacts\Pages\ManageContacts;
 use App\Modules\Contacts\Models\Contact;
-use App\Support\AdminAccess;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
@@ -40,7 +40,7 @@ class ContactResource extends Resource
 
     public static function canAccess(): bool
     {
-        return AdminAccess::allowed() && Modules::enabled('contacts') && parent::canAccess();
+        return PanelAccess::manageClients() && Modules::enabled('contacts') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

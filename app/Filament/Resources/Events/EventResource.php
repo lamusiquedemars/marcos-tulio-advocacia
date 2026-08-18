@@ -3,11 +3,12 @@
 namespace App\Filament\Resources\Events;
 
 use App\Filament\Resources\Events\Pages\ManageEvents;
-use App\Modules\Media\Filament\Forms\Components\MediaPicker;
-use App\Modules\Media\Filament\Forms\Components\MaracujaRichEditor;
 use App\Modules\Events\Models\Event;
+use App\Modules\Media\Filament\Forms\Components\MaracujaRichEditor;
+use App\Modules\Media\Filament\Forms\Components\MediaPicker;
 use App\Modules\Venues\Models\Venue;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -51,7 +52,7 @@ class EventResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('events') && parent::canAccess();
+        return PanelAccess::manageContent() && Modules::enabled('events') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

@@ -18,6 +18,8 @@ class User extends Authenticatable implements FilamentUser
 {
     public const ROLE_CONTENT_EDITOR = 'content_editor';
 
+    public const ROLE_CLIENT_MANAGER = 'client_manager';
+
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
@@ -37,7 +39,9 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->isFullAdministrator() || $this->isContentEditor();
+        return $this->isFullAdministrator()
+            || $this->isContentEditor()
+            || $this->isClientManager();
     }
 
     public function isFullAdministrator(): bool
@@ -50,8 +54,18 @@ class User extends Authenticatable implements FilamentUser
         return $this->role === self::ROLE_CONTENT_EDITOR;
     }
 
+    public function isClientManager(): bool
+    {
+        return $this->role === self::ROLE_CLIENT_MANAGER;
+    }
+
     public function canManageContent(): bool
     {
         return $this->isFullAdministrator() || $this->isContentEditor();
+    }
+
+    public function canManageClients(): bool
+    {
+        return $this->isFullAdministrator() || $this->isClientManager();
     }
 }

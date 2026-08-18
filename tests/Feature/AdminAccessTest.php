@@ -61,6 +61,36 @@ class AdminAccessTest extends TestCase
         }
     }
 
+    public function test_client_manager_can_access_client_resources(): void
+    {
+        $clientManager = User::factory()->create([
+            'is_admin' => false,
+            'role' => User::ROLE_CLIENT_MANAGER,
+        ]);
+
+        foreach (['/admin', '/admin/inquiries', '/admin/contacts', '/admin/conversations'] as $path) {
+            $this->actingAs($clientManager)->get($path)->assertOk();
+        }
+    }
+
+    public function test_client_manager_cannot_access_content_or_configuration(): void
+    {
+        $clientManager = User::factory()->create([
+            'is_admin' => false,
+            'role' => User::ROLE_CLIENT_MANAGER,
+        ]);
+
+        foreach ([
+            '/admin/pages',
+            '/admin/media-assets',
+            '/admin/site-settings',
+            '/admin/appointment-settings',
+            '/admin/conversation-settings',
+        ] as $path) {
+            $this->actingAs($clientManager)->get($path)->assertForbidden();
+        }
+    }
+
     public function test_admin_user_can_open_portuguese_inquiries_resource(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);

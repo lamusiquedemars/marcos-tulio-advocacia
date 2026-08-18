@@ -7,8 +7,8 @@ use App\Modules\Conversations\Enums\ConversationUrgency;
 use App\Modules\Conversations\Filament\Resources\Conversations\Pages\ListConversations;
 use App\Modules\Conversations\Filament\Resources\Conversations\Pages\ViewConversation;
 use App\Modules\Conversations\Models\Conversation;
-use App\Support\AdminAccess;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Resource;
@@ -42,7 +42,7 @@ class ConversationResource extends Resource
 
     public static function canAccess(): bool
     {
-        return AdminAccess::allowed() && Modules::enabled('conversations') && parent::canAccess();
+        return PanelAccess::manageClients() && Modules::enabled('conversations') && parent::canAccess();
     }
 
     public static function table(Table $table): Table

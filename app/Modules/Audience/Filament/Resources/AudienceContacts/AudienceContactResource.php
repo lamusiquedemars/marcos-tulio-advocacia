@@ -6,8 +6,8 @@ use App\Modules\Audience\Actions\CreateSegmentFromContacts;
 use App\Modules\Audience\Filament\Resources\AudienceContacts\Pages\ManageAudienceContacts;
 use App\Modules\Audience\Models\AudienceContact;
 use App\Modules\Audience\Models\AudienceSegment;
-use App\Support\AdminAccess;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
@@ -54,7 +54,7 @@ class AudienceContactResource extends Resource
 
     public static function canAccess(): bool
     {
-        return AdminAccess::allowed()
+        return PanelAccess::administerSite()
             && Modules::enabled('audience')
             && self::hasAudienceTables()
             && parent::canAccess();

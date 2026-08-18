@@ -7,6 +7,7 @@ use App\Modules\Media\Filament\Forms\Components\MaracujaRichEditor;
 use App\Modules\Media\Filament\Forms\Components\MediaPicker;
 use App\Modules\News\Models\NewsPost;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -48,7 +49,7 @@ class NewsPostResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('news') && parent::canAccess();
+        return PanelAccess::manageContent() && Modules::enabled('news') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

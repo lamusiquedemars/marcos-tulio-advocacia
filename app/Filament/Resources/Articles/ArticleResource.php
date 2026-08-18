@@ -8,6 +8,7 @@ use App\Modules\Media\Filament\Forms\Components\MaracujaRichEditor;
 use App\Modules\Media\Filament\Forms\Components\MediaIdSelect;
 use App\Modules\Media\Filament\Forms\Components\MediaPicker;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -51,7 +52,7 @@ class ArticleResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Modules::enabled('articles') && parent::canAccess();
+        return PanelAccess::manageContent() && Modules::enabled('articles') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema

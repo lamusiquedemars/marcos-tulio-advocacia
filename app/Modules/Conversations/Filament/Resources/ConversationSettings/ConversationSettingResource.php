@@ -4,8 +4,8 @@ namespace App\Modules\Conversations\Filament\Resources\ConversationSettings;
 
 use App\Modules\Conversations\Filament\Resources\ConversationSettings\Pages\ManageConversationSettings;
 use App\Modules\Conversations\Models\ConversationSetting;
-use App\Support\AdminAccess;
 use App\Support\Modules;
+use App\Support\PanelAccess;
 use BackedEnum;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\CheckboxList;
@@ -46,7 +46,7 @@ class ConversationSettingResource extends Resource
 
     public static function canAccess(): bool
     {
-        return AdminAccess::allowed() && Modules::enabled('conversations') && parent::canAccess();
+        return PanelAccess::administerSite() && Modules::enabled('conversations') && parent::canAccess();
     }
 
     public static function form(Schema $schema): Schema
