@@ -53,7 +53,7 @@
 
     <x-site.section
         id="atendimento"
-        title="Como podemos orientar o primeiro contato"
+        title="Como o escritório pode orientar o primeiro contato"
         intro="Escolha entre contato imediato, apresentação inicial da situação ou solicitação de consulta."
         heading-variant="accent"
     >
@@ -88,7 +88,7 @@
     <x-site.section
         variant="muted"
         title="Atuação penal"
-        intro="Conheça as áreas em que concentro minha atuação na defesa penal."
+        intro="Conheça as áreas de atuação do escritório na defesa penal."
         heading-variant="underline"
     >
         <div class="practice-grid">
@@ -116,7 +116,7 @@
 
     <x-site.section
         title="Sustentação oral: preparação e presença"
-        intro="Veja como preparo e apresento os fundamentos da defesa perante os tribunais."
+        intro="Conheça a preparação e a apresentação dos fundamentos da defesa perante os tribunais."
         heading-variant="accent"
     >
         <div class="split">
