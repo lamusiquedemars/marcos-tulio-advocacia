@@ -37,7 +37,7 @@
             <article class="authority-card">
                 <span class="practice-card__label">Advocacia</span>
                 <h3>Defesa penal</h3>
-                <p>Atuação desde [ANO] em [PRINCIPAIS ÁREAS DA ADVOCACIA CRIMINAL].</p>
+                <p>Atuação desde 2012 em defesa criminal, com histórico de relaxamentos de flagrante, revogações de prisão preventiva e êxito em habeas corpus, seja restituindo a liberdade, seja trancando inquérito ou ação penal. Atuação perante o Tribunal do Júri e tribunais superiores, somando conquistas de absolvições e recuperação de liberdade em múltiplas dezenas de crimes.</p>
             </article>
             <article class="authority-card">
                 <span class="practice-card__label">Experiência acadêmica</span>
@@ -186,24 +186,24 @@
 
     <x-site.section
         title="Como funciona o atendimento"
-        intro="Cada situação exige uma análise própria. O percurso abaixo será detalhado com o escritório."
+        intro="Cada situação exige uma análise própria. Conheça as etapas do atendimento."
         heading-variant="accent"
     >
         <div class="process-grid">
             <article class="process-step">
                 <span class="process-step__number">01</span>
                 <h3>Contato inicial</h3>
-                <p>[DESCREVER OS CANAIS E A FORMA DE RECEPÇÃO DO PRIMEIRO CONTATO.]</p>
+                <p>Envio de mensagem rápida via WhatsApp ou preenchimento do formulário no site, onde você relata os pontos principais do seu caso com total sigilo.</p>
             </article>
             <article class="process-step">
                 <span class="process-step__number">02</span>
                 <h3>Análise da situação</h3>
-                <p>[DESCREVER COMO A SOLICITAÇÃO É ANALISADA E QUAIS INFORMAÇÕES SÃO NECESSÁRIAS.]</p>
+                <p>Exame técnico preliminar dos fatos apresentados, de eventual documentação e exposição dos fundamentos jurídicos aplicáveis.</p>
             </article>
             <article class="process-step">
                 <span class="process-step__number">03</span>
                 <h3>Definição do atendimento</h3>
-                <p>[DESCREVER COMO SÃO DEFINIDOS A CONSULTA E OS PRÓXIMOS PASSOS.]</p>
+                <p>Agendamento de uma consulta estratégica gratuita, online ou presencial, para alinhar a tese jurídica, apresentar os próximos passos e definir a proposta de atuação.</p>
             </article>
         </div>
     </x-site.section>
