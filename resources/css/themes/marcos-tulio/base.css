@@ -198,6 +198,28 @@
     padding: var(--space-lg);
 }
 
+.theme-marcos-tulio .profile-bio {
+    align-items: start;
+    display: grid;
+    gap: clamp(var(--space-lg), 4vw, var(--space-2xl));
+    grid-template-columns: minmax(0, 1fr) minmax(11rem, 0.32fr);
+}
+
+.theme-marcos-tulio .profile-bio__portrait {
+    justify-self: end;
+    margin: var(--space-xs) 0 0;
+    max-width: 14rem;
+    width: 100%;
+}
+
+.theme-marcos-tulio .profile-bio__portrait img {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
 .theme-marcos-tulio .site-footer .site-brand__mark--image {
     width: min(320px, 100%);
     padding: 0.5rem 0.75rem;
@@ -762,6 +784,16 @@
 
     .theme-marcos-tulio .contact-details-grid {
         grid-template-columns: 1fr;
+    }
+
+    .theme-marcos-tulio .profile-bio {
+        grid-template-columns: 1fr;
+    }
+
+    .theme-marcos-tulio .profile-bio__portrait {
+        justify-self: start;
+        margin-top: 0;
+        max-width: 11rem;
     }
 
     .theme-marcos-tulio .site-footer__bottom {

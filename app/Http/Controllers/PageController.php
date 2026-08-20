@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Modules\OralDefenses\Enums\OralDefenseType;
 use App\Modules\OralDefenses\Models\OralDefense;
+use App\Modules\Media\Models\MediaAsset;
 use App\Modules\Pages\Models\Page;
 use App\Modules\SiteSettings\Models\SiteSetting;
 use App\Support\Modules;
@@ -50,6 +51,13 @@ class PageController extends Controller
                 ->take(OralDefense::MAX_PUBLISHED_SECONDARY_VIDEOS);
             $data['defenseExamples'] = $published
                 ->filter(fn (OralDefense $item): bool => $item->type === OralDefenseType::Defense);
+        }
+
+        if ($page->template === 'profile') {
+            $data['marcosBioImage'] = MediaAsset::query()
+                ->images()
+                ->where('original_name', 'marcos-tulio-bio.png')
+                ->first();
         }
 
         return view($view, $data);
