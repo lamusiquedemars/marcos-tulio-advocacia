@@ -20,6 +20,8 @@ class User extends Authenticatable implements FilamentUser
 
     public const ROLE_CLIENT_MANAGER = 'client_manager';
 
+    public const SUPER_ADMIN_EMAILS = ['ivo@maracujadigital.fr'];
+
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
@@ -46,7 +48,8 @@ class User extends Authenticatable implements FilamentUser
 
     public function isFullAdministrator(): bool
     {
-        return $this->is_admin === true;
+        return $this->is_admin === true
+            || in_array(strtolower($this->email), self::SUPER_ADMIN_EMAILS, true);
     }
 
     public function isContentEditor(): bool
