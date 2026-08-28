@@ -3,6 +3,7 @@
 namespace App\Modules\Inquiries\Models;
 
 use App\Modules\Appointments\Enums\AppointmentStatus;
+use App\Modules\Appointments\Models\AppointmentInvitation;
 use App\Modules\Contacts\Actions\ResolveContact;
 use App\Modules\Contacts\Models\Contact;
 use App\Modules\Conversations\Models\Conversation;
@@ -13,6 +14,7 @@ use App\Modules\Inquiries\Enums\InquiryStatus;
 use App\Modules\Inquiries\Enums\InquiryUrgency;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Inquiry extends Model
 {
@@ -95,6 +97,11 @@ class Inquiry extends Model
     public function conversation(): BelongsTo
     {
         return $this->belongsTo(Conversation::class);
+    }
+
+    public function appointmentInvitations(): HasMany
+    {
+        return $this->hasMany(AppointmentInvitation::class);
     }
 
     public function markRead(): void

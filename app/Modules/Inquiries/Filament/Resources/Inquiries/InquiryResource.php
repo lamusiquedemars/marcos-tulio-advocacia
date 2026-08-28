@@ -3,7 +3,10 @@
 namespace App\Modules\Inquiries\Filament\Resources\Inquiries;
 
 use App\Modules\Appointments\Enums\AppointmentStatus;
+use App\Modules\Appointments\Enums\AppointmentInvitationType;
+use App\Modules\Appointments\Models\AppointmentInvitation;
 use App\Modules\Appointments\Models\AppointmentSetting;
+use App\Modules\Appointments\Support\AppointmentInvitationDeliveryLink;
 use App\Modules\Audience\Actions\CreateContactFromInquiry;
 use App\Modules\Inquiries\Enums\InquiryModality;
 use App\Modules\Inquiries\Enums\InquiryPhase;
@@ -269,19 +272,67 @@ class InquiryResource extends Resource
                             ->success()
                             ->send();
                     }),
-                Action::make('openBooking')
-                    ->label('Abrir agendamento')
+                Action::make('sendBookingInvitation')
+                    ->label('Enviar convite privado')
                     ->icon(Heroicon::OutlinedCalendarDays)
-                    ->visible(fn (): bool => self::appointmentBookingAvailable())
-                    ->action(function (Inquiry $record) {
+                    ->visible(fn (): bool => self::appointmentInvitationAvailable())
+                    ->form([
+                        Select::make('type')
+                            ->label('Tipo de consulta')
+                            ->options(self::enumOptions(AppointmentInvitationType::cases()))
+                            ->default(AppointmentInvitationType::Online->value)
+                            ->required(),
+                        Select::make('channel')
+                            ->label('Enviar por')
+                            ->options([
+                                'email' => 'E-mail',
+                                'whatsapp' => 'WhatsApp',
+                            ])
+                            ->default('email')
+                            ->required(),
+                    ])
+                    ->modalHeading('Enviar convite privado de agendamento')
+                    ->modalDescription('O site cria um link válido por 7 dias. Brevo não recebe o resumo do caso.')
+                    ->action(function (Inquiry $record, array $data) {
                         $setting = AppointmentSetting::current();
+                        $type = AppointmentInvitationType::from($data['type']);
+                        $bookingUrl = $setting->bookingUrlFor($type);
+
+                        if (blank($bookingUrl)) {
+                            Notification::make()
+                                ->title('Link Brevo não configurado')
+                                ->body('Configure o link para este tipo de consulta em Atendimento > Agendamento.')
+                                ->danger()
+                                ->send();
+
+                            return;
+                        }
+
+                        if ($data['channel'] === 'whatsapp' && blank(preg_replace('/\D+/', '', (string) $record->phone))) {
+                            Notification::make()
+                                ->title('Telefone indisponível')
+                                ->body('Escolha E-mail ou complete o telefone da solicitação antes de usar WhatsApp.')
+                                ->danger()
+                                ->send();
+
+                            return;
+                        }
+
+                        [$invitation, $token] = AppointmentInvitation::issue($record, $type, $bookingUrl);
+                        $invitationUrl = route('appointments.invitation.show', ['token' => $token]);
+
                         $record->update([
                             'appointment_status' => AppointmentStatus::BookingOpened,
                             'booking_opened_at' => now(),
                             'appointment_timezone' => $setting->timezone,
                         ]);
+                        $record->moveTo(InquiryStatus::WaitingCustomer);
 
-                        return redirect()->away($setting->booking_url);
+                        $deliveryUrl = $data['channel'] === 'whatsapp'
+                            ? AppointmentInvitationDeliveryLink::whatsapp($record, $type, $invitationUrl)
+                            : AppointmentInvitationDeliveryLink::mailto($record, $type, $invitationUrl);
+
+                        return redirect()->away($deliveryUrl);
                     }),
                 ActionGroup::make([
                     Action::make('markRead')
@@ -370,11 +421,13 @@ class InquiryResource extends Resource
             ->all();
     }
 
-    private static function appointmentBookingAvailable(): bool
+    private static function appointmentInvitationAvailable(): bool
     {
         $setting = AppointmentSetting::current();
 
-        return $setting->is_enabled && filled($setting->booking_url);
+        return $setting->is_enabled
+            && ($setting->bookingUrlFor(AppointmentInvitationType::Online) !== null
+                || $setting->bookingUrlFor(AppointmentInvitationType::InPerson) !== null);
     }
 
     private static function mailtoUrl(Inquiry $record): string

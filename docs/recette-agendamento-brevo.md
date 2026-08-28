@@ -36,12 +36,14 @@ du cabinet, sans transmettre à Brevo le récit juridique du dossier.
 
 ## Cas nominal E2E-AGD-001
 
-1. Ouvrir la page `/contact` dans une fenêtre privée.
-2. Vérifier la présence de `Agendamento direto disponível` et du bouton
-   `Ver horários disponíveis`.
-3. Cliquer sur le bouton.
-4. Vérifier que `/agendamento` s'affiche sans erreur 503 et que l'interface de
-   réservation est en portugais.
+1. Créer une demande de test dans le site, puis l'ouvrir dans
+   `Atendimento > Solicitações recebidas`.
+2. Choisir `Enviar convite privado`, le type `Consulta online` et l'envoi par
+   e-mail. Vérifier que le client de messagerie s'ouvre avec un lien du domaine
+   `marcostulioadvocacia.com.br` et sans résumé juridique.
+3. Ouvrir ce lien dans une fenêtre privée.
+4. Vérifier que l'interface Brevo est incorporée, sans erreur 503 ni login, et
+   que son contenu est en portugais.
 5. Vérifier le type de rendez-vous, la durée, le fuseau et les créneaux.
 6. Choisir le créneau de recette.
 7. Saisir uniquement les données de test ci-dessus et confirmer.
@@ -79,8 +81,8 @@ du cabinet, sans transmettre à Brevo le récit juridique du dossier.
 
 | Contrôle | Attendu | Obtenu | Preuve | Statut |
 |---|---|---|---|---|
-| Départ depuis `/contact` | bouton visible |  | capture/URL | À faire |
-| Page `/agendamento` | interface Brevo en portugais |  | capture | À faire |
+| Invitation privée | lien du domaine du cabinet, 7 jours |  | capture/URL | À faire |
+| Page invitation | interface Brevo en portugais |  | capture | À faire |
 | Confirmation navigateur | réservation confirmée |  | capture | À faire |
 | Brevo Meetings | rendez-vous unique |  | capture/ID | À faire |
 | Contact Brevo | contact de recette présent |  | capture/ID | À faire |
@@ -105,13 +107,14 @@ une capture et l'étape exacte de reproduction.
 - remettre la configuration de l'environnement dans son état initial ;
 - ne pas supprimer les preuves avant la clôture de la recette.
 
-## État technique constaté le 28 juillet 2026
+## État technique constaté le 28 août 2026
 
-- les tests fonctionnels existants couvrent uniquement le fournisseur factice ;
+- les tests fonctionnels couvrent la page d'invitation privée, son expiration et
+  les liens spécifiques par type ;
 - le mode démonstration est actif localement et dans l'exemple de production ;
 - l'envoi email applicatif est configuré sur le transport `log` ;
-- le contrôleur `/agendamento` renvoie volontairement une erreur 503 lorsque le
-  fournisseur est `brevo` ;
+- le contrôleur public `/agendamento` reste volontairement indisponible pour le
+  fournisseur `brevo` ; le parcours réel passe par une invitation privée ;
 - aucun traitement de webhook Meetings (`booked`, `started`, `cancelled`) n'est
   encore présent dans le module Appointments.
 

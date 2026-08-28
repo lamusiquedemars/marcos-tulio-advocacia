@@ -66,10 +66,22 @@ class AppointmentSettingResource extends Resource
                         ->options(self::modeOptions())
                         ->required(),
                     TextInput::make('booking_url')
-                        ->label('Link da página de agendamento')
+                        ->label('Link padrão de agendamento (opcional)')
                         ->url()
                         ->maxLength(2048)
-                        ->helperText('Copie o link em Brevo: Conversas > Meetings. Nenhum dado do caso será acrescentado à URL.')
+                        ->helperText('Usado apenas como fallback. Prefira os links específicos abaixo.')
+                        ->columnSpanFull(),
+                    TextInput::make('online_booking_url')
+                        ->label('Link Brevo — consulta online')
+                        ->url()
+                        ->maxLength(2048)
+                        ->helperText('Link do tipo “Consulta inicial online” no Brevo. Nenhum dado do caso será acrescentado à URL.')
+                        ->columnSpanFull(),
+                    TextInput::make('in_person_booking_url')
+                        ->label('Link Brevo — consulta presencial')
+                        ->url()
+                        ->maxLength(2048)
+                        ->helperText('Link do tipo “Consulta presencial” no Brevo. O site só o entrega após análise.')
                         ->columnSpanFull(),
                     TextInput::make('timezone')
                         ->label('Fuso horário profissional')
