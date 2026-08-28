@@ -42,7 +42,7 @@
             <article class="authority-card">
                 <span class="practice-card__label">Experiência acadêmica</span>
                 <h3>Dez anos de docência</h3>
-                <p>Foi docente de Direito Penal e Processo Penal no UNIVAG, em Várzea Grande.</p>
+                <p>Foi docente de Direito Penal e Processo Penal durante dez anos na UNIVAG, em Várzea Grande, Mato Grosso, e ministra pontualmente cursos e masterclasses nessas áreas.</p>
             </article>
         </div>
 

@@ -19,12 +19,16 @@ use Illuminate\View\View;
 
 class ContactController extends Controller
 {
-    public function create(): View
+    public function create(Request $request): View
     {
         abort_unless(Modules::enabled('contact_form'), 404);
 
+        $requestType = $request->query('tipo');
+        $requestType = in_array($requestType, ['analise', 'consulta'], true) ? $requestType : 'outro';
+
         return view('site.contact', [
             'settings' => SiteSetting::current(),
+            'requestType' => $requestType,
             'page' => Modules::enabled('pages')
                 ? Page::query()->where('slug', 'contact')->where('is_published', true)->first()
                 : null,
