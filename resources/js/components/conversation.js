@@ -25,6 +25,8 @@ function whatsappDestination(url) {
     return { phone, url: webUrl.toString() };
 }
 
+import { trackAcquisitionEvent } from './acquisition';
+
 export function initConversation(root = document) {
     const widget = root.querySelector('[data-conversation-widget]');
 
@@ -51,12 +53,14 @@ export function initConversation(root = document) {
         const conversation = payload.conversation;
         const whatsappUrl = conversation?.whatsapp_url ?? payload.whatsapp_url;
         const inquiryCreated = Boolean(conversation?.inquiry_created);
+        const wasInquiryCreated = !completed.hidden;
         const acceptingMessages = conversation === null
             || Boolean(conversation?.accepting_messages);
 
         status.textContent = '';
         form.hidden = inquiryCreated || !acceptingMessages;
         completed.hidden = !inquiryCreated;
+        if (inquiryCreated && !wasInquiryCreated) trackAcquisitionEvent('chat_contact_request');
         whatsapp.hidden = !whatsappUrl;
         callback.hidden = !conversation?.callback_enabled
             || conversation?.collecting_contact
@@ -90,6 +94,8 @@ export function initConversation(root = document) {
         input.focus();
 
         if (loaded) return;
+
+        trackAcquisitionEvent('chat_start');
 
         status.textContent = 'Carregando…';
         try {

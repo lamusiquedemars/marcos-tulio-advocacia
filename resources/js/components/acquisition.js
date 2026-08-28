@@ -92,6 +92,7 @@ function decorateForms(root, attribution) {
 
 export function trackAcquisitionEvent(event, parameters = {}) {
     if (!eventNames.has(event)) return false;
+    if (window.MaracujaAcquisitionConfig?.analyticsConsent !== true) return false;
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event, ...sanitizeEventParameters(parameters) });
@@ -109,7 +110,9 @@ export function initAcquisition(root = document) {
         last_touch: currentTouch,
     };
 
-    if (!config.consentEnabled) attribution = persistAttribution(currentTouch);
+    if (!config.consentEnabled || config.analyticsConsent === true || config.marketingConsent === true) {
+        attribution = persistAttribution(currentTouch);
+    }
 
     window.addEventListener('maracuja:consent-updated', (event) => {
         if (event.detail?.analytics === true || event.detail?.marketing === true) {
@@ -122,5 +125,31 @@ export function initAcquisition(root = document) {
         attribution: () => structuredClone(attribution),
         allowedEvents: () => [...eventNames],
     };
+
+    (window.MaracujaAcquisitionPendingEvents || []).forEach(({ event, parameters }) => {
+        trackAcquisitionEvent(event, parameters);
+    });
+    window.MaracujaAcquisitionPendingEvents = [];
+
+    document.addEventListener('click', (event) => {
+        const link = event.target.closest('a[href]');
+        if (!link) return;
+
+        const href = link.getAttribute('href') || '';
+        if (href.startsWith('tel:')) {
+            trackAcquisitionEvent('phone_click');
+            return;
+        }
+
+        if (/^https:\/\/(wa\.me|web\.whatsapp\.com)\b/i.test(href)) {
+            trackAcquisitionEvent('whatsapp_click');
+            return;
+        }
+
+        if (new URL(href, window.location.origin).pathname === '/agendamento') {
+            trackAcquisitionEvent('appointment_request');
+        }
+    });
+
     decorateForms(root, () => attribution);
 }

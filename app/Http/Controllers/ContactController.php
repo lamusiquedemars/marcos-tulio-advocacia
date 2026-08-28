@@ -115,6 +115,7 @@ class ContactController extends Controller
 
         return redirect()
             ->route('contact')
-            ->with('status', 'Sua solicitação foi recebida. O escritório entrará em contato pelo canal informado.');
+            ->with('status', 'Sua solicitação foi recebida. O escritório entrará em contato pelo canal informado.')
+            ->with('acquisition_generate_lead', true);
     }
 }

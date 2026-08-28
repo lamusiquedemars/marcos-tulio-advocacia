@@ -49,4 +49,14 @@
             });
         })();
     </script>
+
+    @if (session('acquisition_generate_lead'))
+        <script>
+            window.MaracujaAcquisitionPendingEvents = window.MaracujaAcquisitionPendingEvents || [];
+            window.MaracujaAcquisitionPendingEvents.push({
+                event: 'generate_lead',
+                parameters: { form: 'contact' },
+            });
+        </script>
+    @endif
 @endif

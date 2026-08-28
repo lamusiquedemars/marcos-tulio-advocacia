@@ -60,6 +60,29 @@ class AcquisitionAttributionTest extends TestCase
             ->assertSee('marketing: false', false);
     }
 
+    public function test_successful_contact_queues_an_anonymous_google_lead_event_for_the_next_page(): void
+    {
+        AcquisitionSetting::current()->update([
+            'is_enabled' => true,
+            'gtm_container_id' => 'GTM-TEST123',
+            'consent_enabled' => true,
+        ]);
+
+        $this->post('/contact', [
+            'name' => 'Contato de teste',
+            'email' => 'contato@example.test',
+            'request_type' => 'consulta',
+            'message' => 'Solicitação de teste sem dados reais.',
+            'consent' => '1',
+        ])->assertRedirect('/contact');
+
+        $this->get('/contact')
+            ->assertOk()
+            ->assertSee("event: 'generate_lead'", false)
+            ->assertSee("parameters: { form: 'contact' }", false)
+            ->assertDontSee('contato@example.test');
+    }
+
     public function test_contact_form_keeps_safe_first_and_last_touch_attribution(): void
     {
         $attribution = [

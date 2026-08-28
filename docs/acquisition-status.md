@@ -34,7 +34,7 @@
 | 4 | fait en production | ID GTM configuré ; bannière portugaise déployée, consentement `basic` et absence de chargement direct vérifiés. | Tester le refus et l’acceptation dans un navigateur avant publication GTM. |
 | 5 | fait | Propriété GA4 et flux Web créés par Maracuja. | Ajouter Marcos administrateur GA4 dès qu’il est disponible. |
 | 6 | en cours | Balise GA4 créée dans GTM, non publiée ; aucun tag Analytics ne collecte encore de données. | Prévisualiser GTM après le test du consentement, puis publier uniquement avec accord. |
-| 7 | à préparer | Événements prévus : WhatsApp, téléphone, formulaire, consultation et chatbot. | Définir les conditions de succès et données autorisées. |
+| 7 | fait localement | Événements anonymes instrumentés : WhatsApp, téléphone, intention de rendez-vous, formulaire enregistré et demande de rappel chatbot. | Vérifier les signaux dans GTM Preview après consentement. |
 | 8 | à préparer | Aucun événement clé confirmé. | Marquer les événements validés dans GA4. |
 | 9 | à préparer | Aucune association Search Console ↔ GA4 confirmée. | Créer l’association après les étapes 2 et 5. |
 | 10 | en cours | Compte Ads créé ; rattachement MCC envoyé mais bloqué par la vérification d’identité. | Marcos vérifie son identité puis accepte le rattachement. |

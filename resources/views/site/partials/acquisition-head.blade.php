@@ -39,6 +39,9 @@
             const analyticsGranted = choice?.analytics === true;
             const marketingGranted = choice?.marketing === true;
 
+            window.MaracujaAcquisitionConfig.analyticsConsent = analyticsGranted;
+            window.MaracujaAcquisitionConfig.marketingConsent = marketingGranted;
+
             window.maracujaGtag('consent', 'update', {
                 analytics_storage: analyticsGranted ? 'granted' : 'denied',
                 ad_storage: marketingGranted ? 'granted' : 'denied',
