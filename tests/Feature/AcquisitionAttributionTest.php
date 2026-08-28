@@ -72,6 +72,7 @@ class AcquisitionAttributionTest extends TestCase
             'name' => 'Contato de teste',
             'email' => 'contato@example.test',
             'request_type' => 'consulta',
+            'modality' => 'remoto',
             'message' => 'Solicitação de teste sem dados reais.',
             'consent' => '1',
         ])->assertRedirect('/contact');
@@ -136,6 +137,7 @@ class AcquisitionAttributionTest extends TestCase
             'name' => 'Contato integrado',
             'email' => 'integrado@example.test',
             'request_type' => 'consulta',
+            'modality' => 'presencial',
             'urgency' => 'prazo_proximo',
             'deadline' => '2026-09-01',
             'message' => 'Mensagem armazenada localmente antes do envio.',

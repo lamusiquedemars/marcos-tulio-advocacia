@@ -7,20 +7,19 @@
 @section('content')
     @php
         $isConsultationRequest = ($requestType ?? 'outro') === 'consulta';
-        $isAnalysisRequest = ($requestType ?? 'outro') === 'analise';
     @endphp
 
     <x-site.hero
-        :eyebrow="$isConsultationRequest ? 'Solicitação de consulta' : 'Atendimento presencial ou remoto'"
-        :title="$isConsultationRequest ? 'Solicite uma consulta' : ($isAnalysisRequest ? 'Apresente sua situação' : ($page?->hero_title ?? $page?->title ?? 'Fale com o escritório'))"
-        :subtitle="$isConsultationRequest ? 'Informe o essencial. Após a análise inicial, o escritório enviará um convite privado para você escolher o horário.' : ($page?->hero_subtitle ?? $page?->excerpt ?? 'Conte brevemente como podemos ajudar. A equipe avaliará o encaminhamento adequado.')"
+        eyebrow="Atendimento presencial ou remoto"
+        :title="$page?->hero_title ?? $page?->title ?? 'Fale com o escritório'"
+        :subtitle="$page?->hero_subtitle ?? $page?->excerpt ?? 'Conte brevemente como podemos ajudar. A equipe avaliará o encaminhamento adequado.'"
         :image="$page?->heroImageUrl()"
     />
 
     <x-site.section
         id="formulario"
-        :title="$isConsultationRequest ? 'Pedido de consulta' : 'Envie uma mensagem'"
-        :intro="$isConsultationRequest ? 'Indique a modalidade desejada e descreva apenas o essencial. Não envie documentos ou informações muito sensíveis.' : 'Não é necessário relatar todos os detalhes nem enviar documentos neste primeiro contato.'"
+        title="Envie uma mensagem ou solicite uma consulta"
+        intro="Você escolhe o melhor primeiro passo. Não é necessário relatar todos os detalhes nem enviar documentos neste primeiro contato."
         heading-variant="accent"
     >
         <div class="contact-simple">
@@ -29,11 +28,18 @@
                     <p class="notice" role="status">{{ session('status') }}</p>
                 @endif
 
-                <form method="post" action="{{ route('contact.store') }}" class="contact-form contact-form--legal" data-form data-acquisition-form>
+                <form method="post" action="{{ route('contact.store') }}" class="contact-form contact-form--legal" data-form data-acquisition-form data-contact-consultation>
                     @csrf
                     <input type="hidden" name="acquisition_attribution" value="{{ old('acquisition_attribution') }}">
-                    <input type="hidden" name="request_type" value="{{ $requestType ?? 'outro' }}">
                     <input type="text" name="website" value="" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;">
+
+                    <fieldset class="full contact-intent">
+                        <legend>Como prefere continuar?</legend>
+                        <div class="contact-inline-options">
+                            <label><input type="radio" name="request_type" value="outro" @checked(old('request_type', $requestType ?? 'outro') !== 'consulta')> Enviar uma mensagem</label>
+                            <label><input type="radio" name="request_type" value="consulta" @checked(old('request_type', $requestType ?? 'outro') === 'consulta')> Solicitar uma consulta</label>
+                        </div>
+                    </fieldset>
 
                     @if ($settings->contact_form_show_name)
                         <label>
@@ -56,18 +62,20 @@
                         </label>
                     @endif
 
-                    @if ($isConsultationRequest)
-                        <fieldset class="full">
+                    <section class="full contact-consultation" data-contact-consultation-panel @hidden(! $isConsultationRequest && old('request_type') !== 'consulta')>
+                        <p>Após a análise inicial, o escritório enviará um convite privado para você escolher o horário.</p>
+                        <fieldset>
                             <legend>Modalidade preferida</legend>
-                            <label><input type="radio" name="modality" value="remoto" @checked(old('modality') === 'remoto') required> Consulta online</label>
-                            <label><input type="radio" name="modality" value="presencial" @checked(old('modality') === 'presencial') required> Consulta presencial</label>
-                            <label><input type="radio" name="modality" value="indiferente" @checked(old('modality') === 'indiferente') required> Sem preferência</label>
+                            <div class="contact-inline-options">
+                                <label><input type="radio" name="modality" value="remoto" @checked(old('modality') === 'remoto')> Consulta online</label>
+                                <label><input type="radio" name="modality" value="presencial" @checked(old('modality') === 'presencial')> Consulta presencial</label>
+                            </div>
                             @error('modality') <small class="field__error">{{ $message }}</small> @enderror
                         </fieldset>
-                    @endif
+                    </section>
 
                     <label class="full">
-                        {{ $isConsultationRequest ? 'O que você precisa tratar na consulta?' : 'Como podemos ajudar?' }}
+                        Como podemos ajudar?
                         <textarea name="message" rows="6" maxlength="5000" required>{{ old('message') }}</textarea>
                         <small class="form-help">Escreva apenas o essencial. Não envie documentos ou informações muito sensíveis.</small>
                         @error('message') <small class="field__error">{{ $message }}</small> @enderror
@@ -82,7 +90,7 @@
                     </label>
 
                     <div class="full">
-                        <x-site.button type="submit">{{ $isConsultationRequest ? 'Solicitar consulta' : 'Enviar mensagem' }}</x-site.button>
+                        <x-site.button type="submit">Enviar solicitação</x-site.button>
                     </div>
                 </form>
             </div>

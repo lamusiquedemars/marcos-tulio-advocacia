@@ -13,7 +13,7 @@ class ContactConsultationTest extends TestCase
     {
         $this->get('/contact?tipo=consulta')
             ->assertOk()
-            ->assertSee('Solicite uma consulta')
+            ->assertSee('Envie uma mensagem ou solicite uma consulta')
             ->assertSee('Modalidade preferida')
             ->assertSee('value="consulta"', false)
             ->assertSee('Consulta online');
@@ -25,6 +25,18 @@ class ContactConsultationTest extends TestCase
             ->assertOk()
             ->assertSee('Envie uma mensagem')
             ->assertSee('value="outro"', false)
-            ->assertDontSee('Modalidade preferida');
+            ->assertSee('Modalidade preferida')
+            ->assertDontSee('Sem preferência');
+    }
+
+    public function test_consultation_requires_a_chosen_modality(): void
+    {
+        $this->post('/contact', [
+            'name' => 'Pessoa de teste',
+            'email' => 'pessoa@example.test',
+            'request_type' => 'consulta',
+            'message' => 'Mensagem de teste sem dados sensíveis.',
+            'consent' => '1',
+        ])->assertSessionHasErrors('modality');
     }
 }

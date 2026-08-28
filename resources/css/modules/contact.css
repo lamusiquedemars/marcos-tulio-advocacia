@@ -17,6 +17,51 @@
     font-weight: 700;
 }
 
+.contact-intent,
+.contact-consultation {
+    padding: var(--space-md);
+    border: 1px solid var(--color-line);
+    background: var(--color-surface-muted);
+}
+
+.contact-intent legend,
+.contact-consultation legend {
+    padding: 0 var(--space-xs);
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+.contact-inline-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.contact-form .contact-inline-options label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.theme-marcos-tulio .contact-form--legal .contact-inline-options input {
+    min-height: 1rem;
+    width: 1rem;
+    margin: 0;
+    accent-color: var(--color-brand);
+}
+
+.contact-consultation {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.contact-consultation > p {
+    margin: 0;
+    color: var(--color-muted);
+}
+
 @media (max-width: 700px) {
     .contact-form {
         grid-template-columns: 1fr;

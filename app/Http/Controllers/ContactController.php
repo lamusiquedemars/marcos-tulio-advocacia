@@ -52,7 +52,7 @@ class ContactController extends Controller
             'phase' => ['nullable', 'in:nao_informada,investigacao,intimacao_depoimento,prisao,processo_penal,recurso,preventiva'],
             'deadline' => ['nullable', 'date'],
             'location' => ['nullable', 'string', 'max:120'],
-            'modality' => ['nullable', 'in:presencial,remoto,indiferente'],
+            'modality' => ['nullable', 'required_if:request_type,consulta', 'in:presencial,remoto'],
             'consent' => ['required', 'accepted'],
             'acquisition_attribution' => ['nullable', 'json', 'max:20000'],
         ];
@@ -73,6 +73,7 @@ class ContactController extends Controller
             'phase.in' => 'Selecione uma fase válida.',
             'deadline.date' => 'Informe uma data válida.',
             'modality.in' => 'Selecione uma modalidade válida.',
+            'modality.required_if' => 'Selecione se prefere uma consulta online ou presencial.',
             'message.required' => 'Escreva um resumo inicial.',
             'message.max' => 'O resumo deve ter no máximo 5.000 caracteres.',
             'consent.required' => 'Confirme o consentimento para registrar a solicitação.',
