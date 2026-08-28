@@ -6,6 +6,7 @@ use App\Modules\Appointments\Enums\AppointmentMode;
 use App\Modules\Appointments\Enums\AppointmentProvider;
 use App\Modules\Appointments\Enums\AppointmentInvitationType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class AppointmentSetting extends Model
@@ -17,6 +18,7 @@ class AppointmentSetting extends Model
         'booking_url',
         'online_booking_url',
         'in_person_booking_url',
+        'brevo_meeting_webhook_secret',
         'timezone',
     ];
 
@@ -44,13 +46,20 @@ class AppointmentSetting extends Model
 
     public static function current(): self
     {
-        return static::query()->firstOrCreate([], [
+        $setting = static::query()->firstOrCreate([], [
             'is_enabled' => false,
             'provider' => AppointmentProvider::Brevo,
             'mode' => AppointmentMode::AfterReview,
             'booking_url' => null,
             'timezone' => 'America/Cuiaba',
+            'brevo_meeting_webhook_secret' => Str::random(48),
         ]);
+
+        if (blank($setting->brevo_meeting_webhook_secret)) {
+            $setting->forceFill(['brevo_meeting_webhook_secret' => Str::random(48)])->save();
+        }
+
+        return $setting;
     }
 
     public function canBookDirectly(): bool
@@ -66,5 +75,13 @@ class AppointmentSetting extends Model
             AppointmentInvitationType::Online => $this->online_booking_url ?: $this->booking_url,
             AppointmentInvitationType::InPerson => $this->in_person_booking_url ?: $this->booking_url,
         };
+    }
+
+    public function brevoMeetingWebhookUrl(string $event): string
+    {
+        return route('webhooks.brevo.meetings', [
+            'secret' => $this->brevo_meeting_webhook_secret,
+            'event' => $event,
+        ]);
     }
 }

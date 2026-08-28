@@ -90,6 +90,22 @@ class AppointmentSettingResource extends Resource
                         ->helperText('Use um identificador IANA, por exemplo America/Cuiaba.'),
                 ])
                 ->columns(2),
+            Section::make('Retorno automático do Brevo')
+                ->description('Configure estes endereços em Brevo somente após validar o calendário. Eles atualizam o status do pedido sem enviar o resumo jurídico.')
+                ->schema([
+                    TextInput::make('brevo_booked_webhook_url')
+                        ->label('Webhook Brevo — reunião agendada')
+                        ->formatStateUsing(fn (?AppointmentSetting $record): string => ($record ?? AppointmentSetting::current())->brevoMeetingWebhookUrl('booked'))
+                        ->disabled()
+                        ->dehydrated(false)
+                        ->columnSpanFull(),
+                    TextInput::make('brevo_cancelled_webhook_url')
+                        ->label('Webhook Brevo — reunião cancelada')
+                        ->formatStateUsing(fn (?AppointmentSetting $record): string => ($record ?? AppointmentSetting::current())->brevoMeetingWebhookUrl('cancelled'))
+                        ->disabled()
+                        ->dehydrated(false)
+                        ->columnSpanFull(),
+                ]),
         ]);
     }
 

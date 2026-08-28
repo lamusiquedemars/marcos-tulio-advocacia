@@ -13,6 +13,7 @@ use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
 use App\Modules\Appointments\Http\Controllers\AppointmentController;
 use App\Modules\Appointments\Http\Controllers\AppointmentInvitationController;
+use App\Modules\Appointments\Http\Controllers\BrevoMeetingWebhookController;
 use App\Modules\Assistant\Http\Controllers\AssistantInquiryController;
 use App\Modules\Conversations\Http\Controllers\PublicConversationController;
 use App\Support\Modules;
@@ -68,6 +69,10 @@ Route::post('/assistant/solicitacao', AssistantInquiryController::class)
     ->name('assistant.inquiry');
 
 if (Modules::enabled('appointments')) {
+    Route::post('/webhooks/brevo/meetings/{secret}/{event}', BrevoMeetingWebhookController::class)
+        ->whereIn('event', ['booked', 'cancelled'])
+        ->middleware('throttle:120,1')
+        ->name('webhooks.brevo.meetings');
     Route::get('/agendamento/convite/{token}', AppointmentInvitationController::class)
         ->middleware('throttle:30,1')
         ->name('appointments.invitation.show');
