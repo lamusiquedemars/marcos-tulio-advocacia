@@ -13,6 +13,9 @@
         $clientTheme = config('maracuja.client_theme');
         $conversationWidgetEnabled = \App\Support\Modules::enabled('conversations')
             && \App\Modules\Conversations\Models\ConversationSetting::current()->is_enabled;
+        $acquisitionSettings = \App\Support\Modules::enabled('acquisition')
+            ? \App\Modules\Acquisition\Models\AcquisitionSetting::current()
+            : null;
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,6 +46,8 @@
         <link rel="icon" href="{{ \App\Support\Seo::absoluteUrl($settings->faviconUrl()) }}">
     @endif
 
+    @include('site.partials.acquisition-head', ['acquisitionSettings' => $acquisitionSettings])
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body @class([
@@ -51,6 +56,8 @@
     'theme-' . $clientTheme => filled($clientTheme),
     'has-conversation-widget' => $conversationWidgetEnabled,
 ])>
+    @include('site.partials.acquisition-body', ['acquisitionSettings' => $acquisitionSettings])
+
     @if ($settings->phone || $settings->contact_email)
         <aside class="site-contact-bar" aria-label="Contato direto">
             <div class="site-contact-bar__inner container">

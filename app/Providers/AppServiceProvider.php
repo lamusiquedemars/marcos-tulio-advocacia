@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Console\Commands\SyncAcquisitionSummaryCommand;
 use App\Modules\Assistant\Contracts\AssistantProvider;
 use App\Modules\Assistant\Providers\FakeAssistantProvider;
 use App\Modules\Conversations\Console\Commands\PruneConversationsCommand;
@@ -48,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->commands([
             PruneConversationsCommand::class,
+            SyncAcquisitionSummaryCommand::class,
         ]);
 
         $moduleMigrationPaths = [
@@ -57,6 +59,7 @@ class AppServiceProvider extends ServiceProvider
             app_path('Modules/Appointments/database/migrations'),
             app_path('Modules/Contacts/database/migrations'),
             app_path('Modules/Conversations/database/migrations'),
+            app_path('Modules/Acquisition/database/migrations'),
         ];
 
         foreach ($moduleMigrationPaths as $path) {

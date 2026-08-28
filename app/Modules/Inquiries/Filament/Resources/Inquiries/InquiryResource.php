@@ -121,6 +121,23 @@ class InquiryResource extends Resource
                         DateTimePicker::make('archived_at')->label('Encerrada em')->disabled(),
                     ])
                     ->columns(2),
+                Section::make('Aquisição')
+                    ->description('Origem técnica da solicitação. O resumo jurídico não é enviado às ferramentas de medição.')
+                    ->schema([
+                        TextInput::make('attribution_source')->label('Fonte')->disabled(),
+                        TextInput::make('attribution_medium')->label('Meio')->disabled(),
+                        TextInput::make('attribution_campaign')->label('Campanha')->disabled(),
+                        TextInput::make('attribution_last_touch.utm_term')->label('Termo declarado')->disabled(),
+                        TextInput::make('attribution_first_touch.landing_page')
+                            ->label('Primeira página de entrada')
+                            ->disabled()
+                            ->columnSpanFull(),
+                        TextInput::make('attribution_last_touch.landing_page')
+                            ->label('Última página de entrada')
+                            ->disabled()
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2),
                 Section::make('Agendamento')
                     ->description('O link do Brevo Meetings não recebe o resumo nem dados do caso.')
                     ->schema([
@@ -182,6 +199,11 @@ class InquiryResource extends Resource
                     ->badge()
                     ->formatStateUsing(fn (InquiryUrgency|string|null $state): string => self::enumLabel($state) ?? '-')
                     ->color(fn (InquiryUrgency|string|null $state): string => self::urgencyFrom($state)?->color() ?? 'gray'),
+                TextColumn::make('attribution_source')
+                    ->label('Aquisição')
+                    ->placeholder('Direta / desconhecida')
+                    ->description(fn (Inquiry $record): ?string => $record->attribution_campaign)
+                    ->toggleable(),
                 TextColumn::make('deadline')
                     ->label('Data importante')
                     ->date('d/m/Y')

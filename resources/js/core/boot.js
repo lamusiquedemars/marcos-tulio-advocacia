@@ -7,6 +7,7 @@ import { initFormStates } from '../components/form';
 import { initBackToTop } from '../components/back-to-top';
 import { initAssistant } from '../components/assistant';
 import { initConversation } from '../components/conversation';
+import { initAcquisition } from '../components/acquisition';
 
 const initializers = [
     initNavigation,
@@ -18,6 +19,7 @@ const initializers = [
     initBackToTop,
     initAssistant,
     initConversation,
+    initAcquisition,
 ];
 
 export function bootMaracujaUi(root = document) {

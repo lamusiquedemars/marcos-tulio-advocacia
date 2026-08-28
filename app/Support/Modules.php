@@ -33,6 +33,7 @@ class Modules
             'contact_form' => app_path('Modules/ContactForm'),
             'inquiries' => app_path('Modules/Inquiries'),
             'audience' => app_path('Modules/Audience'),
+            'acquisition' => app_path('Modules/Acquisition'),
             'campaigns' => app_path('Modules/Campaigns'),
             'oral_defenses' => app_path('Modules/OralDefenses'),
             'assistant' => app_path('Modules/Assistant'),

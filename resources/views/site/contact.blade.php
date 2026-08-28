@@ -24,8 +24,9 @@
                     <p class="notice" role="status">{{ session('status') }}</p>
                 @endif
 
-                <form method="post" action="{{ route('contact.store') }}" class="contact-form contact-form--legal" data-form>
+                <form method="post" action="{{ route('contact.store') }}" class="contact-form contact-form--legal" data-form data-acquisition-form>
                     @csrf
+                    <input type="hidden" name="acquisition_attribution" value="{{ old('acquisition_attribution') }}">
                     <input type="hidden" name="request_type" value="outro">
                     <input type="text" name="website" value="" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;">
 

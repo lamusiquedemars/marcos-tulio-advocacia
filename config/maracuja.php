@@ -18,6 +18,16 @@ return [
         'inquiry_retention_days' => env('MARACUJA_INQUIRY_RETENTION_DAYS', 90),
     ],
 
+    'acquisition' => [
+        'cremona' => [
+            'enabled' => env('MARACUJA_CREMONA_ENABLED', false),
+            'endpoint' => env('MARACUJA_CREMONA_ENDPOINT'),
+            'reporting_endpoint' => env('MARACUJA_CREMONA_REPORTING_ENDPOINT'),
+            'token' => env('MARACUJA_CREMONA_TOKEN'),
+            'site_reference' => env('MARACUJA_CREMONA_SITE_REFERENCE', 'marcos-tulio-advocacia'),
+        ],
+    ],
+
     'conversations' => [
         'retention_days' => env('MARACUJA_CONVERSATIONS_RETENTION_DAYS', 90),
         'archive_inactive_after_hours' => env('MARACUJA_CONVERSATIONS_ARCHIVE_INACTIVE_AFTER_HOURS', 48),
@@ -112,6 +122,7 @@ return [
         'contact_form' => env('MARACUJA_MODULE_CONTACT_FORM', true),
         'inquiries' => env('MARACUJA_MODULE_INQUIRIES', true),
         'audience' => env('MARACUJA_MODULE_AUDIENCE', false),
+        'acquisition' => env('MARACUJA_MODULE_ACQUISITION', true),
         'campaigns' => env('MARACUJA_MODULE_CAMPAIGNS', false),
         'oral_defenses' => env('MARACUJA_MODULE_ORAL_DEFENSES', true),
         'assistant' => env('MARACUJA_MODULE_ASSISTANT', true),
