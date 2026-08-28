@@ -62,7 +62,7 @@
                         </label>
                     @endif
 
-                    <section class="full contact-consultation" data-contact-consultation-panel @hidden(! $isConsultationRequest && old('request_type') !== 'consulta')>
+                    <section class="full contact-consultation" data-contact-consultation-panel @if (! $isConsultationRequest && old('request_type') !== 'consulta') hidden @endif>
                         <p>Após a análise inicial, o escritório enviará um convite privado para você escolher o horário.</p>
                         <fieldset>
                             <legend>Modalidade preferida</legend>
