@@ -57,6 +57,7 @@
     'has-conversation-widget' => $conversationWidgetEnabled,
 ])>
     @include('site.partials.acquisition-body', ['acquisitionSettings' => $acquisitionSettings])
+    @include('site.partials.acquisition-consent', ['acquisitionSettings' => $acquisitionSettings])
 
     @if ($settings->phone || $settings->contact_email)
         <aside class="site-contact-bar" aria-label="Contato direto">

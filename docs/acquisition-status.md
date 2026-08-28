@@ -31,7 +31,7 @@
 | 1 | en cours | Le code possède `sitemap.xml`, `robots.txt` et le module Acquisition. | Auditer la production réelle et les URLs publiques. |
 | 2 | à préparer | Aucune propriété Search Console confirmée. | Marcos crée/partage la propriété Domaine. |
 | 3 | fait localement | Conteneur Web GTM créé par Maracuja pour le domaine. | Ajouter Marcos administrateur GTM dès qu’il est disponible. |
-| 4 | fait localement | ID GTM enregistré, mesure activée avec consentement `basic`. | Déployer seulement après test et accord. |
+| 4 | en cours | ID GTM enregistré et bannière de consentement en portugais ajoutée localement, sur le modèle Atelier. | Tester le refus et l’acceptation avant déploiement. |
 | 5 | fait | Propriété GA4 et flux Web créés par Maracuja. | Ajouter Marcos administrateur GA4 dès qu’il est disponible. |
 | 6 | en cours | Balise GA4 créée dans GTM, non publiée ; aucun tag n’est encore chargé sur le site. | Raccorder le site, prévisualiser et tester le consentement. |
 | 7 | à préparer | Événements prévus : WhatsApp, téléphone, formulaire, consultation et chatbot. | Définir les conditions de succès et données autorisées. |
@@ -47,3 +47,4 @@
 
 - 2026-08-26 — Audit local : module Acquisition, sitemap et robots déjà présents ; aucune balise Google réelle détectée dans le code/configuration.
 - 2026-08-28 — GA4 et GTM créés par Maracuja. Balise GA4 enregistrée dans GTM sans publication ; configuration GTM enregistrée en local avec consentement `basic`. Compte Ads Marcos créé et demande de rattachement MCC en attente de sa vérification d’identité.
+- 2026-08-28 — Bannière de consentement Acquisition ajoutée localement : textes portugais, accepter ou recusar, choix mémorisé 180 jours. Elle accorde uniquement la mesure Analytics ; le consentement publicitaire reste refusé.

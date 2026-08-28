@@ -43,6 +43,23 @@ class AcquisitionAttributionTest extends TestCase
         $this->assertSame('BRL', $settings->currency);
     }
 
+    public function test_tracking_consent_is_presented_in_portuguese_only_when_tracking_is_enabled(): void
+    {
+        AcquisitionSetting::current()->update([
+            'is_enabled' => true,
+            'gtm_container_id' => 'GTM-TEST123',
+            'consent_enabled' => true,
+        ]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Cookies de medição')
+            ->assertSee('Aceitar')
+            ->assertSee('Recusar')
+            ->assertSee('maracujaSetConsent', false)
+            ->assertSee('marketing: false', false);
+    }
+
     public function test_contact_form_keeps_safe_first_and_last_touch_attribution(): void
     {
         $attribution = [
