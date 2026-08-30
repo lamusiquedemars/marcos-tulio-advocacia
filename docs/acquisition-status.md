@@ -13,7 +13,7 @@
 | Compte Google propriétaire | Compte Marcos créé ; la vérification d’identité est en attente. |
 | Accès Maracuja | `ivo@maracujadigital.fr` administre les outils de mesure ; Marcos doit être ajouté administrateur à son réveil. |
 | Compte Ads client | Créé par Marcos ; campagnes imposées par le parcours Google conservées en brouillon. |
-| MCC Maracuja | Demande de rattachement envoyée ; elle attend la vérification d’identité de Marcos puis son acceptation. |
+| MCC Maracuja | Compte Marcos rattaché et visible avec le statut `Actif` dans le compte gestionnaire Maracuja le 30 août 2026. |
 | Pays / devise / fuseau | Brésil / BRL / `America/Cuiaba` prévus dans l’admin locale. |
 
 ## Décisions déjà prises
@@ -37,7 +37,7 @@
 | 7 | fait localement | Événements anonymes instrumentés : WhatsApp, téléphone, intention de rendez-vous, formulaire enregistré et demande de rappel chatbot. | Vérifier les signaux dans GTM Preview après consentement. |
 | 8 | à préparer | Aucun événement clé confirmé. | Marquer les événements validés dans GA4. |
 | 9 | à préparer | Aucune association Search Console ↔ GA4 confirmée. | Créer l’association après les étapes 2 et 5. |
-| 10 | en cours | Compte Ads créé ; rattachement MCC envoyé mais bloqué par la vérification d’identité. | Marcos vérifie son identité puis accepte le rattachement. |
+| 10 | fait | Compte Ads Marcos visible `Actif` dans le MCC Maracuja. La campagne Google existante reste en brouillon. | Relever le nom commercial du compte seulement si utile ; ne pas modifier la campagne. |
 | 11 | à préparer | Dépend des événements GA4 et d’une campagne approuvée. | Importer les conversions GA4 juste avant diffusion. |
 | 12 | en cours | Brouillon interne Cremona existe ; pas de campagne Google active. | Préparer mots-clés, exclusions, budget et validation client. |
 | 13 | non applicable | Pas d’accord de lancement ni tracking validé. | — |
@@ -49,3 +49,4 @@
 - 2026-08-28 — GA4 et GTM créés par Maracuja. Balise GA4 enregistrée dans GTM sans publication ; configuration GTM enregistrée en local avec consentement `basic`. Compte Ads Marcos créé et demande de rattachement MCC en attente de sa vérification d’identité.
 - 2026-08-28 — Bannière de consentement Acquisition ajoutée localement : textes portugais, accepter ou recusar, choix mémorisé 180 jours. Elle accorde uniquement la mesure Analytics ; le consentement publicitaire reste refusé.
 - 2026-08-28 — Module Acquisition déployé : quatre migrations exécutées, configuration GTM de production activée avec consentement `basic`, caches reconstruits. Vérification HTTPS : bannière affichée et aucun script GTM chargé directement avant consentement.
+- 2026-08-30 — Marcos a accepté le rattachement : son compte Google Ads apparaît `Actif` dans le compte gestionnaire Maracuja. Seul le numéro client est affiché dans la liste ; aucune campagne n’a été modifiée.
