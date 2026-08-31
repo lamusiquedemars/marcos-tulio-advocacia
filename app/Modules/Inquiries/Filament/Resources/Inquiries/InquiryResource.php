@@ -2,8 +2,8 @@
 
 namespace App\Modules\Inquiries\Filament\Resources\Inquiries;
 
-use App\Modules\Appointments\Enums\AppointmentStatus;
 use App\Modules\Appointments\Enums\AppointmentInvitationType;
+use App\Modules\Appointments\Enums\AppointmentStatus;
 use App\Modules\Appointments\Models\AppointmentInvitation;
 use App\Modules\Appointments\Models\AppointmentSetting;
 use App\Modules\Appointments\Support\AppointmentInvitationDeliveryLink;
@@ -34,6 +34,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -82,8 +83,17 @@ class InquiryResource extends Resource
                         TextInput::make('phone')->label('Telefone')->tel(),
                         TextInput::make('location')->label('Cidade e estado'),
                     ])
-                    ->columns(2),
-                Section::make('Solicitação')
+                    ->columns(1),
+                Section::make('Mensagem recebida')
+                    ->schema([
+                        Textarea::make('message')
+                            ->label('Mensagem')
+                            ->required()
+                            ->rows(16)
+                            ->columnSpanFull(),
+                    ]),
+                Section::make('Classificação e acompanhamento')
+                    ->description('Use estes campos para organizar o atendimento. Eles podem ficar em branco quando a pessoa enviou apenas uma mensagem livre.')
                     ->schema([
                         Select::make('request_type')
                             ->label('Tipo')
@@ -104,45 +114,49 @@ class InquiryResource extends Resource
                             ->label('Estado do acompanhamento')
                             ->options(self::statusOptions())
                             ->required(),
-                        Textarea::make('message')
-                            ->label('Resumo inicial')
-                            ->required()
-                            ->rows(7)
-                            ->columnSpanFull(),
                     ])
                     ->columns(2),
-                Section::make('Acompanhamento interno')
+                Section::make('Notas do escritório')
                     ->schema([
                         Textarea::make('internal_notes')
                             ->label('Notas internas')
-                            ->helperText('Nunca copie dados sensíveis para ferramentas de marketing.')
+                            ->helperText('Uso interno. Não copie estas notas para ferramentas de marketing.')
+                            ->rows(8)
                             ->columnSpanFull(),
+                    ]),
+                Section::make('Informações de registro')
+                    ->description('Dados automáticos de controle. Normalmente não precisam ser alterados.')
+                    ->schema([
                         DateTimePicker::make('consent_at')->label('Consentimento registrado em')->disabled(),
-                        TextInput::make('source')->label('Origem')->disabled(),
+                        TextInput::make('source')->label('Formulário de origem')->disabled(),
                         DateTimePicker::make('read_at')->label('Consultada em')->disabled(),
                         DateTimePicker::make('handled_at')->label('Agendada em')->disabled(),
                         DateTimePicker::make('archived_at')->label('Encerrada em')->disabled(),
                     ])
-                    ->columns(2),
-                Section::make('Aquisição')
-                    ->description('Origem técnica da solicitação. O resumo jurídico não é enviado às ferramentas de medição.')
+                    ->columns(2)
+                    ->collapsed()
+                    ->collapsible(),
+                Section::make('Origem da visita (medição)')
+                    ->description('Serve para saber se o contato veio do Google Ads ou de outro canal. Somente dados da visita são medidos; a mensagem e as notas não são enviadas ao Google.')
                     ->schema([
-                        TextInput::make('attribution_source')->label('Fonte')->disabled(),
-                        TextInput::make('attribution_medium')->label('Meio')->disabled(),
-                        TextInput::make('attribution_campaign')->label('Campanha')->disabled(),
-                        TextInput::make('attribution_last_touch.utm_term')->label('Termo declarado')->disabled(),
+                        TextInput::make('attribution_source')->label('Canal de origem')->disabled(),
+                        TextInput::make('attribution_medium')->label('Tipo de acesso')->disabled(),
+                        TextInput::make('attribution_campaign')->label('Nome da campanha')->disabled(),
+                        TextInput::make('attribution_last_touch.utm_term')->label('Termo de campanha')->disabled(),
                         TextInput::make('attribution_first_touch.landing_page')
-                            ->label('Primeira página de entrada')
+                            ->label('Primeira página visitada')
                             ->disabled()
                             ->columnSpanFull(),
                         TextInput::make('attribution_last_touch.landing_page')
-                            ->label('Última página de entrada')
+                            ->label('Página visitada antes do envio')
                             ->disabled()
                             ->columnSpanFull(),
                     ])
-                    ->columns(2),
+                    ->columns(2)
+                    ->collapsed()
+                    ->collapsible(),
                 Section::make('Agendamento')
-                    ->description('O link do Brevo Meetings não recebe o resumo nem dados do caso.')
+                    ->description('Preencha somente quando houver uma consulta marcada. O sistema de agenda não recebe a mensagem nem as notas.')
                     ->schema([
                         Select::make('appointment_status')
                             ->label('Estado do agendamento')
@@ -162,7 +176,9 @@ class InquiryResource extends Resource
                             ->helperText('Opcional. Não inserir link de videoconferência.')
                             ->columnSpanFull(),
                     ])
-                    ->columns(2),
+                    ->columns(2)
+                    ->collapsed()
+                    ->collapsible(),
             ]);
     }
 
@@ -203,10 +219,10 @@ class InquiryResource extends Resource
                     ->formatStateUsing(fn (InquiryUrgency|string|null $state): string => self::enumLabel($state) ?? '-')
                     ->color(fn (InquiryUrgency|string|null $state): string => self::urgencyFrom($state)?->color() ?? 'gray'),
                 TextColumn::make('attribution_source')
-                    ->label('Aquisição')
+                    ->label('Origem')
                     ->placeholder('Direta / desconhecida')
                     ->description(fn (Inquiry $record): ?string => $record->attribution_campaign)
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deadline')
                     ->label('Data importante')
                     ->date('d/m/Y')
@@ -363,7 +379,9 @@ class InquiryResource extends Resource
                 ])
                     ->label('Acompanhamento')
                     ->icon(Heroicon::OutlinedEllipsisVertical),
-                EditAction::make()->label('Editar'),
+                EditAction::make()
+                    ->label('Editar')
+                    ->modalWidth(Width::SixExtraLarge),
                 DeleteAction::make()->label('Excluir'),
             ])
             ->toolbarActions([

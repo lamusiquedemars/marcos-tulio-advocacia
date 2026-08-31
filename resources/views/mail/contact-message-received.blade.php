@@ -9,4 +9,4 @@
     <p><strong>Assunto:</strong> {{ $messageData->subject }}</p>
 @endif
 <p><strong>Mensagem:</strong></p>
-<p>{{ $messageData->message }}</p>
+<div style="line-height: 1.6; overflow-wrap: anywhere;">{!! nl2br(e($messageData->message)) !!}</div>
