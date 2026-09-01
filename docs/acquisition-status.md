@@ -33,8 +33,8 @@
 | 3 | fait | Conteneur Web GTM créé par Maracuja pour le domaine. | Ajouter Marcos administrateur GTM dès qu’il est disponible. |
 | 4 | fait en production | ID GTM configuré ; bannière portugaise déployée, consentement `basic` et absence de chargement direct vérifiés. | Tester le refus et l’acceptation dans un navigateur avant publication GTM. |
 | 5 | fait | Propriété GA4 et flux Web créés par Maracuja. | Ajouter Marcos administrateur GA4 dès qu’il est disponible. |
-| 6 | en cours | Balise GA4 créée dans GTM, non publiée ; aucun tag Analytics ne collecte encore de données. | Prévisualiser GTM après le test du consentement, puis publier uniquement avec accord. |
-| 7 | fait localement | Événements anonymes instrumentés : WhatsApp, téléphone, intention de rendez-vous, formulaire enregistré et demande de rappel chatbot. | Vérifier les signaux dans GTM Preview après consentement. |
+| 6 | fait | Le 1er septembre 2026, Tag Assistant a confirmé que la balise GA4 se déclenche sur le site public lors de la prévisualisation GTM. | Publier le conteneur seulement après validation des événements. |
+| 7 | en cours | Les événements anonymes sont instrumentés. Le 1er septembre 2026, `whatsapp_click` et `phone_click` ont été confirmés dans GTM Preview, avec leurs balises GA4 déclenchées. | Configurer et vérifier la demande de consultation dans GTM Preview. |
 | 8 | à préparer | Aucun événement clé confirmé. | Marquer les événements validés dans GA4. |
 | 9 | à préparer | Aucune association Search Console ↔ GA4 confirmée. | Créer l’association après les étapes 2 et 5. |
 | 10 | fait | Compte Ads Marcos visible `Actif` dans le MCC Maracuja. La campagne Google existante reste en brouillon. | Relever le nom commercial du compte seulement si utile ; ne pas modifier la campagne. |
@@ -50,3 +50,6 @@
 - 2026-08-28 — Bannière de consentement Acquisition ajoutée localement : textes portugais, accepter ou recusar, choix mémorisé 180 jours. Elle accorde uniquement la mesure Analytics ; le consentement publicitaire reste refusé.
 - 2026-08-28 — Module Acquisition déployé : quatre migrations exécutées, configuration GTM de production activée avec consentement `basic`, caches reconstruits. Vérification HTTPS : bannière affichée et aucun script GTM chargé directement avant consentement.
 - 2026-08-30 — Marcos a accepté le rattachement : son compte Google Ads apparaît `Actif` dans le compte gestionnaire Maracuja. Seul le numéro client est affiché dans la liste ; aucune campagne n’a été modifiée.
+- 2026-09-01 — Prévisualisation GTM du site public : la balise GA4 apparaît dans `Tags Fired` sur l’événement `Page View`. La preuve de l’étape 6 est obtenue ; aucune publication GTM n’a encore été faite.
+- 2026-09-01 — Événement `whatsapp_click` : la balise GTM `GA4 — WhatsApp click` a été créée puis confirmée dans `Tags Fired` lors de la prévisualisation. Le conteneur n’est pas publié.
+- 2026-09-01 — Événement `phone_click` : la balise GTM `GA4 — Phone click` a été créée puis confirmée dans `Tags Fired` lors de la prévisualisation. Le conteneur n’est pas publié.

@@ -146,7 +146,9 @@ export function initAcquisition(root = document) {
             return;
         }
 
-        if (new URL(href, window.location.origin).pathname === '/agendamento') {
+        const destination = new URL(href, window.location.origin);
+
+        if (destination.pathname === '/agendamento' || destination.searchParams.get('tipo') === 'consulta') {
             trackAcquisitionEvent('appointment_request');
         }
     });
