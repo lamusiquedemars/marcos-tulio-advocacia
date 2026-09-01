@@ -131,6 +131,10 @@ export function initAcquisition(root = document) {
     });
     window.MaracujaAcquisitionPendingEvents = [];
 
+    if (new URL(window.location.href).searchParams.get('tipo') === 'consulta') {
+        trackAcquisitionEvent('appointment_request');
+    }
+
     document.addEventListener('click', (event) => {
         const link = event.target.closest('a[href]');
         if (!link) return;
@@ -146,9 +150,7 @@ export function initAcquisition(root = document) {
             return;
         }
 
-        const destination = new URL(href, window.location.origin);
-
-        if (destination.pathname === '/agendamento' || destination.searchParams.get('tipo') === 'consulta') {
+        if (new URL(href, window.location.origin).pathname === '/agendamento') {
             trackAcquisitionEvent('appointment_request');
         }
     });
