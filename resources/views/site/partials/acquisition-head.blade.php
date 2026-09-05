@@ -27,6 +27,10 @@
         window.maracujaLoadGtm = window.maracujaLoadGtm || function () {
             if (window.maracujaGtmLoaded) return;
             window.maracujaGtmLoaded = true;
+            window.dataLayer.push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js',
+            });
 
             const script = document.createElement('script');
             script.async = true;

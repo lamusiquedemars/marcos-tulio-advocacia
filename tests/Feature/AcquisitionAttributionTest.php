@@ -57,6 +57,8 @@ class AcquisitionAttributionTest extends TestCase
             ->assertSee('Aceitar')
             ->assertSee('Recusar')
             ->assertSee('maracujaSetConsent', false)
+            ->assertSee("'gtm.start': new Date().getTime()", false)
+            ->assertSee("event: 'gtm.js'", false)
             ->assertSee('marketing: false', false);
     }
 
