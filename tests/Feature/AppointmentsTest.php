@@ -41,7 +41,7 @@ class AppointmentsTest extends TestCase
         $response = $this->get('/contact')
             ->assertOk()
             ->assertSee('Ver horários')
-            ->assertSee('http://marcos-tulio-advocacia.test/agendamento', false);
+            ->assertSee(config('app.url').'/agendamento', false);
 
         $this->assertStringNotContainsString('summary=', $response->getContent());
         $this->assertStringNotContainsString('message=', $response->getContent());

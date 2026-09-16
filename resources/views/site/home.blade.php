@@ -37,7 +37,8 @@
             <article class="authority-card">
                 <span class="practice-card__label">Advocacia</span>
                 <h3>Defesa penal</h3>
-                <p>Atuação desde 2012 em defesa criminal, com histórico de relaxamentos de flagrante, revogações de prisão preventiva e êxito em habeas corpus, seja restituindo a liberdade, seja trancando inquérito ou ação penal. Atuação perante o Tribunal do Júri e tribunais superiores, somando conquistas de absolvições e recuperação de liberdade em múltiplas dezenas de crimes.</p>
+                <p>Atuação desde 2012 em defesa criminal, com histórico de relaxamentos de flagrante, revogações de prisão preventiva e êxito em habeas corpus, seja restituindo a liberdade, seja trancando inquérito ou ação penal.</p>
+                <p>Atuação perante o Tribunal do Júri e tribunais superiores, somando conquistas de absolvições e recuperação de liberdade em múltiplas dezenas de crimes.</p>
             </article>
             <article class="authority-card">
                 <span class="practice-card__label">Experiência acadêmica</span>

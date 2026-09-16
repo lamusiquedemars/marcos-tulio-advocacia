@@ -6,7 +6,7 @@ Toutes les identités, coordonnées et données de contact présentes dans l'ins
 
 ## Installation locale
 
-Prérequis : PHP 8.3.31+, Composer, Node.js/npm, MySQL 8 ou MariaDB et l'extension PHP PDO MySQL.
+Prérequis : PHP 8.4.1+, Composer, Node.js/npm, MySQL 8 ou MariaDB et l'extension PHP PDO MySQL.
 
 ```bash
 cp .env.example .env
@@ -21,7 +21,7 @@ php artisan serve
 
 Créer auparavant les bases MySQL locales `marcos_tulio_advocacia` et `marcos_tulio_advocacia_testing`. Ne copie jamais une `APP_KEY` depuis un autre site : `php artisan key:generate` crée celle de cette installation.
 
-Administration : `http://127.0.0.1:8000/admin`. Compte de démonstration local : `admin@avocat.test` / `password`. Change ou supprime ce mot de passe avant toute exposition publique.
+Administration : `http://marcostulioadvocacia.test/admin`. Compte administrateur local : `ivo@maracujadigital.fr` / `password`. Change ou supprime ce mot de passe avant toute exposition publique.
 
 Tests :
 
