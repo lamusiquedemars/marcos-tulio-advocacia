@@ -1,0 +1,77 @@
+/* Preserve the containing layout, including wide reports inside native modals. */
+.fi-modal-content,
+.fi-main, .fi-page, .fi-sc, .fi-sc-component, .fi-section,
+.fi-section-content, .fi-ta, .fi-ta-ctn, .fi-ta-main, .fi-ta-content-ctn {
+    min-width: 0;
+    max-width: 100%;
+}
+.fi-modal-window-ctn { grid-template-columns: minmax(0, 1fr); }
+.fi-modal-window { min-width: 0; }
+
+/* Adapted from Cremona's rental-table. The marker is on the outer .fi-ta,
+   and .fi-ta-content-ctn is Filament's actual scrollport, not a descendant marker. */
+.admin-data-table .fi-ta-content-ctn,
+.admin-table-scroll {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: scroll !important;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-gutter: stable both-edges;
+    scrollbar-color: rgb(120 113 108) rgb(231 229 228);
+    scrollbar-width: auto;
+}
+
+.admin-data-table .fi-ta-content-ctn::-webkit-scrollbar,
+.admin-table-scroll::-webkit-scrollbar {
+    -webkit-appearance: none;
+    height: 14px;
+}
+.admin-data-table .fi-ta-content-ctn::-webkit-scrollbar-track,
+.admin-table-scroll::-webkit-scrollbar-track {
+    background: rgb(231 229 228);
+    border-radius: 9999px;
+}
+.admin-data-table .fi-ta-content-ctn::-webkit-scrollbar-thumb,
+.admin-table-scroll::-webkit-scrollbar-thumb {
+    min-width: 3rem;
+    border: 3px solid rgb(231 229 228);
+    border-radius: 9999px;
+    background: rgb(120 113 108);
+}
+.dark .admin-data-table .fi-ta-content-ctn,
+.dark .admin-table-scroll {
+    scrollbar-color: rgb(168 162 158) rgb(41 37 36);
+}
+.dark .admin-data-table .fi-ta-content-ctn::-webkit-scrollbar-track,
+.dark .admin-table-scroll::-webkit-scrollbar-track {
+    background: rgb(41 37 36);
+}
+.dark .admin-data-table .fi-ta-content-ctn::-webkit-scrollbar-thumb,
+.dark .admin-table-scroll::-webkit-scrollbar-thumb {
+    border-color: rgb(41 37 36);
+    background: rgb(168 162 158);
+}
+
+.admin-data-table .fi-ta-table,
+.admin-table-scroll > table {
+    width: max-content;
+    min-width: max(100%, 48rem);
+    table-layout: auto;
+}
+.admin-data-table .fi-ta-table th,
+.admin-table-scroll th { white-space: nowrap; }
+.admin-data-table .fi-ta-table td { min-width: 7rem; }
+.admin-data-table .fi-ta-table .fi-ta-text { max-width: 32rem; }
+
+/* Keep native Filament action labels readable, including floating menus. */
+.fi-dropdown-list-item {
+    align-items: flex-start;
+    white-space: normal;
+}
+.fi-dropdown-list-item-label {
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}

@@ -36,6 +36,13 @@ class AdminTableSortingTest extends TestCase
         foreach (Filament::getResources() as $resource) {
             $page = $resource::getPages()['index']->getPage();
             $component = Livewire::test($page)->assertSuccessful();
+            $table = $component->instance()->getTable();
+            if (! $table->getContentGrid()) {
+                $this->assertSame('admin-data-table', $table->getExtraAttributes()['class'] ?? null);
+                $component->assertSeeHtml('admin-data-table');
+            } else {
+                $this->assertArrayNotHasKey('class', $table->getExtraAttributes());
+            }
             foreach ($component->instance()->getTable()->getColumns() as $column) {
                 if (! $column->isSortable() || $column->isToggledHidden()) {
                     continue;

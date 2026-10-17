@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="fi-ta-content-ctn fi-fixed-positioning-context">
-                            <div class="fi-ta-table-scroll-ctn overflow-x-auto">
+                            <div class="admin-table-scroll overflow-x-auto">
                                 <table class="fi-ta-table">
                                     <thead>
                                         <tr>

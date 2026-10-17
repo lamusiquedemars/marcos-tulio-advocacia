@@ -95,6 +95,7 @@ class ImagesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->extraAttributes(['class' => 'admin-data-table'])
             ->modifyQueryUsing(fn (Builder $query) => $query->reorder())
             ->columns([
                 TextColumn::make('resolved_image_url')

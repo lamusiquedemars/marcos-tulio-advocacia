@@ -33,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->renderHook('panels::head.end', fn () => view('filament.table-styles'))
+            ->renderHook('panels::body.end', fn () => view('filament.hooks.table-wheel-scroll'))
             ->brandName(fn (): string => Schema::hasTable('site_settings')
                 ? SiteSetting::query()->value('site_name') ?: config('maracuja.product_name', 'Maracuja CMS')
                 : config('maracuja.product_name', 'Maracuja CMS'))

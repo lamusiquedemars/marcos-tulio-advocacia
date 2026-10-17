@@ -93,6 +93,7 @@ class ContactResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->extraAttributes(['class' => 'admin-data-table'])
             ->columns([
                 TextColumn::make('display_name')->sortable()
                     ->label(__('admin.conversations.contact'))

@@ -10,12 +10,21 @@ Les rapports de livraison permettent aussi de trier les dates de livraison, ouve
 
 Les aperçus, chemins d’images décoratives, textes longs, relations multiples, dernier message calculé, totaux de livraison et indicateurs de synthèse ne reçoivent pas de nouveau tri. Les compteurs relationnels déjà triables par SQL restent disponibles.
 
-Le style commun `resources/views/filament/table-styles.blade.php` est chargé uniquement dans l’administration. Il conserve la largeur intrinsèque des tableaux et contient le défilement horizontal dans leur zone, y compris dans les fiches et rapports. Il respecte la préférence de réduction des animations.
+Le style `resources/css/filament/admin/tables.css` est compilé par Vite et chargé uniquement dans l’administration via `resources/views/filament/table-styles.blade.php`. Les 21 tableaux Filament classiques (dont les photos d’une galerie) portent la classe `admin-data-table` sur leur racine `.fi-ta`. Leur vrai conteneur est `.admin-data-table .fi-ta-content-ctn`. Les rapports Blade et le journal d’optimisation réutilisent leur conteneur `.admin-table-scroll`. Les grilles de médias restent inchangées.
+
+La solution reprend le défilement natif de Cremona (`feat/admin-interface-translations`, commits `80a6fee`, `e45a361`, `f313607`, `0ed759c`) : `overflow-x: scroll !important`, `overflow-y: hidden`, gouttière stable et barre native grise, y compris en thème sombre. La largeur minimale est adaptée à 48 rem pour les listes plus courtes de Marcos ; la largeur intrinsèque permet aux listes plus larges de dépasser cette valeur sans cacher de colonnes. Les menus natifs conservent leurs libellés complets avec retour à la ligne. Le menu de suivi des demandes utilise `dropdownTeleport()` et `dropdownAutoPlacement()` de Filament afin de sortir de la zone à `overflow-y: hidden` et de rester dans l’écran.
+
+Le hook `resources/views/filament/hooks/table-wheel-scroll.blade.php` convertit la molette verticale seulement au-dessus du conteneur réel et tant qu’il reste du contenu à parcourir. Il laisse libres le zoom, les gestes horizontaux, les champs, les menus et le défilement de page aux extrémités. Il est enregistré une seule fois et reste compatible avec les mises à jour Livewire.
+
+**Convention à conserver :** vérifier le DOM réel avant toute modification. La classe est sur le parent : ne pas utiliser `:has(.admin-data-table)`. Ne créer aucun slider, fausse barre de défilement, couleur de test ou commande supplémentaire pour remplacer la barre native. Ne masquer aucune colonne métier.
 
 ## Vérification
 
 - `composer test` : suite complète, comprenant `AdminTableSortingTest` et `ReportSortingTest`.
-- `npm ci --ignore-scripts && npm run build`.
+- `npm ci --ignore-scripts && npm run build` ; vérifier l’entrée `resources/css/filament/admin/tables.css` dans `public/build/manifest.json`.
+- `node --test tests/Browser/admin-table-wheel-scroll.test.mjs` : molette, extrémités, absence de débordement, unités de défilement, contrôles et enregistrement unique.
 - Vérifier au navigateur les deux clics sur un en-tête, les filtres/recherches et la pagination, puis les largeurs ordinateur et mobile.
 - Vérifier les photos dans une fiche galerie et les rapports en fenêtre modale.
 - Déployer selon `docs/deploiement-hostinger.md`, exclusivement à partir du commit poussé ; aucune migration n’est nécessaire pour cette évolution.
+
+La livraison de cette correction doit inclure les fichiers applicatifs modifiés **et** `public/build` compilé depuis le commit poussé, dans `app/public/build` puis `public_html/build`. Ne supprimer aucun ancien asset et conserver le front controller et le lien `storage` du serveur. Rafraîchir `config:cache`, `route:cache` et `view:cache` après transfert.

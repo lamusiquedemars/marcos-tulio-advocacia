@@ -68,6 +68,7 @@ class ConversationResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->extraAttributes(['class' => 'admin-data-table'])
             ->modifyQueryUsing(fn (Builder $query): Builder => $query
                 ->with(['contact', 'messages']))
             ->defaultSort('last_message_at', 'desc')

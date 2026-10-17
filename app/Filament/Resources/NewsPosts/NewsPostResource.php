@@ -102,6 +102,7 @@ class NewsPostResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->extraAttributes(['class' => 'admin-data-table'])
             ->columns([
                 TextColumn::make('title')->sortable()
                     ->label('Titre')

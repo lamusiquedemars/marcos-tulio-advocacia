@@ -228,6 +228,7 @@ class ConversationSettingResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->extraAttributes(['class' => 'admin-data-table'])
             ->columns([
                 IconColumn::make('is_enabled')->sortable()->label('Ativo')->boolean(),
                 TextColumn::make('assistant_language')->sortable()->label('Idioma'),

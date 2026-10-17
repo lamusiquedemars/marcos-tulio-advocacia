@@ -185,6 +185,7 @@ class InquiryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->extraAttributes(['class' => 'admin-data-table'])
             ->defaultSort(fn (Builder $query) => $query
                 ->orderByRaw(
                     'case when status = ? then 0 when status = ? then 1 else 2 end',
@@ -378,6 +379,8 @@ class InquiryResource extends Resource
                         ->action(fn (Inquiry $record) => $record->moveTo(InquiryStatus::Archived)),
                 ])
                     ->label('Acompanhamento')
+                    ->dropdownTeleport()
+                    ->dropdownAutoPlacement()
                     ->icon(Heroicon::OutlinedEllipsisVertical),
                 EditAction::make()
                     ->label('Editar')

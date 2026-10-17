@@ -71,6 +71,7 @@ class AudienceSegmentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->extraAttributes(['class' => 'admin-data-table'])
             ->columns([
                 TextColumn::make('name')->sortable()
                     ->label('Nom')
