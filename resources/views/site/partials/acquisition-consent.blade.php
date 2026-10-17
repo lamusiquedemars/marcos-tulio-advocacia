@@ -16,7 +16,9 @@
     <script>
         (() => {
             const banner = document.querySelector('[data-consent-banner]');
-            const key = 'maracuja_analytics_consent';
+            // The v2 consent covers Ads conversion measurement too. Do not reuse
+            // the narrower choice stored by the former Analytics-only banner.
+            const key = 'maracuja_measurement_consent_v2';
             const cookieValue = document.cookie.match(new RegExp(`(?:^|; )${key}=([^;]+)`))?.[1];
             const saved = cookieValue || window.localStorage.getItem(key);
 

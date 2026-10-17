@@ -63,6 +63,7 @@ class AcquisitionAttributionTest extends TestCase
             ->assertSee('gtm_cookies_win', false)
             ->assertSee('adsMeasurement: value === \'granted\'', false)
             ->assertSee('personalizedAdvertising: false', false)
+            ->assertSee('maracuja_measurement_consent_v2', false)
             ->assertSee('Não usamos remarketing.', false);
     }
 
