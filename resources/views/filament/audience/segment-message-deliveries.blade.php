@@ -25,7 +25,7 @@
 <div
     class="space-y-4"
     x-data="{
-        sortKey: 'email',
+        sortKey: null,
         sortDirection: 'asc',
         sortBy(key) {
             if (this.sortKey === key) {
@@ -37,12 +37,13 @@
             this.sortDirection = 'asc';
         },
         sortedRows() {
+            if (!this.sortKey || !this.$refs.rows) return;
             const rows = Array.from(this.$refs.rows.querySelectorAll('tr'));
 
             rows.sort((a, b) => {
                 const left = a.dataset[this.sortKey] || '';
                 const right = b.dataset[this.sortKey] || '';
-                const result = left.localeCompare(right, 'fr', { numeric: true, sensitivity: 'base' });
+                const result = left.localeCompare(right, document.documentElement.lang || 'pt-BR', { numeric: true, sensitivity: 'base' });
 
                 return this.sortDirection === 'asc' ? result : -result;
             });
@@ -55,8 +56,8 @@
     <x-filament::section>
         <x-slot name="heading">Vue d'ensemble</x-slot>
 
-        <div class="overflow-x-auto rounded-lg" style="border: 1px solid #d1d5db;">
-            <table class="min-w-full table-fixed text-center text-sm" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+        <div class="admin-table-scroll overflow-x-auto rounded-lg" style="border: 1px solid #d1d5db;">
+            <table class="min-w-full text-center text-sm" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                 <thead>
                     <tr class="bg-gray-50 text-xs uppercase tracking-wide text-gray-600">
                         @foreach ($summaryColumns as $column)
@@ -87,48 +88,19 @@
             </p>
         </x-filament::section>
     @else
-        <div class="overflow-x-auto rounded-md" style="border: 1px solid #d1d5db;">
+        <div class="admin-table-scroll overflow-x-auto rounded-md" style="border: 1px solid #d1d5db;">
             <table class="min-w-full text-xs" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                 <thead class="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-600">
                     <tr>
-                        <th class="whitespace-nowrap font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;">
-                            <button type="button" x-on:click="sortBy('email')" class="inline-flex items-center gap-1">
-                                Email
-                            </button>
-                        </th>
-                        <th class="whitespace-nowrap font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;">
-                            <button type="button" x-on:click="sortBy('contact')" class="inline-flex items-center gap-1">
-                                Contact
-                            </button>
-                        </th>
-                        <th class="whitespace-nowrap font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;">
-                            <button type="button" x-on:click="sortBy('status')" class="inline-flex items-center gap-1">
-                                Statut
-                            </button>
-                        </th>
-                        <th class="whitespace-nowrap font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;">
-                            <button type="button" x-on:click="sortBy('domain')" class="inline-flex items-center gap-1">
-                                Domaine
-                            </button>
-                        </th>
-                        <th class="whitespace-nowrap font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;">
-                            <button type="button" x-on:click="sortBy('event')" class="inline-flex items-center gap-1">
-                                Dernier événement
-                            </button>
-                        </th>
-                        <th class="whitespace-nowrap font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;">
-                            <button type="button" x-on:click="sortBy('eventat')" class="inline-flex items-center gap-1">
-                                Date dernier événement
-                            </button>
-                        </th>
-                        <th class="whitespace-nowrap font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;">
-                            <button type="button" x-on:click="sortBy('sent')" class="inline-flex items-center gap-1">
-                                Envoyé le
-                            </button>
-                        </th>
-                        <th class="whitespace-nowrap font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;">Délivré le</th>
-                        <th class="whitespace-nowrap font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;">Ouvert le</th>
-                        <th class="whitespace-nowrap font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;">Cliqué le</th>
+                        @foreach (['email' => 'Email', 'contact' => 'Contact', 'status' => 'Statut', 'domain' => 'Domaine', 'event' => 'Dernier événement', 'eventat' => 'Date dernier événement', 'sent' => 'Envoyé le', 'delivered' => 'Délivré le', 'opened' => 'Ouvert le', 'clicked' => 'Cliqué le'] as $key => $label)
+                            <th class="whitespace-nowrap font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;"
+                                :aria-sort="sortKey === '{{ $key }}' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'">
+                                <button type="button" x-on:click="sortBy('{{ $key }}')" class="inline-flex items-center gap-1">
+                                    {{ $label }}
+                                    <span aria-hidden="true" x-text="sortKey === '{{ $key }}' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'"></span>
+                                </button>
+                            </th>
+                        @endforeach
                         <th class="min-w-72 font-medium" style="border: 1px solid #d1d5db; padding: 6px 8px;">Raison</th>
                     </tr>
                 </thead>
@@ -149,6 +121,9 @@
                             data-domain="{{ $delivery->domain() }}"
                             data-event="{{ $delivery->latest_event ?? '' }}"
                             data-eventat="{{ $delivery->latest_event_at?->format('Y-m-d H:i:s') ?? '' }}"
+                            data-delivered="{{ $delivery->delivered_at?->format('Y-m-d H:i:s') ?? '' }}"
+                            data-opened="{{ $delivery->opened_at?->format('Y-m-d H:i:s') ?? '' }}"
+                            data-clicked="{{ $delivery->clicked_at?->format('Y-m-d H:i:s') ?? '' }}"
                             data-sent="{{ $delivery->sent_at?->format('Y-m-d H:i:s') ?? '' }}"
                         >
                             <td class="whitespace-nowrap font-medium text-gray-900" style="border: 1px solid #d1d5db; padding: 6px 8px;">{{ $delivery->email }}</td>

@@ -72,7 +72,7 @@ class AudienceSegmentResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('name')->sortable()
                     ->label('Nom')
                     ->searchable(),
                 TextColumn::make('description')
@@ -92,7 +92,7 @@ class AudienceSegmentResource extends Resource
                     ->label('Messages')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('brevo_sync_status')
+                TextColumn::make('brevo_sync_status')->sortable()
                     ->label('Brevo')
                     ->badge()
                     ->formatStateUsing(fn (?string $state): string => match ($state) {

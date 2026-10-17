@@ -229,10 +229,10 @@ class ConversationSettingResource extends Resource
     {
         return $table
             ->columns([
-                IconColumn::make('is_enabled')->label('Ativo')->boolean(),
-                TextColumn::make('assistant_language')->label('Idioma'),
-                IconColumn::make('whatsapp_enabled')->label('WhatsApp')->boolean(),
-                IconColumn::make('callback_enabled')->label('Contato posterior')->boolean(),
+                IconColumn::make('is_enabled')->sortable()->label('Ativo')->boolean(),
+                TextColumn::make('assistant_language')->sortable()->label('Idioma'),
+                IconColumn::make('whatsapp_enabled')->sortable()->label('WhatsApp')->boolean(),
+                IconColumn::make('callback_enabled')->sortable()->label('Contato posterior')->boolean(),
             ])
             ->recordActions([
                 EditAction::make()

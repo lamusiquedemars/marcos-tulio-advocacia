@@ -133,10 +133,10 @@ class PageResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('title')->sortable()
                     ->label('Titre')
                     ->searchable(),
-                TextColumn::make('slug')
+                TextColumn::make('slug')->sortable()
                     ->searchable(),
                 TextColumn::make('type')
                     ->label('Type')
@@ -148,7 +148,7 @@ class PageResource extends Resource
                     })
                     ->badge()
                     ->sortable(),
-                TextColumn::make('template')
+                TextColumn::make('template')->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('hero_title')
@@ -157,7 +157,7 @@ class PageResource extends Resource
                     ->disk('public'),
                 TextColumn::make('seo_title')
                     ->searchable(),
-                IconColumn::make('is_published')
+                IconColumn::make('is_published')->sortable()
                     ->label('Publié')
                     ->boolean(),
                 TextColumn::make('published_at')

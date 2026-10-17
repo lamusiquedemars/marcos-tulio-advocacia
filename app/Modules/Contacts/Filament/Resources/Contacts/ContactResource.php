@@ -13,8 +13,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Support\Enums\Width;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use UnitEnum;
@@ -94,14 +94,14 @@ class ContactResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('display_name')
+                TextColumn::make('display_name')->sortable()
                     ->label(__('admin.conversations.contact'))
                     ->default(fn (Contact $record): string => trim("{$record->first_name} {$record->last_name}") ?: __('admin.contacts.unnamed'))
                     ->searchable(['display_name', 'first_name', 'last_name']),
-                TextColumn::make('email')->label(__('admin.contacts.email'))->searchable(),
-                TextColumn::make('phone')->label(__('admin.contacts.phone'))->searchable(),
-                TextColumn::make('organization_name')->label(__('admin.contacts.organization'))->toggleable(),
-                TextColumn::make('source')->label(__('admin.contacts.source'))->badge(),
+                TextColumn::make('email')->sortable()->label(__('admin.contacts.email'))->searchable(),
+                TextColumn::make('phone')->sortable()->label(__('admin.contacts.phone'))->searchable(),
+                TextColumn::make('organization_name')->sortable()->label(__('admin.contacts.organization'))->toggleable(),
+                TextColumn::make('source')->sortable()->label(__('admin.contacts.source'))->badge(),
                 TextColumn::make('updated_at')->label(__('admin.contacts.updated_at'))->dateTime()->sortable(),
             ])
             ->recordActions([

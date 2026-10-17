@@ -69,27 +69,27 @@ class ConversationResource extends Resource
     {
         return $table
             ->modifyQueryUsing(fn (Builder $query): Builder => $query
-                ->with(['contact', 'messages'])
-                ->latest('last_message_at'))
+                ->with(['contact', 'messages']))
+            ->defaultSort('last_message_at', 'desc')
             ->columns([
-                TextColumn::make('public_reference')
+                TextColumn::make('public_reference')->sortable()
                     ->label(__('admin.conversations.reference'))
                     ->searchable(),
-                TextColumn::make('contact.display_name')
+                TextColumn::make('contact.display_name')->sortable()
                     ->label(__('admin.conversations.contact'))
                     ->default(__('admin.conversations.anonymous_visitor'))
                     ->searchable(),
-                TextColumn::make('status')
+                TextColumn::make('status')->sortable()
                     ->label(__('admin.conversations.status'))
                     ->badge()
                     ->formatStateUsing(fn (ConversationStatus $state): string => $state->label())
                     ->color(fn (ConversationStatus $state): string => $state->color()),
-                TextColumn::make('urgency')
+                TextColumn::make('urgency')->sortable()
                     ->label(__('admin.conversations.urgency'))
                     ->badge()
                     ->formatStateUsing(fn (ConversationUrgency $state): string => $state->label())
                     ->color(fn (ConversationUrgency $state): string => $state->color()),
-                TextColumn::make('topic')->label(__('admin.conversations.subject'))->limit(32)->toggleable(),
+                TextColumn::make('topic')->sortable()->label(__('admin.conversations.subject'))->limit(32)->toggleable(),
                 TextColumn::make('messages.content')
                     ->label(__('admin.conversations.last_message'))
                     ->getStateUsing(fn (Conversation $record): ?string => $record->messages

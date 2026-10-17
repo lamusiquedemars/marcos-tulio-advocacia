@@ -114,10 +114,10 @@ class ContentSlotResource extends Resource
                 TextColumn::make('group')
                     ->label('Page / module')
                     ->sortable(),
-                TextColumn::make('label')
+                TextColumn::make('label')->sortable()
                     ->label('Nom')
                     ->searchable(),
-                TextColumn::make('key')
+                TextColumn::make('key')->sortable()
                     ->label('Clé')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -125,9 +125,9 @@ class ContentSlotResource extends Resource
                     ->label('Contenu')
                     ->limit(56)
                     ->searchable(),
-                TextColumn::make('type')
+                TextColumn::make('type')->sortable()
                     ->label('Type'),
-                IconColumn::make('is_locked')
+                IconColumn::make('is_locked')->sortable()
                     ->label('Verrou')
                     ->boolean(),
             ])

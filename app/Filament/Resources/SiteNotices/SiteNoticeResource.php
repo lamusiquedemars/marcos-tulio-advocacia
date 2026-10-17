@@ -105,7 +105,7 @@ class SiteNoticeResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('title')->sortable()
                     ->label('Titre')
                     ->placeholder('Sans titre')
                     ->searchable(),
@@ -113,9 +113,9 @@ class SiteNoticeResource extends Resource
                     ->label('Message')
                     ->limit(48)
                     ->searchable(),
-                TextColumn::make('placement')
+                TextColumn::make('placement')->sortable()
                     ->label('Emplacement'),
-                IconColumn::make('is_published')
+                IconColumn::make('is_published')->sortable()
                     ->label('Publié')
                     ->boolean(),
                 TextColumn::make('starts_at')

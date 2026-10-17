@@ -148,18 +148,18 @@ class OralDefenseResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('title')->sortable()
                     ->label('Título')
                     ->searchable()
                     ->wrap(),
-                TextColumn::make('type')
+                TextColumn::make('type')->sortable()
                     ->label('Tipo')
                     ->badge()
                     ->formatStateUsing(fn (OralDefenseType $state): string => $state->label()),
-                IconColumn::make('is_featured')
+                IconColumn::make('is_featured')->sortable()
                     ->label('Principal')
                     ->boolean(),
-                TextColumn::make('status')
+                TextColumn::make('status')->sortable()
                     ->label('Estado')
                     ->badge()
                     ->formatStateUsing(fn (OralDefenseStatus $state): string => $state->label())

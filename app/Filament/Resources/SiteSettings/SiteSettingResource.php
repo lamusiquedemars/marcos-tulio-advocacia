@@ -113,17 +113,17 @@ class SiteSettingResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('site_name')
+                TextColumn::make('site_name')->sortable()
                     ->label('Nome')
                     ->searchable(),
                 TextColumn::make('baseline')
                     ->searchable(),
                 TextColumn::make('default_seo_title')
                     ->searchable(),
-                TextColumn::make('contact_email')
+                TextColumn::make('contact_email')->sortable()
                     ->label('Email')
                     ->searchable(),
-                TextColumn::make('phone')
+                TextColumn::make('phone')->sortable()
                     ->searchable(),
                 TextColumn::make('logo_path')
                     ->searchable(),

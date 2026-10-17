@@ -96,20 +96,20 @@ class AudienceContactResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('first_name')
+                TextColumn::make('first_name')->sortable()
                     ->label('Prénom')
                     ->searchable(),
-                TextColumn::make('last_name')
+                TextColumn::make('last_name')->sortable()
                     ->label('Nom')
                     ->searchable(),
-                TextColumn::make('organization_name')
+                TextColumn::make('organization_name')->sortable()
                     ->label('Organisation')
                     ->searchable()
                     ->toggleable(),
-                TextColumn::make('email')
+                TextColumn::make('email')->sortable()
                     ->label('Email')
                     ->searchable(),
-                IconColumn::make('accepts_email')
+                IconColumn::make('accepts_email')->sortable()
                     ->label('Emails')
                     ->boolean(),
                 TextColumn::make('segments.name')

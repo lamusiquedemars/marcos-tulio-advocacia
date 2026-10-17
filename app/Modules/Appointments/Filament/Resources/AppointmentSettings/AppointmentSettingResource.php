@@ -113,15 +113,15 @@ class AppointmentSettingResource extends Resource
     {
         return $table
             ->columns([
-                IconColumn::make('is_enabled')->label('Ativo')->boolean(),
-                TextColumn::make('provider')
+                IconColumn::make('is_enabled')->sortable()->label('Ativo')->boolean(),
+                TextColumn::make('provider')->sortable()
                     ->label('Provedor')
                     ->formatStateUsing(fn (AppointmentProvider $state): string => $state->label()),
-                TextColumn::make('mode')
+                TextColumn::make('mode')->sortable()
                     ->label('Modo')
                     ->formatStateUsing(fn (AppointmentMode $state): string => $state->label()),
-                TextColumn::make('timezone')->label('Fuso horário'),
-                TextColumn::make('booking_url')->label('Página de agendamento')->limit(45),
+                TextColumn::make('timezone')->sortable()->label('Fuso horário'),
+                TextColumn::make('booking_url')->sortable()->label('Página de agendamento')->limit(45),
             ])
             ->recordActions([
                 EditAction::make()->label('Configurar'),

@@ -82,10 +82,10 @@ class AcquisitionSettingResource extends Resource
     {
         return $table
             ->columns([
-                IconColumn::make('is_enabled')->label('Ativa')->boolean(),
-                TextColumn::make('gtm_container_id')->label('Contêiner GTM')->placeholder('Não configurado'),
-                TextColumn::make('consent_mode')->label('Consentimento'),
-                TextColumn::make('currency')->label('Moeda'),
+                IconColumn::make('is_enabled')->sortable()->label('Ativa')->boolean(),
+                TextColumn::make('gtm_container_id')->sortable()->label('Contêiner GTM')->placeholder('Não configurado'),
+                TextColumn::make('consent_mode')->sortable()->label('Consentimento'),
+                TextColumn::make('currency')->sortable()->label('Moeda'),
             ])
             ->recordActions([EditAction::make()->label('Configurar')])
             ->toolbarActions([]);

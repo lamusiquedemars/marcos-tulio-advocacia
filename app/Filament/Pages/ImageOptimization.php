@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Concerns\SortsReportRows;
 use App\Support\Images\SiteImageOptimizer;
 use App\Support\Modules;
 use App\Support\PanelAccess;
@@ -14,6 +15,18 @@ use UnitEnum;
 
 class ImageOptimization extends Page
 {
+    use SortsReportRows;
+
+    protected function sortableReportColumns(): array
+    {
+        return ['path', 'before_size', 'after_size'];
+    }
+
+    public function sortedImages(): array
+    {
+        return $this->sortedReportRows($this->optimizedImages);
+    }
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
 
     protected static string|UnitEnum|null $navigationGroup = 'Outils';

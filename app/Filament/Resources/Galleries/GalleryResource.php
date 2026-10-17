@@ -77,10 +77,10 @@ class GalleryResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('title')->sortable()
                     ->label('Nom')
                     ->searchable(),
-                TextColumn::make('slug')
+                TextColumn::make('slug')->sortable()
                     ->label('Slug')
                     ->searchable()
                     ->copyable(),
@@ -88,7 +88,7 @@ class GalleryResource extends Resource
                     ->counts('images')
                     ->label('Photos')
                     ->sortable(),
-                IconColumn::make('is_published')
+                IconColumn::make('is_published')->sortable()
                     ->label('Publié')
                     ->boolean(),
             ])

@@ -168,7 +168,7 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('title')->sortable()
                     ->label('Titre')
                     ->searchable(),
                 ImageColumn::make('image_path')
@@ -178,17 +178,17 @@ class EventResource extends Resource
                     ->label('Date et heure')
                     ->dateTime()
                     ->sortable(),
-                TextColumn::make('venue.name')
+                TextColumn::make('venue.name')->sortable()
                     ->label('Lieu')
                     ->searchable(),
-                TextColumn::make('status')
+                TextColumn::make('status')->sortable()
                     ->label('Statut')
                     ->badge()
                     ->formatStateUsing(fn (Event $record): string => $record->statusLabel()),
-                IconColumn::make('is_featured')
+                IconColumn::make('is_featured')->sortable()
                     ->label('Une')
                     ->boolean(),
-                IconColumn::make('is_published')
+                IconColumn::make('is_published')->sortable()
                     ->label('Publié')
                     ->boolean(),
                 TextColumn::make('updated_at')

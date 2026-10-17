@@ -115,12 +115,12 @@ class SegmentMessageResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('subject')
+                TextColumn::make('subject')->sortable()
                     ->label('Sujet')
                     ->searchable(),
-                TextColumn::make('segment.name')
+                TextColumn::make('segment.name')->sortable()
                     ->label('Segment'),
-                TextColumn::make('provider')
+                TextColumn::make('provider')->sortable()
                     ->label('Mode')
                     ->badge()
                     ->formatStateUsing(fn (?string $state): string => match ($state) {
@@ -128,12 +128,12 @@ class SegmentMessageResource extends Resource
                         default => 'Envoi standard',
                     })
                     ->color(fn (?string $state): string => $state === SegmentMessage::PROVIDER_BREVO ? 'info' : 'gray'),
-                TextColumn::make('status')
+                TextColumn::make('status')->sortable()
                     ->label('Statut')
                     ->badge()
                     ->formatStateUsing(fn (string $state) => self::statusLabel($state))
                     ->color(fn (string $state) => self::statusColor($state)),
-                TextColumn::make('brevo_campaign_id')
+                TextColumn::make('brevo_campaign_id')->sortable()
                     ->label('Campagne Brevo')
                     ->formatStateUsing(fn (?int $state): string => $state ? "#{$state}" : '—')
                     ->toggleable(),

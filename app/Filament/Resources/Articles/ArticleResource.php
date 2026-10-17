@@ -153,15 +153,15 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('title')->sortable()
                     ->label('Titre')
                     ->searchable(),
-                TextColumn::make('slug')
+                TextColumn::make('slug')->sortable()
                     ->searchable(),
                 ImageColumn::make('image_path')
                     ->disk('public')
                     ->label('Image'),
-                IconColumn::make('is_published')
+                IconColumn::make('is_published')->sortable()
                     ->label('Publié')
                     ->boolean(),
                 TextColumn::make('published_at')

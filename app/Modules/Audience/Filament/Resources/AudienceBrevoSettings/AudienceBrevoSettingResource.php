@@ -106,12 +106,12 @@ class AudienceBrevoSettingResource extends Resource
     {
         return $table
             ->columns([
-                IconColumn::make('is_enabled')
+                IconColumn::make('is_enabled')->sortable()
                     ->label('Actif')
                     ->boolean(),
-                TextColumn::make('sender_email')
+                TextColumn::make('sender_email')->sortable()
                     ->label('Expéditeur'),
-                TextColumn::make('last_connection_test_status')
+                TextColumn::make('last_connection_test_status')->sortable()
                     ->label('Dernier test')
                     ->badge()
                     ->color(fn (?string $state): string => match ($state) {

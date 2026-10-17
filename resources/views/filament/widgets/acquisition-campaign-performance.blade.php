@@ -18,12 +18,12 @@
                 Ainda não há campanhas vinculadas a este site no Cremona.
             </p>
         @else
-            <div class="overflow-x-auto">
+            <div class="admin-table-scroll overflow-x-auto">
                 <table class="w-full text-left text-sm">
                     <thead class="border-b text-xs uppercase text-gray-500 dark:border-white/10 dark:text-gray-400">
                         <tr>
-                            <th class="px-3 py-3">Campanha</th>
-                            <th class="px-3 py-3">Canal</th>
+                            <x-admin.sortable-report-heading column="name" class="px-3 py-3">Campanha</x-admin.sortable-report-heading>
+                            <x-admin.sortable-report-heading column="channel" class="px-3 py-3">Canal</x-admin.sortable-report-heading>
                             <th class="px-3 py-3 text-right">Investimento</th>
                             <th class="px-3 py-3 text-right">Solicitações</th>
                             <th class="px-3 py-3 text-right">Convertidas</th>

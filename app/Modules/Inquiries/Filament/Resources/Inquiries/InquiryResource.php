@@ -185,7 +185,7 @@ class InquiryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query
+            ->defaultSort(fn (Builder $query) => $query
                 ->orderByRaw(
                     'case when status = ? then 0 when status = ? then 1 else 2 end',
                     [InquiryStatus::New->value, InquiryStatus::ToHandle->value]
@@ -199,26 +199,26 @@ class InquiryResource extends Resource
                     ->formatStateUsing(fn (InquiryStatus|string|null $state) => self::statusFrom($state)?->label() ?? '-')
                     ->color(fn (InquiryStatus|string|null $state) => self::statusFrom($state)?->color() ?? 'gray')
                     ->sortable(),
-                TextColumn::make('conversation.public_reference')
+                TextColumn::make('conversation.public_reference')->sortable()
                     ->label('Conversa')
                     ->placeholder('—')
                     ->searchable()
                     ->toggleable(),
-                TextColumn::make('name')
+                TextColumn::make('name')->sortable()
                     ->label('Nome')
                     ->searchable(),
-                TextColumn::make('email')
+                TextColumn::make('email')->sortable()
                     ->label('Email')
                     ->searchable(),
-                TextColumn::make('request_type')
+                TextColumn::make('request_type')->sortable()
                     ->label('Tipo')
                     ->formatStateUsing(fn (InquiryRequestType|string|null $state): string => self::enumLabel($state) ?? '-'),
-                TextColumn::make('urgency')
+                TextColumn::make('urgency')->sortable()
                     ->label('Urgência')
                     ->badge()
                     ->formatStateUsing(fn (InquiryUrgency|string|null $state): string => self::enumLabel($state) ?? '-')
                     ->color(fn (InquiryUrgency|string|null $state): string => self::urgencyFrom($state)?->color() ?? 'gray'),
-                TextColumn::make('attribution_source')
+                TextColumn::make('attribution_source')->sortable()
                     ->label('Origem')
                     ->placeholder('Direta / desconhecida')
                     ->description(fn (Inquiry $record): ?string => $record->attribution_campaign)
@@ -231,7 +231,7 @@ class InquiryResource extends Resource
                     ->label('Recebida em')
                     ->dateTime('d/m/Y H:i')
                     ->sortable(),
-                TextColumn::make('read_at')
+                TextColumn::make('read_at')->sortable()
                     ->label('Consultada em')
                     ->dateTime()
                     ->toggleable(isToggledHiddenByDefault: true),

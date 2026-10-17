@@ -112,19 +112,19 @@ class MediaAssetResource extends Resource
                     ->label('Visualização')
                     ->view('filament.media.columns.preview'),
                 Stack::make([
-                    TextColumn::make('display_name')
+                    TextColumn::make('display_name')->sortable()
                         ->label('Nome')
                         ->weight('semibold')
                         ->searchable(['display_name', 'original_name', 'path', 'alt_text', 'caption', 'credit'])
                         ->lineClamp(2)
                         ->wrap(),
-                    TextColumn::make('original_name')
+                    TextColumn::make('original_name')->sortable()
                         ->label('Arquivo')
                         ->color('gray')
                         ->size('sm')
                         ->lineClamp(1)
                         ->limit(40),
-                    TextColumn::make('type')
+                    TextColumn::make('type')->sortable()
                         ->badge()
                         ->formatStateUsing(fn (MediaType $state): string => $state->label())
                         ->color(fn (MediaType $state): string => match ($state) {

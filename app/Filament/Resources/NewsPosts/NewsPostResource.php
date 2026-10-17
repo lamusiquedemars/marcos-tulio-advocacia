@@ -103,21 +103,21 @@ class NewsPostResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('title')->sortable()
                     ->label('Titre')
                     ->searchable(),
-                TextColumn::make('slug')
+                TextColumn::make('slug')->sortable()
                     ->searchable(),
                 ImageColumn::make('image_path')
                     ->disk('public'),
-                IconColumn::make('is_published')
+                IconColumn::make('is_published')->sortable()
                     ->label('Publié')
                     ->boolean(),
                 IconColumn::make('is_pinned')
                     ->label('Épinglé')
                     ->boolean()
                     ->sortable(),
-                IconColumn::make('has_detail_page')
+                IconColumn::make('has_detail_page')->sortable()
                     ->label('Détail')
                     ->boolean(),
                 TextColumn::make('published_at')

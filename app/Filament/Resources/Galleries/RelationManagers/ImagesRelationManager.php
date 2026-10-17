@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Galleries\RelationManagers;
 
-use App\Modules\Media\Filament\Forms\Components\MediaPicker;
 use App\Modules\Gallery\Models\Gallery;
 use App\Modules\Gallery\Models\GalleryImage;
+use App\Modules\Media\Filament\Forms\Components\MediaPicker;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -20,6 +20,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\HtmlString;
 
 class ImagesRelationManager extends RelationManager
@@ -94,6 +95,7 @@ class ImagesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query->reorder())
             ->columns([
                 TextColumn::make('resolved_image_url')
                     ->label('Aperçu')
@@ -103,7 +105,7 @@ class ImagesRelationManager extends RelationManager
                             : ''
                     ))
                     ->html(),
-                TextColumn::make('title')
+                TextColumn::make('title')->sortable()
                     ->label('Titre')
                     ->searchable(),
                 TextColumn::make('caption')
@@ -119,7 +121,7 @@ class ImagesRelationManager extends RelationManager
                     ->label('Ordre')
                     ->numeric()
                     ->sortable(),
-                IconColumn::make('is_published')
+                IconColumn::make('is_published')->sortable()
                     ->label('Publié')
                     ->boolean(),
             ])

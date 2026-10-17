@@ -2,6 +2,7 @@
 
 namespace App\Modules\Acquisition\Filament\Widgets;
 
+use App\Filament\Concerns\SortsReportRows;
 use App\Modules\Acquisition\Models\AcquisitionReportingSnapshot;
 use App\Support\Modules;
 use Filament\Widgets\Widget;
@@ -9,6 +10,13 @@ use Illuminate\Support\Facades\Schema;
 
 class AcquisitionCampaignPerformance extends Widget
 {
+    use SortsReportRows;
+
+    protected function sortableReportColumns(): array
+    {
+        return ['name', 'channel'];
+    }
+
     protected static ?int $sort = 31;
 
     protected int|string|array $columnSpan = 'full';
@@ -49,7 +57,7 @@ class AcquisitionCampaignPerformance extends Widget
             ->all();
 
         return [
-            'campaigns' => $campaigns,
+            'campaigns' => $this->sortedReportRows($campaigns),
             'fetchedAt' => $snapshot?->fetched_at,
             'hasSnapshot' => $snapshot !== null,
         ];

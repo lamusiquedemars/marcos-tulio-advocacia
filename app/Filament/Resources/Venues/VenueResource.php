@@ -147,21 +147,21 @@ class VenueResource extends Resource
                     ->label('Nom')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('type')
+                TextColumn::make('type')->sortable()
                     ->label('Type')
                     ->badge(),
                 TextColumn::make('city')
                     ->label('Ville')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('country')
+                TextColumn::make('country')->sortable()
                     ->label('Pays')
                     ->searchable(),
                 TextColumn::make('events_count')
                     ->counts('events')
                     ->label('Événements')
                     ->sortable(),
-                IconColumn::make('is_active')
+                IconColumn::make('is_active')->sortable()
                     ->label('Actif')
                     ->boolean(),
                 TextColumn::make('updated_at')

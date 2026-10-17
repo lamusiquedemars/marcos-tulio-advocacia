@@ -73,17 +73,17 @@
                                 <table class="fi-ta-table">
                                     <thead>
                                         <tr>
-                                            <th class="fi-ta-header-cell">Image</th>
+                                            <x-admin.sortable-report-heading column="path" class="fi-ta-header-cell">Image</x-admin.sortable-report-heading>
                                             <th class="fi-ta-header-cell fi-align-end">Dimensions avant</th>
                                             <th class="fi-ta-header-cell fi-align-end">Dimensions après</th>
-                                            <th class="fi-ta-header-cell fi-align-end">Poids avant</th>
-                                            <th class="fi-ta-header-cell fi-align-end">Poids après</th>
+                                            <x-admin.sortable-report-heading column="before_size" class="fi-ta-header-cell fi-align-end">Poids avant</x-admin.sortable-report-heading>
+                                            <x-admin.sortable-report-heading column="after_size" class="fi-ta-header-cell fi-align-end">Poids après</x-admin.sortable-report-heading>
                                             <th class="fi-ta-header-cell fi-align-end">Ratio</th>
                                             <th class="fi-ta-header-cell fi-align-end">Gain</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($optimizedImages as $image)
+                                        @foreach ($this->sortedImages() as $image)
                                             <tr class="fi-ta-row">
                                                 <td class="fi-ta-cell">
                                                     <div class="fi-ta-text font-mono text-xs" title="{{ $image['path'] }}">
