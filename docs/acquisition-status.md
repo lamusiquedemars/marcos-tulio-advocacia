@@ -33,9 +33,9 @@
 | 3 | fait | Conteneur Web GTM créé par Maracuja pour le domaine. | Ajouter Marcos administrateur GTM dès qu’il est disponible. |
 | 4 | fait en production | ID GTM configuré ; bannière portugaise déployée, consentement `basic` et absence de chargement direct vérifiés. | Tester le refus et l’acceptation dans un navigateur avant publication GTM. |
 | 5 | fait | Propriété GA4 et flux Web créés par Maracuja. | Ajouter Marcos administrateur GA4 dès qu’il est disponible. |
-| 6 | fait | Le 1er septembre 2026, Tag Assistant a confirmé la balise GA4 ; le conteneur GTM a ensuite été publié. | Vérifier une collecte réelle dans GA4. |
-| 7 | fait pour le lancement | Le 1er septembre 2026, `whatsapp_click`, `phone_click` et `generate_lead` ont été confirmés dans GTM Preview, avec leurs balises GA4 déclenchées, puis publiées dans GTM. La mesure de consultation par bouton radio est reportée ; elle ne bloque pas le lancement. | Vérifier une collecte réelle dans GA4. |
-| 8 | fait | `generate_lead` est confirmé comme événement clé GA4, sans valeur monétaire par défaut et comptabilisé une fois par événement. | Contrôler les premières conversions réelles. |
+| 6 | fait | Le 17 octobre 2026, Tag Assistant a confirmé la balise GA4 et le chargement du conteneur publié après consentement. | Contrôler les données agrégées après le délai GA4 habituel. |
+| 7 | fait | Le 17 octobre 2026, `whatsapp_click`, `phone_click` et `generate_lead` ont chacun déclenché leur balise GA4 avec le statut « Réussite » dans Tag Assistant. La mesure de consultation via bouton radio reste volontairement reportée. | Contrôler les événements agrégés dans GA4. |
+| 8 | fait | Le 17 octobre 2026, `generate_lead` est arrivé dans GA4 et a été compté une fois comme événement clé. | Contrôler les premières conversions réelles issues des annonces. |
 | 9 | fait | Le 1er septembre 2026, la propriété Search Console `marcostulioadvocacia.com.br` a été associée au flux GA4 `G-R2YMNR6NG0`. | Attendre les premières données SEO. |
 | 10 | fait | Compte Ads Marcos visible `Actif` dans le MCC Maracuja et associé au flux GA4 `G-R2YMNR6NG0`. | Surveiller la diffusion et les alertes Google Ads. |
 | 11 | fait | Le 1er septembre 2026, l’événement clé GA4 `generate_lead` a été importé dans Google Ads sous le nom `Enviar formulário de lead`. Aucun snippet Google Ads supplémentaire n’est installé. | Vérifier les premières conversions importées. |
@@ -64,3 +64,5 @@
 - 2026-09-01 — Ciblage géographique corrigé : État de Mato Grosso (Brésil) uniquement. Cuiabá, Gramado (RS) et Iporá (GO), qui formaient une liste incohérente, ont été retirés.
 - 2026-09-01 — Option de ciblage géographique réglée sur la présence habituelle dans les lieux ciblés.
 - 2026-09-02 — Campagne Marcos activée dans Google Ads avec l’autorisation explicite d’Ivo. Statut observé : `Em aprendizado`.
+- 2026-10-17 — Diagnostic de production : le conteneur publié `GTM-53RBHG26` contient bien la balise GA4 et les trois événements. Le chargeur du site a été ajusté pour transmettre les paramètres de session Tag Assistant, nécessaires à la prévisualisation avec le consentement `basic`, sans charger GTM pour les visiteurs ordinaires avant accord.
+- 2026-10-17 — Validation de bout en bout dans Safari : Tag Assistant connecté ; `GA4 — WhatsApp click`, `GA4 — Phone click` et `GA4 — Generate lead` ont tous affiché « Réussite ». GA4 a reçu `generate_lead` et l’a compté une fois comme événement clé.
