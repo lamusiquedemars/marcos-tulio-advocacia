@@ -61,7 +61,9 @@ class AcquisitionAttributionTest extends TestCase
             ->assertSee("event: 'gtm.js'", false)
             ->assertSee('maracujaIsGtmPreview', false)
             ->assertSee('gtm_cookies_win', false)
-            ->assertSee('marketing: false', false);
+            ->assertSee('adsMeasurement: value === \'granted\'', false)
+            ->assertSee('personalizedAdvertising: false', false)
+            ->assertSee('Não usamos remarketing.', false);
     }
 
     public function test_successful_contact_queues_an_anonymous_google_lead_event_for_the_next_page(): void

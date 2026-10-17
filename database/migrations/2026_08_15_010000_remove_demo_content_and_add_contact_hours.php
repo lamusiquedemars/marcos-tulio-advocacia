@@ -56,7 +56,7 @@ return new class extends Migration
                 'excerpt' => 'Informações legais e condições de uso do site.',
                 'hero_title' => 'Aviso legal',
                 'hero_subtitle' => 'Informações institucionais e condições de uso.',
-                'content' => '<p>As informações deste site têm caráter institucional e informativo. O envio de uma mensagem não cria relação advogado-cliente nem substitui uma consulta jurídica.</p><p>Os dados enviados pelos formulários são utilizados exclusivamente para analisar e responder à solicitação de contato.</p>',
+                'content' => '<p>As informações deste site têm caráter institucional e informativo. O envio de uma mensagem não cria relação advogado-cliente nem substitui uma consulta jurídica.</p><p>Os dados enviados pelos formulários são utilizados exclusivamente para analisar e responder à solicitação de contato.</p><p>Com autorização, utilizamos Google Analytics e a medição de conversões do Google Ads para medir o uso do site e saber se os anúncios geram contatos. Não utilizamos remarketing.</p>',
             ],
         ];
 

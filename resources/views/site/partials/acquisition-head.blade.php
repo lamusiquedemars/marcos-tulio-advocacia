@@ -61,22 +61,24 @@
 
         window.maracujaSetConsent = window.maracujaSetConsent || function (choice) {
             const analyticsGranted = choice?.analytics === true;
-            const marketingGranted = choice?.marketing === true;
+            const adsMeasurementGranted = choice?.adsMeasurement === true;
+            const personalizedAdvertisingGranted = choice?.personalizedAdvertising === true
+                && adsMeasurementGranted;
 
             window.MaracujaAcquisitionConfig.analyticsConsent = analyticsGranted;
-            window.MaracujaAcquisitionConfig.marketingConsent = marketingGranted;
+            window.MaracujaAcquisitionConfig.marketingConsent = adsMeasurementGranted;
 
             window.maracujaGtag('consent', 'update', {
                 analytics_storage: analyticsGranted ? 'granted' : 'denied',
-                ad_storage: marketingGranted ? 'granted' : 'denied',
-                ad_user_data: marketingGranted ? 'granted' : 'denied',
-                ad_personalization: marketingGranted ? 'granted' : 'denied',
+                ad_storage: adsMeasurementGranted ? 'granted' : 'denied',
+                ad_user_data: adsMeasurementGranted ? 'granted' : 'denied',
+                ad_personalization: personalizedAdvertisingGranted ? 'granted' : 'denied',
             });
 
-            if (analyticsGranted || marketingGranted) window.maracujaLoadGtm();
+            if (analyticsGranted || adsMeasurementGranted) window.maracujaLoadGtm();
 
             window.dispatchEvent(new CustomEvent('maracuja:consent-updated', {
-                detail: { analytics: analyticsGranted, marketing: marketingGranted },
+                detail: { analytics: analyticsGranted, marketing: adsMeasurementGranted },
             }));
         };
 
