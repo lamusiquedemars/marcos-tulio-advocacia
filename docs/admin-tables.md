@@ -18,11 +18,17 @@ Le hook `resources/views/filament/hooks/table-wheel-scroll.blade.php` convertit 
 
 **Convention à conserver :** vérifier le DOM réel avant toute modification. La classe est sur le parent : ne pas utiliser `:has(.admin-data-table)`. Ne créer aucun slider, fausse barre de défilement, couleur de test ou commande supplémentaire pour remplacer la barre native. Ne masquer aucune colonne métier.
 
+## Barres natives sur macOS
+
+Ne pas appliquer simultanément `scrollbar-color` avec une couleur et les pseudo-éléments `::-webkit-scrollbar` dans Chromium/WebKit : la propriété standard prend le dessus et réactive les barres superposées masquées de macOS. Le CSS conserve `scrollbar-color: auto` dans ces moteurs ; les couleurs standard sont réservées aux moteurs sans ces pseudo-éléments. La barre reste native, grise et manipulable.
+
+Les contrôles doivent mesurer la hauteur réellement réservée à la barre et déplacer son curseur natif, pas seulement vérifier `overflow-x` ou `scrollLeft`. Dans Playwright, retirer l’argument headless `--hide-scrollbars`, sinon les captures masquent précisément ce défaut. Le test `admin-table-scrollbar.test.mjs` vérifie les tableaux et rapports dans les deux thèmes.
+
 ## Vérification
 
 - `composer test` : suite complète, comprenant `AdminTableSortingTest` et `ReportSortingTest`.
 - `npm ci --ignore-scripts && npm run build` ; vérifier l’entrée `resources/css/filament/admin/tables.css` dans `public/build/manifest.json`.
-- `node --test tests/Browser/admin-table-wheel-scroll.test.mjs` : molette, extrémités, absence de débordement, unités de défilement, contrôles et enregistrement unique.
+- `npx playwright install chromium` si le navigateur de test n’est pas déjà installé, puis `npm run test:admin-tables` après le build : visibilité et manipulation de la barre native, molette, extrémités, contrôles et enregistrement unique.
 - Vérifier au navigateur les deux clics sur un en-tête, les filtres/recherches et la pagination, puis les largeurs ordinateur et mobile.
 - Vérifier les photos dans une fiche galerie et les rapports en fenêtre modale.
 - Déployer selon `docs/deploiement-hostinger.md`, exclusivement à partir du commit poussé ; aucune migration n’est nécessaire pour cette évolution.
