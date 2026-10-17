@@ -54,7 +54,7 @@ class AcquisitionAttributionTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('Cookies de medição')
-            ->assertSee('Aceitar')
+            ->assertSee('Aceitar medição')
             ->assertSee('Recusar')
             ->assertSee('maracujaSetConsent', false)
             ->assertSee("'gtm.start': new Date().getTime()", false)

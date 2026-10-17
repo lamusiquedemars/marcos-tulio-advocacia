@@ -8,7 +8,7 @@
         <p>Com sua autorização, usamos Google Analytics e Google Ads para medir o uso do site e saber se os anúncios geram contatos. Não usamos remarketing.</p>
         <p><a href="{{ $privacyUrl }}">Saiba mais no aviso legal e de privacidade</a></p>
         <div class="consent-banner__actions">
-            <button class="btn btn--primary" type="button" data-acquisition-consent="granted">Aceitar</button>
+            <button class="btn btn--primary" type="button" data-acquisition-consent="granted">Aceitar medição</button>
             <button class="btn btn--secondary" type="button" data-acquisition-consent="denied">Recusar</button>
         </div>
     </aside>
