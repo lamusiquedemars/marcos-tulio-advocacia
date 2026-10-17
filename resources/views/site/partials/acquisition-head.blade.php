@@ -34,9 +34,29 @@
 
             const script = document.createElement('script');
             script.async = true;
-            script.src = 'https://www.googletagmanager.com/gtm.js?id='
-                + encodeURIComponent(window.MaracujaAcquisitionConfig.gtmContainerId);
+            const source = new URL('https://www.googletagmanager.com/gtm.js');
+            source.searchParams.set('id', window.MaracujaAcquisitionConfig.gtmContainerId);
+
+            // Tag Assistant turns a published GTM container into its preview version
+            // through these session parameters. The public site normally has none of
+            // them. Carrying them to the dynamically loaded container makes Preview
+            // work with our consent-first (basic mode) implementation.
+            const pageParameters = new URLSearchParams(window.location.search);
+            ['gtm_auth', 'gtm_preview', 'gtm_debug', 'gtm_cookies_win'].forEach((name) => {
+                const value = pageParameters.get(name);
+                if (value) source.searchParams.set(name, value);
+            });
+
+            script.src = source.toString();
             document.head.appendChild(script);
+        };
+
+        window.maracujaIsGtmPreview = window.maracujaIsGtmPreview || function () {
+            const pageParameters = new URLSearchParams(window.location.search);
+
+            return ['gtm_auth', 'gtm_preview', 'gtm_debug'].some((name) => pageParameters.has(name))
+                || document.referrer.startsWith('https://tagassistant.google.com')
+                || /(?:^|;\\s*)__TAG_ASSISTANT=/.test(document.cookie);
         };
 
         window.maracujaSetConsent = window.maracujaSetConsent || function (choice) {
@@ -62,6 +82,10 @@
 
         @if ($acquisitionSettings->loadsContainerBeforeConsent())
             window.maracujaLoadGtm();
+        @elseif ($acquisitionSettings->consent_enabled)
+            // This is only a local Tag Assistant debugging session. Normal visitors
+            // still require an explicit consent choice before GTM is loaded.
+            if (window.maracujaIsGtmPreview()) window.maracujaLoadGtm();
         @endif
         @endif
     </script>

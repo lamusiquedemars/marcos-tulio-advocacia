@@ -59,6 +59,8 @@ class AcquisitionAttributionTest extends TestCase
             ->assertSee('maracujaSetConsent', false)
             ->assertSee("'gtm.start': new Date().getTime()", false)
             ->assertSee("event: 'gtm.js'", false)
+            ->assertSee('maracujaIsGtmPreview', false)
+            ->assertSee('gtm_cookies_win', false)
             ->assertSee('marketing: false', false);
     }
 
