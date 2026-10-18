@@ -107,6 +107,14 @@
     white-space: pre-wrap;
 }
 
+.conversation-widget__message p {
+    margin: 0;
+}
+
+.conversation-widget__message p + p {
+    margin-top: var(--space-xs);
+}
+
 .conversation-widget__message--visitor {
     align-self: flex-end;
     background: var(--color-brand);

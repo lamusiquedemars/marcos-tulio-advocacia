@@ -105,6 +105,14 @@ class DatabaseSeeder extends Seeder
                 'help_text' => 'Breve apresentação profissional, sem sugerir sociedade.',
             ],
             [
+                'key' => 'office.marcos.oab',
+                'label' => 'Inscrição profissional de Marcos Túlio',
+                'group' => 'O Escritório',
+                'type' => 'text',
+                'value' => 'Inscrito na OAB/MT sob o nº 16.291.',
+                'help_text' => 'Número de inscrição profissional exibido na apresentação do advogado responsável.',
+            ],
+            [
                 'key' => 'contact.office_hours',
                 'label' => 'Horários de atendimento',
                 'group' => 'Contato',

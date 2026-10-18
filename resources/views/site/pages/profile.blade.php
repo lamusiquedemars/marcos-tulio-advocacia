@@ -9,6 +9,7 @@
         $collaboratorName = \App\Support\ContentSlots::value('office.collaborator.name');
         $collaboratorRole = \App\Support\ContentSlots::value('office.collaborator.role', 'Advogado colaborador');
         $collaboratorBio = \App\Support\ContentSlots::value('office.collaborator.bio');
+        $marcosOab = \App\Support\ContentSlots::value('office.marcos.oab');
     @endphp
 
     <x-site.hero
@@ -33,6 +34,9 @@
                 <article class="stack stack--md prose">
                     <span class="practice-card__label">Advogado responsável</span>
                     <h2>Marcos Túlio de Melo</h2>
+                    @if ($marcosOab)
+                        <p>{{ $marcosOab }}</p>
+                    @endif
                     <p>Advogado em Mato Grosso desde 2012, é mestre em História pela Universidade Federal de Mato Grosso (UFMT) e também cursou Economia na mesma instituição. Em 2008, obteve certificações básica e avançada em investimentos.</p>
                     <p>Foi docente por dez anos, com atuação em Direito Penal e Processo Penal no UNIVAG, em Várzea Grande. Ao longo de sua trajetória acadêmica, ministrou mais de 2.000 aulas para mais de 4.000 alunos, em mais de 100 turmas.</p>
                     <p>Em 2020, lançou o livro <em>O Pacote Anticrime Comentado</em>. É também autor do curso Oratória Jurídica, com mais de 400 unidades comercializadas em todo o Brasil.</p>

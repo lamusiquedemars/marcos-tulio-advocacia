@@ -37,6 +37,7 @@ export function initFormStates(root = document) {
             panel.hidden = !isConsultation;
             modalities.forEach((input) => {
                 input.required = isConsultation;
+                if (!isConsultation) input.checked = false;
             });
         };
 

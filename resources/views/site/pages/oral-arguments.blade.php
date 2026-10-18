@@ -19,7 +19,7 @@
 
     <x-site.section
         title="Seleção profissional"
-        intro="Somente materiais autorizados e exemplos devidamente anonimizados podem ser publicados nesta página."
+        intro="Seleção de sustentações orais e intervenções profissionais."
         heading-variant="accent"
     >
         @if ($featuredVideo ?? null)
@@ -91,33 +91,6 @@
                 @endforeach
             </div>
         @endif
-    </x-site.section>
-
-    <x-site.section
-        variant="muted"
-        title="Exemplos de preparação da defesa"
-        intro="A estrutura protege a confidencialidade e concentra a atenção no trabalho realizado."
-        heading-variant="underline"
-    >
-        @forelse (($defenseExamples ?? collect()) as $defense)
-            <article class="defense-case stack stack--md">
-                <span class="media-tag">Conteúdo anonimizado</span>
-                <h3>{{ $defense->title }}</h3>
-                @if ($defense->context)<p>{{ $defense->context }}</p>@endif
-                <dl class="defense-case__details">
-                    <div><dt>Situação inicial</dt><dd>{{ $defense->initial_situation }}</dd></div>
-                    <div><dt>Questão jurídica</dt><dd>{{ $defense->legal_question }}</dd></div>
-                    <div><dt>Estratégia</dt><dd>{{ $defense->strategy }}</dd></div>
-                    <div><dt>Intervenção</dt><dd>{{ $defense->intervention }}</dd></div>
-                </dl>
-            </article>
-        @empty
-            <div class="process-grid">
-                <article class="process-step"><span class="process-step__number">01</span><h3>Situação inicial</h3><p>Contexto geral sem elementos identificadores.</p></article>
-                <article class="process-step"><span class="process-step__number">02</span><h3>Questão e estratégia</h3><p>Explicação objetiva da preparação da defesa.</p></article>
-                <article class="process-step"><span class="process-step__number">03</span><h3>Intervenção realizada</h3><p>Descrição do trabalho sem promessa de resultado.</p></article>
-            </div>
-        @endforelse
     </x-site.section>
 
     <x-site.section>

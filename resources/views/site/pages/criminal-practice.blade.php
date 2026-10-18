@@ -12,7 +12,7 @@
         :subtitle="$page->hero_subtitle ?? $page->excerpt"
         :image="$page->heroImageUrl()"
         :cta-url="$settings->whatsappUrl()"
-        cta-label="Falar sobre uma urgência"
+        cta-label="Falar com o escritório"
         :secondary-cta-url="route('contact', ['tipo' => 'analise'])"
         secondary-cta-label="Apresentar o caso"
     />
@@ -28,7 +28,7 @@
             <li>
                 <span class="practice-card__label">Urgência</span>
                 <h2>Prisão, busca e apreensão</h2>
-                <p>Contato imediato para compreender o ato realizado, identificar a autoridade responsável e orientar os próximos passos possíveis.</p>
+                <p>Contato direto para compreender o ato realizado, identificar a autoridade responsável e orientar os próximos passos possíveis.</p>
             </li>
             <li>
                 <span class="practice-card__label">Fase inicial</span>
@@ -62,7 +62,7 @@
             <article class="pathway-card pathway-card--urgent">
                 <span class="pathway-card__label">Não pode esperar</span>
                 <h3>Use o contato direto</h3>
-                <p>Em caso de prisão, diligência em andamento ou prazo imediato, não preencha o formulário antes de pedir ajuda.</p>
+                <p>Em caso de prisão, diligência em andamento ou prazo imediato, entre em contato diretamente com o escritório.</p>
                 <x-site.button :href="$settings->whatsappUrl()">Abrir WhatsApp</x-site.button>
             </article>
             <article class="pathway-card pathway-card--analysis">

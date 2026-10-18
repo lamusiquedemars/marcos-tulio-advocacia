@@ -44,7 +44,7 @@ class PublicSiteTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('Un site clair')
-            ->assertSee('Preciso de contato imediato');
+            ->assertSee('Preciso falar com o escritório');
     }
 
     public function test_services_page_uses_dedicated_demo_template(): void
@@ -127,9 +127,19 @@ class PublicSiteTest extends TestCase
                 'published_at' => now(),
             ]);
 
-            $this->get('/'.$page['slug'])
+            $response = $this->get('/'.$page['slug'])
                 ->assertOk()
                 ->assertSee($page['expected']);
+
+            if ($page['slug'] === 'marcos-tulio') {
+                $response
+                    ->assertSee('OAB/MT')
+                    ->assertSee('16.291');
+            }
+
+            if ($page['slug'] === 'sustentacoes-e-defesas') {
+                $response->assertDontSee('Exemplos de preparação da defesa');
+            }
         });
     }
 

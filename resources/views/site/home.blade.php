@@ -38,7 +38,7 @@
                 <span class="practice-card__label">Advocacia</span>
                 <h3>Defesa penal</h3>
                 <p>Atuação desde 2012 em defesa criminal, com histórico de relaxamentos de flagrante, revogações de prisão preventiva e êxito em habeas corpus, seja restituindo a liberdade, seja trancando inquérito ou ação penal.</p>
-                <p>Atuação perante o Tribunal do Júri e tribunais superiores, somando conquistas de absolvições e recuperação de liberdade em múltiplas dezenas de crimes.</p>
+                <p>Atuação perante o Tribunal do Júri e os tribunais, com experiência em absolvições, habeas corpus e medidas relacionadas à liberdade.</p>
             </article>
             <article class="authority-card">
                 <span class="practice-card__label">Experiência acadêmica</span>
@@ -55,14 +55,14 @@
     <x-site.section
         id="atendimento"
         title="Como o escritório pode orientar o primeiro contato"
-        intro="Escolha entre contato imediato, apresentação inicial da situação ou solicitação de consulta."
+        intro="Escolha entre contato direto, apresentação inicial da situação ou solicitação de consulta."
         heading-variant="accent"
     >
         <div class="pathway-grid">
             <article class="pathway-card pathway-card--urgent">
                 <span class="pathway-card__label">01 · Urgência</span>
-                <h2>Preciso de contato imediato</h2>
-                <p>Para prisão, busca e apreensão, intimação próxima ou outra situação que não pode esperar.</p>
+                <h2>Preciso falar com o escritório</h2>
+                <p>Para prisão, busca e apreensão, intimação próxima ou outra situação urgente.</p>
                 <x-site.button :href="$settings->whatsappUrl()">Abrir WhatsApp</x-site.button>
             </article>
 
@@ -194,7 +194,7 @@
             <article class="process-step">
                 <span class="process-step__number">01</span>
                 <h3>Contato inicial</h3>
-                <p>Envio de mensagem rápida via WhatsApp ou preenchimento do formulário no site, onde você relata os pontos principais do seu caso com total sigilo.</p>
+                <p>Envie uma mensagem pelo WhatsApp ou pelo formulário, com apenas as informações necessárias para o primeiro contato.</p>
             </article>
             <article class="process-step">
                 <span class="process-step__number">02</span>
@@ -204,7 +204,7 @@
             <article class="process-step">
                 <span class="process-step__number">03</span>
                 <h3>Definição do atendimento</h3>
-                <p>Agendamento de uma consulta estratégica gratuita, online ou presencial, para alinhar a tese jurídica, apresentar os próximos passos e definir a proposta de atuação.</p>
+                <p>Definição da forma de atendimento e, quando pertinente, agendamento de consulta presencial ou remota.</p>
             </article>
         </div>
     </x-site.section>

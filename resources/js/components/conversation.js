@@ -1,7 +1,13 @@
 function createMessage(message) {
-    const item = document.createElement('p');
+    const item = document.createElement('div');
     item.className = `conversation-widget__message conversation-widget__message--${message.author}`;
-    item.textContent = message.content;
+    const paragraphs = String(message.content).split(/(?:\\\\n|\r?\n){2,}/);
+
+    paragraphs.forEach((paragraph) => {
+        const line = document.createElement('p');
+        line.textContent = paragraph.replace(/(?:\\\\n|\r?\n)/g, ' ');
+        item.append(line);
+    });
 
     return item;
 }

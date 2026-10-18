@@ -50,7 +50,7 @@
                     @endif
 
                     <label>
-                        Email
+                        E-mail
                         <input name="email" type="email" value="{{ old('email') }}" autocomplete="email" required>
                         @error('email') <small class="field__error">{{ $message }}</small> @enderror
                     </label>
@@ -130,7 +130,7 @@
             @if ($settings->contact_email)
                 <article class="contact-detail-card">
                     <x-site.contact-icon name="mail" />
-                    <div><span>Email</span><a href="mailto:{{ $settings->contact_email }}">{{ $settings->contact_email }}</a></div>
+                    <div><span>E-mail</span><a href="mailto:{{ $settings->contact_email }}">{{ $settings->contact_email }}</a></div>
                 </article>
             @endif
             <article class="contact-detail-card">
