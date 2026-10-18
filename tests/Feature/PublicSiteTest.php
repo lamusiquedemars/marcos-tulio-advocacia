@@ -345,7 +345,7 @@ class PublicSiteTest extends TestCase
             'slug' => 'mentions-legales',
             'type' => Page::TYPE_TEXT,
             'hero_title' => 'Mentions légales',
-            'content' => '<p>Éditeur du site: Maracuja CMS.</p>',
+            'content' => '<p>Informações do editor do site.</p>',
             'is_published' => true,
             'published_at' => now(),
         ]);
@@ -354,7 +354,8 @@ class PublicSiteTest extends TestCase
             ->assertOk()
             ->assertSee('Navegação estrutural')
             ->assertSee('Mentions légales')
-            ->assertSee('Éditeur du site: Maracuja CMS')
+            ->assertSee('Informações do editor do site.')
+            ->assertDontSee('<p class="eyebrow">Maracuja CMS</p>', false)
             ->assertSee('Voltar ao início');
     }
 
