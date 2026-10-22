@@ -30,3 +30,9 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Sources client et artefacts de préparation : les versions publiées sont dans
+# public/images/brand ; ces fichiers ne font pas partie du code déployable.
+/Informações e logo.docx
+/optimized-videos/
+/public/images/brand/tmp/
