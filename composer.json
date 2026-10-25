@@ -5,11 +5,26 @@
     "description": "Site de Marcos Túlio Advocacia, desenvolvido com Laravel, Filament e Maracuja CMS.",
     "keywords": ["laravel", "filament", "cms", "showcase", "maracuja"],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../maracuja-site-core/packages/*",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "filament/filament": "^4.0",
         "laravel/framework": "^13.8",
-        "laravel/tinker": "^3.0"
+        "laravel/tinker": "^3.0",
+        "maracuja-digital/site-core-contact": "dev-main",
+        "maracuja-digital/site-core-events": "dev-main",
+        "maracuja-digital/site-core-foundation": "dev-main",
+        "maracuja-digital/site-core-gallery": "dev-main",
+        "maracuja-digital/site-core-media": "dev-main",
+        "maracuja-digital/site-core-publication": "dev-main"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -75,7 +90,7 @@
     },
     "config": {
         "platform": {
-            "php": "8.3.31"
+            "php": "8.4.1"
         },
         "optimize-autoloader": true,
         "preferred-install": "dist",
