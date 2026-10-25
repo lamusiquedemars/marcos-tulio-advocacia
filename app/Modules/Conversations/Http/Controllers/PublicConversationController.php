@@ -18,7 +18,7 @@ use App\Modules\Conversations\Support\WhatsAppHandoverLink;
 use App\Support\Modules;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
+use Maracuja\SiteCore\Assistant\Enums\HandoverReason;
 
 class PublicConversationController extends Controller
 {

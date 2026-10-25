@@ -12,7 +12,7 @@ use Filament\Actions\Action;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
-use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
+use Maracuja\SiteCore\Assistant\Enums\HandoverReason;
 
 class ViewConversation extends ViewRecord
 {

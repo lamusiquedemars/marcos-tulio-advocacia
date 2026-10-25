@@ -8,8 +8,8 @@ use App\Modules\Conversations\Models\Conversation;
 use App\Modules\Conversations\Models\Message;
 use App\Modules\Conversations\Services\AiConversationService;
 use Illuminate\Support\Facades\Log;
-use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
-use Maracuja\SiteCore\Conversations\Exceptions\AiProviderException;
+use Maracuja\SiteCore\Assistant\Enums\HandoverReason;
+use Maracuja\SiteCore\Assistant\Exceptions\AiProviderException;
 use Throwable;
 
 class GenerateAiReply

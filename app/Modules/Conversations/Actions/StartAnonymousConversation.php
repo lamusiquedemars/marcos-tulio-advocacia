@@ -8,7 +8,7 @@ use App\Modules\Conversations\Enums\ConversationStatus;
 use App\Modules\Conversations\Events\ConversationStarted;
 use App\Modules\Conversations\Models\Conversation;
 use Illuminate\Support\Str;
-use Maracuja\SiteCore\Conversations\Enums\ConversationUrgency;
+use Maracuja\SiteCore\Assistant\Enums\AssistantUrgency;
 
 class StartAnonymousConversation
 {
@@ -26,7 +26,7 @@ class StartAnonymousConversation
             'session_token_hash' => hash('sha256', $token),
             'channel' => $channel,
             'status' => ConversationStatus::New,
-            'urgency' => ConversationUrgency::Unknown,
+            'urgency' => AssistantUrgency::Unknown,
             'locale' => $locale,
             'entry_url' => $entryUrl,
             'ai_enabled' => true,

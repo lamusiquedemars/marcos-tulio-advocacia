@@ -15,7 +15,7 @@ use App\Modules\SiteSettings\Models\SiteSetting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Maracuja\SiteCore\Conversations\Enums\ConversationUrgency;
+use Maracuja\SiteCore\Assistant\Enums\AssistantUrgency;
 
 class CreateInquiryFromConversation
 {
@@ -89,11 +89,11 @@ class CreateInquiryFromConversation
         return $inquiry;
     }
 
-    private static function urgency(ConversationUrgency $urgency): InquiryUrgency
+    private static function urgency(AssistantUrgency $urgency): InquiryUrgency
     {
         return match ($urgency) {
-            ConversationUrgency::Immediate, ConversationUrgency::High => InquiryUrgency::Urgent,
-            ConversationUrgency::Normal, ConversationUrgency::Unknown => InquiryUrgency::None,
+            AssistantUrgency::Immediate, AssistantUrgency::High => InquiryUrgency::Urgent,
+            AssistantUrgency::Normal, AssistantUrgency::Unknown => InquiryUrgency::None,
         };
     }
 }

@@ -16,7 +16,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Maracuja\SiteCore\Conversations\Enums\ConversationUrgency;
+use Maracuja\SiteCore\Assistant\Enums\AssistantUrgency;
 use UnitEnum;
 
 class ConversationResource extends Resource
@@ -87,8 +87,8 @@ class ConversationResource extends Resource
                 TextColumn::make('urgency')
                     ->label(__('admin.conversations.urgency'))
                     ->badge()
-                    ->formatStateUsing(fn (ConversationUrgency $state): string => $state->label())
-                    ->color(fn (ConversationUrgency $state): string => $state->color()),
+                    ->formatStateUsing(fn (AssistantUrgency $state): string => $state->label())
+                    ->color(fn (AssistantUrgency $state): string => $state->color()),
                 TextColumn::make('topic')->label(__('admin.conversations.subject'))->limit(32)->toggleable(),
                 TextColumn::make('messages.content')
                     ->label(__('admin.conversations.last_message'))
@@ -110,8 +110,8 @@ class ConversationResource extends Resource
                         ->all()),
                 SelectFilter::make('urgency')
                     ->label(__('admin.conversations.urgency'))
-                    ->options(collect(ConversationUrgency::cases())
-                        ->mapWithKeys(fn (ConversationUrgency $urgency): array => [$urgency->value => $urgency->label()])
+                    ->options(collect(AssistantUrgency::cases())
+                        ->mapWithKeys(fn (AssistantUrgency $urgency): array => [$urgency->value => $urgency->label()])
                         ->all()),
             ])
             ->recordActions([

@@ -11,9 +11,9 @@ use App\Modules\Media\Models\MediaAsset;
 use App\Modules\Media\Policies\MediaAssetPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Maracuja\SiteCore\Conversations\Contracts\ConversationAiProvider;
-use Maracuja\SiteCore\Conversations\Providers\FakeConversationAiProvider;
-use Maracuja\SiteCore\Conversations\Providers\OpenAiConversationProvider;
+use Maracuja\SiteCore\Assistant\Contracts\AssistantAiProvider;
+use Maracuja\SiteCore\Assistant\Providers\FakeAssistantAiProvider;
+use Maracuja\SiteCore\Assistant\Providers\OpenAiAssistantProvider;
 use RuntimeException;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,10 +30,10 @@ class AppServiceProvider extends ServiceProvider
             };
         });
 
-        $this->app->bind(ConversationAiProvider::class, function (): ConversationAiProvider {
+        $this->app->bind(AssistantAiProvider::class, function (): AssistantAiProvider {
             return match (config('maracuja.conversations.ai.provider')) {
-                'fake' => new FakeConversationAiProvider,
-                'openai' => new OpenAiConversationProvider,
+                'fake' => new FakeAssistantAiProvider,
+                'openai' => new OpenAiAssistantProvider,
                 default => throw new \InvalidArgumentException('O provedor de IA configurado não está disponível.'),
             };
         });

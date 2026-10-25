@@ -27,7 +27,8 @@ modèle et ses limites techniques restent également dans l’environnement.
 L’adaptateur utilise
 la Responses API avec une sortie JSON Schema stricte, `store: false`, un
 historique borné et un identifiant de sécurité pseudonymisé. Un autre
-fournisseur implémente simplement `ConversationAiProvider`.
+fournisseur implémente simplement `AssistantAiProvider` du paquet partagé
+`site-core-assistant`.
 
 ## Paramétrage par site
 

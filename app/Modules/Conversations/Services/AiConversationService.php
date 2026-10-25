@@ -8,14 +8,14 @@ use App\Modules\Conversations\Enums\MessageAuthorType;
 use App\Modules\Conversations\Models\Conversation;
 use App\Modules\Conversations\Models\ConversationSetting;
 use App\Modules\Conversations\Models\Message;
-use Maracuja\SiteCore\Conversations\Contracts\ConversationAiProvider;
-use Maracuja\SiteCore\Conversations\Data\AiConversationRequest;
-use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
+use Maracuja\SiteCore\Assistant\Contracts\AssistantAiProvider;
+use Maracuja\SiteCore\Assistant\Data\AssistantRequest;
+use Maracuja\SiteCore\Assistant\Enums\HandoverReason;
 
 class AiConversationService
 {
     public function __construct(
-        private readonly ConversationAiProvider $provider,
+        private readonly AssistantAiProvider $provider,
     ) {}
 
     public function reply(Conversation $conversation): Message
@@ -46,7 +46,7 @@ class AiConversationService
             ->values()
             ->all();
 
-        $result = $this->provider->respond(new AiConversationRequest(
+        $result = $this->provider->respond(new AssistantRequest(
             instructions: $instructions,
             messages: $messages,
             safetyIdentifier: hash_hmac('sha256', (string) $conversation->getKey(), (string) config('app.key')),

@@ -7,7 +7,7 @@ use App\Modules\Conversations\Enums\MessageAuthorType;
 use App\Modules\Conversations\Events\HumanHandoverRequested;
 use App\Modules\Conversations\Models\Conversation;
 use App\Modules\Conversations\Models\Message;
-use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
+use Maracuja\SiteCore\Assistant\Enums\HandoverReason;
 
 class RequestHumanHandover
 {

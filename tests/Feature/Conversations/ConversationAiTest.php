@@ -6,7 +6,7 @@ use App\Modules\Conversations\Actions\AddMessage;
 use App\Modules\Conversations\Actions\GenerateAiReply;
 use App\Modules\Conversations\Actions\StartAnonymousConversation;
 use App\Modules\Conversations\Enums\ConversationStatus;
-use Maracuja\SiteCore\Conversations\Enums\ConversationUrgency;
+use Maracuja\SiteCore\Assistant\Enums\AssistantUrgency;
 use App\Modules\Conversations\Enums\MessageAuthorType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
@@ -58,7 +58,7 @@ class ConversationAiTest extends TestCase
 
         $this->assertSame(MessageAuthorType::Ai, $reply->author_type);
         $this->assertSame(ConversationStatus::NeedsHuman, $conversation->status);
-        $this->assertSame(ConversationUrgency::High, $conversation->urgency);
+        $this->assertSame(AssistantUrgency::High, $conversation->urgency);
         $this->assertFalse($conversation->ai_enabled);
         $this->assertSame('urgency', $conversation->handover_reason->value);
         $this->assertSame('assistance', $conversation->qualification['category']);

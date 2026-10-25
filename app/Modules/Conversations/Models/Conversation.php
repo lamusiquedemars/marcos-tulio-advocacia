@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Maracuja\SiteCore\Conversations\Enums\ConversationUrgency;
-use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
+use Maracuja\SiteCore\Assistant\Enums\AssistantUrgency;
+use Maracuja\SiteCore\Assistant\Enums\HandoverReason;
 
 class Conversation extends Model
 {
@@ -45,7 +45,7 @@ class Conversation extends Model
         return [
             'channel' => ConversationChannel::class,
             'status' => ConversationStatus::class,
-            'urgency' => ConversationUrgency::class,
+            'urgency' => AssistantUrgency::class,
             'qualification' => 'array',
             'ai_enabled' => 'boolean',
             'last_message_at' => 'datetime',
