@@ -6,7 +6,7 @@ use App\Modules\Conversations\Actions\AddMessage;
 use App\Modules\Conversations\Actions\GenerateAiReply;
 use App\Modules\Conversations\Actions\StartAnonymousConversation;
 use App\Modules\Conversations\Enums\ConversationStatus;
-use App\Modules\Conversations\Enums\ConversationUrgency;
+use Maracuja\SiteCore\Conversations\Enums\ConversationUrgency;
 use App\Modules\Conversations\Enums\MessageAuthorType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;

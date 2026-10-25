@@ -11,7 +11,6 @@ use App\Modules\Conversations\Actions\GenerateAiReply;
 use App\Modules\Conversations\Actions\RequestHumanHandover;
 use App\Modules\Conversations\Actions\StartAnonymousConversation;
 use App\Modules\Conversations\Enums\ConversationStatus;
-use App\Modules\Conversations\Enums\HandoverReason;
 use App\Modules\Conversations\Enums\MessageAuthorType;
 use App\Modules\Conversations\Models\Conversation;
 use App\Modules\Conversations\Models\ConversationSetting;
@@ -19,6 +18,7 @@ use App\Modules\Conversations\Support\WhatsAppHandoverLink;
 use App\Support\Modules;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
 
 class PublicConversationController extends Controller
 {

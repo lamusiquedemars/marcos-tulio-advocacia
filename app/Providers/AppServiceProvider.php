@@ -5,15 +5,15 @@ namespace App\Providers;
 use App\Modules\Assistant\Contracts\AssistantProvider;
 use App\Modules\Assistant\Providers\FakeAssistantProvider;
 use App\Modules\Conversations\Console\Commands\PruneConversationsCommand;
-use App\Modules\Conversations\Contracts\ConversationAiProvider;
 use App\Modules\Conversations\Models\Conversation;
 use App\Modules\Conversations\Policies\ConversationPolicy;
-use App\Modules\Conversations\Providers\FakeConversationAiProvider;
-use App\Modules\Conversations\Providers\OpenAiConversationProvider;
 use App\Modules\Media\Models\MediaAsset;
 use App\Modules\Media\Policies\MediaAssetPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Maracuja\SiteCore\Conversations\Contracts\ConversationAiProvider;
+use Maracuja\SiteCore\Conversations\Providers\FakeConversationAiProvider;
+use Maracuja\SiteCore\Conversations\Providers\OpenAiConversationProvider;
 use RuntimeException;
 
 class AppServiceProvider extends ServiceProvider

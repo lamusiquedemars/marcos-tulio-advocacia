@@ -3,7 +3,6 @@
 namespace App\Modules\Conversations\Filament\Resources\Conversations;
 
 use App\Modules\Conversations\Enums\ConversationStatus;
-use App\Modules\Conversations\Enums\ConversationUrgency;
 use App\Modules\Conversations\Filament\Resources\Conversations\Pages\ListConversations;
 use App\Modules\Conversations\Filament\Resources\Conversations\Pages\ViewConversation;
 use App\Modules\Conversations\Models\Conversation;
@@ -17,6 +16,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Maracuja\SiteCore\Conversations\Enums\ConversationUrgency;
 use UnitEnum;
 
 class ConversationResource extends Resource

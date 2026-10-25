@@ -3,11 +3,11 @@
 namespace App\Modules\Conversations\Actions;
 
 use App\Modules\Conversations\Enums\ConversationStatus;
-use App\Modules\Conversations\Enums\HandoverReason;
 use App\Modules\Conversations\Enums\MessageAuthorType;
 use App\Modules\Conversations\Events\HumanHandoverRequested;
 use App\Modules\Conversations\Models\Conversation;
 use App\Modules\Conversations\Models\Message;
+use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
 
 class RequestHumanHandover
 {

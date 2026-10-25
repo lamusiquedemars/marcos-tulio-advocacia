@@ -3,14 +3,14 @@
 namespace App\Modules\Conversations\Services;
 
 use App\Modules\Conversations\Actions\AddMessage;
-use App\Modules\Conversations\Contracts\ConversationAiProvider;
-use App\Modules\Conversations\Data\AiConversationRequest;
 use App\Modules\Conversations\Enums\ConversationStatus;
-use App\Modules\Conversations\Enums\HandoverReason;
 use App\Modules\Conversations\Enums\MessageAuthorType;
 use App\Modules\Conversations\Models\Conversation;
 use App\Modules\Conversations\Models\ConversationSetting;
 use App\Modules\Conversations\Models\Message;
+use Maracuja\SiteCore\Conversations\Contracts\ConversationAiProvider;
+use Maracuja\SiteCore\Conversations\Data\AiConversationRequest;
+use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
 
 class AiConversationService
 {

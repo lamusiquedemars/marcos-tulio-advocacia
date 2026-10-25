@@ -4,7 +4,6 @@ namespace App\Modules\Conversations\Filament\Resources\Conversations\Pages;
 
 use App\Modules\Conversations\Actions\AddMessage;
 use App\Modules\Conversations\Enums\ConversationStatus;
-use App\Modules\Conversations\Enums\HandoverReason;
 use App\Modules\Conversations\Enums\MessageAuthorType;
 use App\Modules\Conversations\Enums\MessageVisibility;
 use App\Modules\Conversations\Filament\Resources\Conversations\ConversationResource;
@@ -13,6 +12,7 @@ use Filament\Actions\Action;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
+use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
 
 class ViewConversation extends ViewRecord
 {

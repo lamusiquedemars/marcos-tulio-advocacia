@@ -6,13 +6,13 @@ use App\Models\User;
 use App\Modules\Contacts\Models\Contact;
 use App\Modules\Conversations\Enums\ConversationChannel;
 use App\Modules\Conversations\Enums\ConversationStatus;
-use App\Modules\Conversations\Enums\ConversationUrgency;
-use App\Modules\Conversations\Enums\HandoverReason;
 use App\Modules\Inquiries\Models\Inquiry;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Maracuja\SiteCore\Conversations\Enums\ConversationUrgency;
+use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
 
 class Conversation extends Model
 {

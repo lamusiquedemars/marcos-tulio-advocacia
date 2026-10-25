@@ -3,7 +3,6 @@
 namespace App\Modules\Conversations\Actions;
 
 use App\Modules\Contacts\Actions\ResolveContact;
-use App\Modules\Conversations\Enums\ConversationUrgency;
 use App\Modules\Conversations\Mail\ConversationCallbackReceived;
 use App\Modules\Conversations\Models\Conversation;
 use App\Modules\Conversations\Models\ConversationSetting;
@@ -16,6 +15,7 @@ use App\Modules\SiteSettings\Models\SiteSetting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Maracuja\SiteCore\Conversations\Enums\ConversationUrgency;
 
 class CreateInquiryFromConversation
 {

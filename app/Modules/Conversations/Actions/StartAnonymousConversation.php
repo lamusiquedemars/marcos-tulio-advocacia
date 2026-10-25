@@ -5,10 +5,10 @@ namespace App\Modules\Conversations\Actions;
 use App\Modules\Conversations\Data\AnonymousConversationSession;
 use App\Modules\Conversations\Enums\ConversationChannel;
 use App\Modules\Conversations\Enums\ConversationStatus;
-use App\Modules\Conversations\Enums\ConversationUrgency;
 use App\Modules\Conversations\Events\ConversationStarted;
 use App\Modules\Conversations\Models\Conversation;
 use Illuminate\Support\Str;
+use Maracuja\SiteCore\Conversations\Enums\ConversationUrgency;
 
 class StartAnonymousConversation
 {

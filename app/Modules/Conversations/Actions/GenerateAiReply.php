@@ -3,13 +3,13 @@
 namespace App\Modules\Conversations\Actions;
 
 use App\Modules\Conversations\Enums\ConversationStatus;
-use App\Modules\Conversations\Enums\HandoverReason;
 use App\Modules\Conversations\Enums\MessageAuthorType;
-use App\Modules\Conversations\Exceptions\AiProviderException;
 use App\Modules\Conversations\Models\Conversation;
 use App\Modules\Conversations\Models\Message;
 use App\Modules\Conversations\Services\AiConversationService;
 use Illuminate\Support\Facades\Log;
+use Maracuja\SiteCore\Conversations\Enums\HandoverReason;
+use Maracuja\SiteCore\Conversations\Exceptions\AiProviderException;
 use Throwable;
 
 class GenerateAiReply
