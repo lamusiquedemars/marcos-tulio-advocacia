@@ -2,8 +2,8 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "lamusiquedemars/marcos-tulio-advocacia",
     "type": "project",
-    "description": "Site de Marcos Túlio Advocacia, desenvolvido com Laravel, Filament e Maracuja CMS.",
-    "keywords": ["laravel", "filament", "cms", "showcase", "maracuja"],
+    "description": "Site de Marcos Túlio Advocacia, desenvolvido com Laravel, Filament e Maracuja Site Core.",
+    "keywords": ["laravel", "filament", "showcase", "maracuja"],
     "license": "MIT",
     "repositories": [
         {
