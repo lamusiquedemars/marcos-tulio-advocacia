@@ -2,13 +2,19 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Modules\Appointments\Models\AppointmentSetting;
 use App\Modules\Assistant\Contracts\AssistantProvider;
 use App\Modules\Assistant\Providers\FakeAssistantProvider;
+use App\Modules\Audience\Models\AudienceBrevoSetting;
 use App\Modules\Conversations\Console\Commands\PruneConversationsCommand;
 use App\Modules\Conversations\Models\Conversation;
+use App\Modules\Conversations\Models\ConversationSetting;
 use App\Modules\Conversations\Policies\ConversationPolicy;
 use App\Modules\Media\Models\MediaAsset;
 use App\Modules\Media\Policies\MediaAssetPolicy;
+use App\Modules\SiteSettings\Models\SiteSetting;
+use App\Support\ContentPermissions;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Maracuja\SiteCore\Assistant\Contracts\AssistantAiProvider;
@@ -67,6 +73,25 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::policy(MediaAsset::class, MediaAssetPolicy::class);
         Gate::policy(Conversation::class, ConversationPolicy::class);
+
+        Gate::before(function (User $user, string $ability, array $arguments): ?bool {
+            $subject = $arguments[0] ?? null;
+            $subjectClass = is_object($subject) ? $subject::class : $subject;
+
+            if (! $user->isAdministrator() && in_array($subjectClass, [User::class, SiteSetting::class, AudienceBrevoSetting::class, AppointmentSetting::class, ConversationSetting::class], true)) {
+                return false;
+            }
+
+            if (! ContentPermissions::allows($user, $subjectClass)) {
+                return false;
+            }
+
+            if (! $subjectClass || Gate::getPolicyFor($subjectClass)) {
+                return null;
+            }
+
+            return true;
+        });
     }
 
     private function guardTestingDatabase(): void

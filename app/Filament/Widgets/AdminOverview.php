@@ -30,6 +30,15 @@ class AdminOverview extends StatsOverviewWidget
 
     protected ?string $description = 'Os pontos úteis para administrar o site no dia a dia.';
 
+    public static function canView(): bool
+    {
+        $user = auth()->user();
+
+        // The aggregate includes several capabilities; do not disclose counts
+        // from functions outside an explicitly restricted account's selection.
+        return $user !== null && ($user->isAdministrator() || ($user->canEditContent() && $user->content_permissions === null));
+    }
+
     protected function getStats(): array
     {
         if ($this->currentUser()?->isClientManager()) {
