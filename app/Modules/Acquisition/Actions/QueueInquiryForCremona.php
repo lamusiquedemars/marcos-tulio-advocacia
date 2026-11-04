@@ -38,7 +38,7 @@ class QueueInquiryForCremona
         return [
             'source' => [
                 'channel' => 'website',
-                'name' => 'maracuja-cms',
+                'name' => 'maracuja-site',
                 'site_reference' => config('maracuja.acquisition.cremona.site_reference'),
                 'form_reference' => 'contact-v1',
             ],
