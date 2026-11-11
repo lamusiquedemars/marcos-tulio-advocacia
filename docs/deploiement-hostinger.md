@@ -1,5 +1,11 @@
 # Déploiement Hostinger — marcostulioadvocacia.com.br
 
+> **QUARANTAINE — ne pas exécuter ce guide.** Cette procédure est un transfert
+> manuel décrit pour Hostinger, non vérifié selon le contrat commun ; ses
+> chemins, alias et commandes ne sont pas des cibles courantes garanties. Voir
+> le [registre central](../../maracuja-control/docs/documents-a-retirer.md) et
+> la [politique multi-sites](../../maracuja-control/docs/deploiement-multi-sites.md).
+
 ## Architecture
 
 - Application Laravel privée : `/home/u424344637/domains/marcostulioadvocacia.com.br/app`

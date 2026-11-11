@@ -29,7 +29,12 @@ Tests :
 composer test
 ```
 
-Le cahier des charges fonctionnel se trouve dans `CODEX_SITE_MARCOS_TULIO.md`. Le déploiement est détaillé dans `docs/deploiement-lws.md`.
+Le cahier des charges fonctionnel se trouve dans `CODEX_SITE_MARCOS_TULIO.md`.
+L'ancien guide de déploiement Hostinger est en quarantaine et ne doit pas être
+exécuté. Voir le
+[registre central des documents retirés/en quarantaine](../maracuja-control/docs/documents-a-retirer.md)
+et la
+[politique de déploiement multi-sites](../maracuja-control/docs/deploiement-multi-sites.md).
 
 ## Sécurité des bases partagées
 
